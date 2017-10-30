@@ -1,6 +1,6 @@
 {
   "name": "solium-plugin-security",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Official Solium Plugin for Security-related lint rules",
   "main": "index.js",
   "scripts": {
