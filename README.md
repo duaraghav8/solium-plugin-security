@@ -25,10 +25,10 @@ Add `security` to your `soliumrc.json`'s `plugins` array. Your configuration fil
 ```
 
 ## Developer Setup
-`git clone <URL-of-this-repo>`
-`cd solium-plugin-security`
-`npm install --dev`
-`npm test`
+- `git clone <URL-of-this-repo>`
+- `cd solium-plugin-security`
+- `npm install --dev`
+- `npm test`
 
 ## List of rules
 Below are the rules supplied by this plugin and the information on passing options to them and their auto-fixing capabilities.
@@ -63,6 +63,7 @@ Lint normally using `solium -d contracts/` or `solium -d contracts/ --fix` to ap
 
 ## Roadmap
 - [ ] Add automated tests
+- [ ] Refine rule `enforce-explicit-visibility`
 - [ ] Add more security rules
 
 ## Security rules to be implemented
