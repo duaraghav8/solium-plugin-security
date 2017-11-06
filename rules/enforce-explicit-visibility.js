@@ -61,7 +61,7 @@ module.exports = {
 
             (node.modifiers === null || !hasAVisibilityModifier(node.modifiers)) && context.report({
                 node, fix,
-                message: `No visibility specified explicitly for function '${node.name}'.`
+                message: `No visibility specified explicitly for ${node.name || "the fallback"} function.`
             });
         }
 
