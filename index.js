@@ -12,6 +12,7 @@ module.exports = {
 	},
 
 	rules: {
+		"no-continue": require("./rules/no-continue"),
 		"no-throw": require("./rules/no-throw"),
 		"no-sha3": require("./rules/no-sha3"),
 		"no-tx-origin": require("./rules/no-tx-origin"),

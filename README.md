@@ -35,6 +35,7 @@ Below are the rules supplied by this plugin and the information on passing optio
 
 | Name                        | Description                                                                                      | Options                           | Defaults                             | Fixes |
 |-----------------------------|--------------------------------------------------------------------------------------------------|-----------------------------------|--------------------------------------|-------|
+| no-continue                 | Discourage use of 'continue' statement.                                                          |                                   |                                      |       |
 | no-throw                    | Discourage use of 'throw' statement for error flagging.                                          |                                   |                                      | YES   |
 | no-sha3                     | Encourage use of 'keccak256()' over 'sha3()' function.                                           |                                   |                                      | YES   |
 | no-tx-origin                | Discourage use of 'tx.origin' global variable.                                                   |                                   |                                      |       |
