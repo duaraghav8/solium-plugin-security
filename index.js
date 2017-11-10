@@ -6,20 +6,21 @@
 "use strict";
 
 module.exports = {
-
 	meta: {
 		description: "Official Security-focused lint rules for Solium"
 	},
 
 	rules: {
-		"no-throw": require("./rules/no-throw"),
-		"no-sha3": require("./rules/no-sha3"),
-		"no-tx-origin": require("./rules/no-tx-origin"),
-		"no-low-level-calls": require("./rules/no-low-level-calls"),
-		"no-inline-assembly": require("./rules/no-inline-assembly"),
-		"no-call-value": require("./rules/no-call-value"),
+		"enforce-explicit-visibility": require("./rules/enforce-explicit-visibility"),
+		"no-bit-operations": require("./rules/no-bit-operations"),
 		"no-block-members": require("./rules/no-block-members"),
-		"enforce-explicit-visibility": require("./rules/enforce-explicit-visibility")
+		"no-call-value": require("./rules/no-call-value"),
+		"no-fixed": require("./rules/no-fixed"),
+		"no-inline-assembly": require("./rules/no-inline-assembly"),
+		"no-low-level-calls": require("./rules/no-low-level-calls"),
+		"no-sha3": require("./rules/no-sha3"),
+		"no-suicide-or-selfdestruct": require("./rules/no-suicide-or-selfdestruct"),
+		"no-throw": require("./rules/no-throw"),
+		"no-tx-origin": require("./rules/no-tx-origin")
 	}
-
 };
