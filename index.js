@@ -18,6 +18,7 @@ module.exports = {
 		"no-fixed": require("./rules/no-fixed"),
 		"no-inline-assembly": require("./rules/no-inline-assembly"),
 		"no-low-level-calls": require("./rules/no-low-level-calls"),
+		"no-named-parameters": require("./rules/no-named-parameters"),
 		"no-non-256-bit-ints": require("./rules/no-non-256-bit-ints"),
 		"no-sha3": require("./rules/no-sha3"),
 		"no-suicide-or-selfdestruct": require("./rules/no-suicide-or-selfdestruct"),
