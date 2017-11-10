@@ -32,6 +32,10 @@ module.exports = {
 			var node = emitted.node;
 			var variableType = node.literal.literal;
 
+			if (typeof variableType !== "string") {
+				return;
+			}
+
 			if (
 				(variableType.indexOf("int") === 0 || variableType.indexOf("uint") === 0) &&
 				ALLOWED_INTS.indexOf(variableType) === -1

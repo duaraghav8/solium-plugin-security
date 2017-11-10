@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @fileoverview Disallow suicide and selfdestruct
@@ -7,40 +7,38 @@
  */
 
 function isSuicideOrSelfDestruct(node) {
-  return node.type === 'Identifier' &&
-    (node.name === 'suicide' || node.name === 'selfdestruct');
+	return node.type === "Identifier" && (node.name === "suicide" || node.name === "selfdestruct");
 }
 
 module.exports = {
-  meta: {
-    docs: {
-      recommended: true,
-      type: 'warning',
-      description: 'Disallow \'suicide\' and \'selfdestruct\''
-    },
+	meta: {
+		docs: {
+			recommended: true,
+			type: "warning",
+			description: "Disallow 'suicide' and 'selfdestruct'"
+		},
 
-    schema: []
-  },
+		schema: []
+	},
 
-  create: function (context) {
-    function inspectCallExpression(emittedObject) {
-      if (!emittedObject.exit) {
-        return;
-      }
+	create: function(context) {
+		function inspectCallExpression(emittedObject) {
+			if (!emittedObject.exit) {
+				return;
+			}
 
-      var callee = emittedObject.node.callee;
+			var callee = emittedObject.node.callee;
 
-      if (isSuicideOrSelfDestruct(callee)) {
-        context.report({
-          node: emittedObject.node,
+			if (isSuicideOrSelfDestruct(callee)) {
+				context.report({
+					node: emittedObject.node,
+					message: "'suicide' and 'selfdestruct' are disallowed"
+				});
+			}
+		}
 
-          message: "'suicide' and 'selfdestruct' are disallowed"
-        });
-      }
-    }
-
-    return {
-      CallExpression: inspectCallExpression
-    };
-  }
+		return {
+			CallExpression: inspectCallExpression
+		};
+	}
 };

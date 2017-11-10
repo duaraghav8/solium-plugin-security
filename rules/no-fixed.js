@@ -3,38 +3,42 @@
  * @author Beau Gunderson <beau@beaugunderson.com>
  */
 
-'use strict';
+"use strict";
 
 module.exports = {
-  meta: {
-    docs: {
-      recommended: false,
-      type: 'error',
-      description: 'Disallow fixed point types'
-    },
+	meta: {
+		docs: {
+			recommended: false,
+			type: "error",
+			description: "Disallow fixed point types"
+		},
 
-    schema: []
-  },
+		schema: []
+	},
 
-  create: function (context) {
-    function inspectDeclarationExpression (emitted) {
-      if (emitted.exit) {
-        return;
-      }
+	create: function(context) {
+		function inspectDeclarationExpression(emitted) {
+			if (emitted.exit) {
+				return;
+			}
 
-      var node = emitted.node;
+			var node = emitted.node;
+			var variableType = node.literal.literal;
 
-      if (node.literal.literal.indexOf('fixed') === 0 ||
-         node.literal.literal.indexOf('ufixed') === 0) {
-        context.report({
-          node: node,
-          message: node.literal.literal + ' is a fixed type and these are disallowed'
-        });
-      }
-    }
+			if (typeof variableType !== "string") {
+				return;
+			}
 
-    return {
-      DeclarativeExpression: inspectDeclarationExpression
-    };
-  }
+			if (variableType.indexOf("fixed") === 0 || variableType.indexOf("ufixed") === 0) {
+				context.report({
+					node: node,
+					message: variableType + " is a fixed type and these are disallowed"
+				});
+			}
+		}
+
+		return {
+			DeclarativeExpression: inspectDeclarationExpression
+		};
+	}
 };
