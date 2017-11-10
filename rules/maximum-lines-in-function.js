@@ -15,7 +15,8 @@ module.exports = {
 
 		schema: [
 			{
-				type: "number"
+				type: "integer",
+				minimum: 0
 			}
 		]
 	},
@@ -31,16 +32,19 @@ module.exports = {
 
 			var node = emitted.node;
 
-			var startingLine = sourceCode.getLine(node);
-			var endingLine = sourceCode.getEndingLine(node);
-			var functionLines = endingLine - startingLine;
+			var functionText = sourceCode.getText(node);
 
-			if (functionLines > maximumLines) {
+			var functionLines = functionText
+				.split(/[\r\n]/g)
+				.map(line => line.trim())
+				.filter(line => line);
+
+			if (functionLines.length > maximumLines) {
 				context.report({
 					node: node,
 					message:
 						"function is " +
-						functionLines +
+						functionLines.length +
 						" lines long, " +
 						maximumLines +
 						" is the maximum allowed"
