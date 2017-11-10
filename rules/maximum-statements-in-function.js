@@ -22,8 +22,18 @@ module.exports = {
 	},
 
 	create: function(context) {
-		var maximumLines = context.options ? context.options : 25;
+		var maximumStatements = context.options ? context.options : 25;
 		var sourceCode = context.getSourceCode();
+
+		function getStatementLines(node) {
+			var lines = sourceCode
+				.getText(node)
+				.split(/[\r\n]/g)
+				.map(line => line.trim())
+				.filter(line => line);
+
+			return lines.length;
+		}
 
 		function inspectFunctionDeclaration(emitted) {
 			if (emitted.exit) {
@@ -32,21 +42,24 @@ module.exports = {
 
 			var node = emitted.node;
 
-			var functionText = sourceCode.getText(node);
+			if (!node.body) {
+				return;
+			}
 
-			var functionLines = functionText
-				.split(/[\r\n]/g)
-				.map(line => line.trim())
-				.filter(line => line);
+			var topLevelStatements = node.body.body;
 
-			if (functionLines.length > maximumLines) {
+			var numberOfStatements = topLevelStatements.reduce((total, statement) => {
+				return total + getStatementLines(statement);
+			}, 0);
+
+			if (numberOfStatements > maximumStatements) {
 				context.report({
 					node: node,
 					message:
-						"function is " +
-						functionLines.length +
-						" lines long, " +
-						maximumLines +
+						"function contains " +
+						numberOfStatements +
+						" statements, " +
+						maximumStatements +
 						" is the maximum allowed"
 				});
 			}

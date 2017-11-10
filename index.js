@@ -12,7 +12,7 @@ module.exports = {
 
 	rules: {
 		"enforce-explicit-visibility": require("./rules/enforce-explicit-visibility"),
-		"maximum-lines-in-function": require("./rules/maximum-lines-in-function"),
+		"maximum-statements-in-function": require("./rules/maximum-statements-in-function"),
 		"no-bit-operations": require("./rules/no-bit-operations"),
 		"no-block-members": require("./rules/no-block-members"),
 		"no-call-value": require("./rules/no-call-value"),
