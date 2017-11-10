@@ -19,6 +19,7 @@ module.exports = {
 		"no-inline-assembly": require("./rules/no-inline-assembly"),
 		"no-call-value": require("./rules/no-call-value"),
 		"no-block-members": require("./rules/no-block-members"),
+		"max-one-break-per-loop": require('./rules/max-one-break-per-loop'),
 		"enforce-explicit-visibility": require("./rules/enforce-explicit-visibility")
 	}
 
