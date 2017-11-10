@@ -10,13 +10,12 @@ var wrappers = require("./utils/wrappers");
 var toContract = wrappers.toContract;
 
 var userConfig = {
-	plugins: ["security"],
 	rules: {
 		"security/no-bit-operations": 1
 	}
 };
 
-xdescribe("[RULE] no-bit-operations", function() {
+describe("[RULE] no-bit-operations", function() {
 	it("should reject contracts using bit operations (in declaration)", function(done) {
 		var code = toContract("function foo () { uint a = 2 >> 4; }"),
 			errors = Solium.lint(code, userConfig);

@@ -10,13 +10,12 @@ var wrappers = require("./utils/wrappers");
 var toContract = wrappers.toContract;
 
 var userConfig = {
-	plugins: ["security"],
 	rules: {
-		"security/no-fixed": true
+		"security/no-fixed": "error"
 	}
 };
 
-xdescribe("[RULE] no-fixed", function() {
+describe("[RULE] no-fixed", function() {
 	it("should reject contracts using fixed point declarations", function(done) {
 		var code = toContract("function foo () { fixed a; }"),
 			errors = Solium.lint(code, userConfig);

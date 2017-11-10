@@ -10,13 +10,12 @@ var wrappers = require("./utils/wrappers");
 var toContract = wrappers.toContract;
 
 var userConfig = {
-	plugins: ["security"],
 	rules: {
-		"security/no-suicide-or-selfdestruct": true
+		"security/no-suicide-or-selfdestruct": "error"
 	}
 };
 
-xdescribe("[RULE] no-suicide-or-selfdestruct", function() {
+describe("[RULE] no-suicide-or-selfdestruct", function() {
 	it("should reject contracts using suicide", function(done) {
 		var code = toContract("function foo () { suicide(0x0); }"),
 			errors = Solium.lint(code, userConfig);

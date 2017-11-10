@@ -1,5 +1,5 @@
 /**
- * @fileoverview Tests for no-fixed rule
+ * @fileoverview Tests for no-non-256-bit-ints rule
  * @author Beau Gunderson <beau@beaugunderson.com>
  */
 
@@ -10,13 +10,12 @@ var wrappers = require("./utils/wrappers");
 var toContract = wrappers.toContract;
 
 var userConfig = {
-	plugins: ["security"],
 	rules: {
-		"security/no-non-256-bit-ints": true
+		"security/no-non-256-bit-ints": "error"
 	}
 };
 
-xdescribe("[RULE] no-fixed", function() {
+describe("[RULE] no-non-256-bit-ints", function() {
 	it("should reject contracts using non-256 bit ints", function(done) {
 		var code = toContract("function foo () { int8 a; uint8 b; int16 c; }"),
 			errors = Solium.lint(code, userConfig);
