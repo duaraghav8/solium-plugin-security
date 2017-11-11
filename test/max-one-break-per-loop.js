@@ -6,6 +6,8 @@
 'use strict';
 
 var Solium = require ('solium');
+var wrappers = require("./utils/wrappers");
+var toContract = wrappers.toContract;
 
 var userConfig = {
     "rules": {
@@ -17,7 +19,9 @@ describe ('[RULE] max-one-break-per-loop: Acceptances', function () {
 
     it ('should accept all loops that have one or less breaks in them', function (done) {
         var code = [
-            'function foo() { for(uint i = 0; i<10; i++) {break;} }',
+            'function foo () { for(uint i = 0; i<10; i++) {break; for(uint j = 0; j<10; j++) {break;}} }',
+            'function foo () { for(uint i = 0; i<10; i++) {for(uint j = 0; j<10; j++) {break;} break;} }',
+            'function foo () { do { break;} while (1);  for(uint i = 0; i < 10; i++) { break; } }',
             'function foo () { for(uint i = 0; i < 10; i++) { uint x=1; } }',
             'function foo () { while(true) {break;} }',
             'function foo () { while(x!=1) { x=1; } }',
@@ -27,6 +31,7 @@ describe ('[RULE] max-one-break-per-loop: Acceptances', function () {
         ];
         var errors;
 
+        code = code.map(function(item){return toContract(item)});
 
         errors = Solium.lint (code [0], userConfig);
         errors.length.should.equal (0);
@@ -41,6 +46,10 @@ describe ('[RULE] max-one-break-per-loop: Acceptances', function () {
         errors = Solium.lint (code [5], userConfig);
         errors.length.should.equal (0);
         errors = Solium.lint (code [6], userConfig);
+        errors.length.should.equal (0);
+        errors = Solium.lint (code [7], userConfig);
+        errors.length.should.equal (0);
+        errors = Solium.lint (code [8], userConfig);
         errors.length.should.equal (0);
         Solium.reset ();
         done ();
@@ -58,8 +67,12 @@ describe ('[RULE] max-one-break-per-loop: Rejections', function () {
             'function foo () { while(x!=1) { x=1; if(x=1){break;} if(x=2){break;} if(x=3){break;} } }',
             'function foo () { do { break; break; } while (i < 20); }',
             'function foo () { do { if(x=1){break;} if(x=2){break;} if(x=3){break;} } while (i < 20); }',
+            'function foo () { for(uint i = 0; i<10; i++) {break; for(uint j = 0; j<10; j++) {break;} break;} }',
+            'function foo () { for(uint i = 0; i<10; i++) {for(uint j = 0; j<10; j++) {break; break;} break;} }',
         ];
         var errors;
+
+        code = code.map(function(item){return toContract(item)});
 
         errors = Solium.lint (code [0], userConfig);
         errors.length.should.equal (1);
@@ -72,6 +85,10 @@ describe ('[RULE] max-one-break-per-loop: Rejections', function () {
         errors = Solium.lint (code [4], userConfig);
         errors.length.should.equal (1);
         errors = Solium.lint (code [5], userConfig);
+        errors.length.should.equal (1);
+        errors = Solium.lint (code [6], userConfig);
+        errors.length.should.equal (1);
+        errors = Solium.lint (code [7], userConfig);
         errors.length.should.equal (1);
         Solium.reset ();
         done ();
