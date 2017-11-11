@@ -14,8 +14,7 @@ module.exports = {
             type: "error"
         },
 
-        schema: [],
-        fixable: "code"
+        schema: []
     },
 
     create(context) {
