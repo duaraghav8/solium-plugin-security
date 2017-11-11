@@ -1,5 +1,5 @@
 /**
- * @fileoverview Set a maximum number of lines per function
+ * @fileoverview Set a maximum number of statements per function
  * @author Beau Gunderson <beau@beaugunderson.com>
  */
 
@@ -10,7 +10,7 @@ module.exports = {
 		docs: {
 			recommended: false,
 			type: "error",
-			description: "Set a maximum number of lines per function"
+			description: "Set a maximum number of statements per function"
 		},
 
 		schema: [
