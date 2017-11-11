@@ -20,6 +20,7 @@ module.exports = {
 		"no-call-value": require("./rules/no-call-value"),
 		"no-block-members": require("./rules/no-block-members"),
 		"no-inheritance": require("./rules/no-inheritance"),
+		"no-multiple-inheritance": require("./rules/no-multiple-inheritance"),
 		"enforce-explicit-visibility": require("./rules/enforce-explicit-visibility")
 	}
 

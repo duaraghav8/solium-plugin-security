@@ -44,6 +44,7 @@ Below are the rules supplied by this plugin and the information on passing optio
 | no-block-members            | Discourage use of members 'blockhash' & 'timestamp' (and alias 'now') of 'block' global variable | List of members to warn against   | ["blockhash", "timestamp"]           |       |
 | enforce-explicit-visibility | Encourage user to explicitly specify visibility of function                                      |                                   |                                      | YES   |
 | no-inheritance              | Discourage use of inheritance                                                                    |                                   |                                      |       |
+| no-multiple-inheritance     | Discourage use of multiple inheritance                                                           |                                   |                                      |       |
 
 An example `soliumrc.json` configuring and applying this plugin is:
 
