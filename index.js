@@ -26,6 +26,7 @@ module.exports = {
 		"no-throw": require("./rules/no-throw"),
 		"no-type-deduction": require("./rules/no-type-deduction"),
 		"no-tx-origin": require("./rules/no-tx-origin"),
+		"no-unreachable-code": require("./rules/no-unreachable-code"),
 		"no-user-defined-modifiers": require("./rules/no-user-defined-modifiers")
 	}
 };
