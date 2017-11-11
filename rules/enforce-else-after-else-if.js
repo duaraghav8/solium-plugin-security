@@ -24,7 +24,7 @@ module.exports = {
             if (!node['alternate']) {
                 context.report({
                     node: node,
-                    message: 'else if statement not followed by else'
+                    message: '"else if" statement must be followed by an "else" statement'
                 });
             } else if (node['alternate']['type'] === "IfStatement") {
                 inspectElseIfStatement(node['alternate']) 
