@@ -15,7 +15,7 @@ var userConfig = {
 	}
 };
 
-describe("[RULE] no-bit-operations", function() {
+describe("[RULE] no-bit-operations: Rejections", function() {
 	it("should reject contracts using bit operations (in declaration)", function(done) {
 		var code = toContract("function foo () { uint a = 2 >> 4; }"),
 			errors = Solium.lint(code, userConfig);

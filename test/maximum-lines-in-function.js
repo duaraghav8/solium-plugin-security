@@ -15,7 +15,7 @@ var userConfig = {
 	}
 };
 
-describe("[RULE] maximum-statements-in-function", function() {
+describe("[RULE] maximum-statements-in-function: Rejections", function() {
 	it("should reject contracts with functions with many lines", function(done) {
 		var code = toContract("function foo () { uint8 a;\n  uint8 b;\n  uint8 c; }"),
 			errors = Solium.lint(code, userConfig);

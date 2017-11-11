@@ -15,7 +15,7 @@ var userConfig = {
 	}
 };
 
-describe("[RULE] no-suicide-or-selfdestruct", function() {
+describe("[RULE] no-suicide-or-selfdestruct: Rejections", function() {
 	it("should reject contracts using suicide", function(done) {
 		var code = toContract("function foo () { suicide(0x0); }"),
 			errors = Solium.lint(code, userConfig);

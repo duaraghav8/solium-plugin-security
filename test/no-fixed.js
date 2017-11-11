@@ -15,7 +15,7 @@ var userConfig = {
 	}
 };
 
-describe("[RULE] no-fixed", function() {
+describe("[RULE] no-fixed: Rejections", function() {
 	it("should reject contracts using fixed point declarations", function(done) {
 		var code = toContract("function foo () { fixed a; }"),
 			errors = Solium.lint(code, userConfig);

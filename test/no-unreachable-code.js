@@ -15,7 +15,7 @@ var userConfig = {
 	}
 };
 
-describe("[RULE] no-unreachable-code", function() {
+describe("[RULE] no-unreachable-code: Rejections", function() {
 	it("should reject contracts with unreachable code", function(done) {
 		var code = toContract("function foo () { return; fixed a; }"),
 			errors = Solium.lint(code, userConfig);
@@ -27,8 +27,10 @@ describe("[RULE] no-unreachable-code", function() {
 
 		done();
 	});
+});
 
-	it("should not reject contracts without a return", function(done) {
+describe("[RULE] no-unreachable-code: Acceptances", function() {
+	it("should accept contracts without a return", function(done) {
 		var code = toContract("function foo () { fixed a = 2.0; }");
 		var errors = Solium.lint(code, userConfig);
 

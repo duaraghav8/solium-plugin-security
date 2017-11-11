@@ -15,7 +15,7 @@ var userConfig = {
 	}
 };
 
-describe("[RULE] no-non-256-bit-ints", function() {
+describe("[RULE] no-non-256-bit-ints: Rejections", function() {
 	it("should reject contracts using non-256 bit ints", function(done) {
 		var code = toContract("function foo () { int8 a; uint8 b; int16 c; }"),
 			errors = Solium.lint(code, userConfig);

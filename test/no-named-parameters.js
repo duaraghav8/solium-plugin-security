@@ -13,7 +13,7 @@ var userConfig = {
 	}
 };
 
-describe("[RULE] no-named-parameters", function() {
+describe("[RULE] no-named-parameters: Rejections", function() {
 	it("should reject contracts using named parameters but allow structs", function(done) {
 		var code = `pragma solidity 0.4.17;
 
