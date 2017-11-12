@@ -34,7 +34,7 @@ describe ('[RULE] enforce-single-end-return: Rejections', function () {
         var errors;
 
         errors = Solium.lint (code, userConfig);
-        errors.length.should.be.above (0);
+        errors.length.should.be.size (1);
 
         Solium.reset ();
         done ();
@@ -45,7 +45,18 @@ describe ('[RULE] enforce-single-end-return: Rejections', function () {
         var errors;
 
         errors = Solium.lint (code, userConfig);
-        errors.length.should.be.above (0);
+        errors.length.should.be.size (1);
+
+        Solium.reset ();
+        done ();
+    });
+
+    it ('should reject functions that don\'t have a return statement at the end', function (done) {
+        var code = 'contract Foo { function foo () { do { return 100; } while(true); } }';
+        var errors;
+
+        errors = Solium.lint (code, userConfig);
+        errors.length.should.be.size (1);
 
         Solium.reset ();
         done ();

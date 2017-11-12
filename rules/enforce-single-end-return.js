@@ -47,8 +47,23 @@ module.exports = {
             }
         }
 
+        function inspectReturnDeclaration(emitted) {
+            var node = emitted.node;
+
+            if (emitted.exit) { return; }
+
+						let parent_node = context.getSourceCode().getParent(node);
+						if(!parent_node['type'] == 'FunctionDeclaration') {
+						    context.report({
+                    node: node,
+                    message: 'Missing return statement at end of function'
+                });
+						}
+        }
+
         return {
             FunctionDeclaration: inspectFunctionDeclaration,
+						ReturnStatement: inspectReturnStatement
         };
 
     }
