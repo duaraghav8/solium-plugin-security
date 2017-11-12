@@ -20,7 +20,7 @@ describe ('[RULE] enforce-single-end-return: Acceptances', function () {
         var errors;
 
         errors = Solium.lint (code, userConfig);
-        errors.length.should.be.equal (0);
+        errors.length.should.be.size (0);
 
         Solium.reset ();
         done ();
