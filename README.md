@@ -42,6 +42,7 @@ Below are the rules supplied by this plugin and the information on passing optio
 | no-inline-assembly          | Discourage use of inline assembly.                                                               |                                   |                                      |       |
 | no-call-value               | Discourage use of .call.value()()                                                                |                                   |                                      |       |
 | no-block-members            | Discourage use of members 'blockhash' & 'timestamp' (and alias 'now') of 'block' global variable | List of members to warn against   | ["blockhash", "timestamp"]           |       |
+| enforce-single-end-return   | Discourage use of early returns in functions                                                     |                                   |                                      |       |
 | enforce-explicit-visibility | Encourage user to explicitly specify visibility of function                                      |                                   |                                      | YES   |
 
 An example `soliumrc.json` configuring and applying this plugin is:

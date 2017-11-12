@@ -19,7 +19,8 @@ module.exports = {
 		"no-inline-assembly": require("./rules/no-inline-assembly"),
 		"no-call-value": require("./rules/no-call-value"),
 		"no-block-members": require("./rules/no-block-members"),
-		"enforce-explicit-visibility": require("./rules/enforce-explicit-visibility")
+		"enforce-explicit-visibility": require("./rules/enforce-explicit-visibility"),
+		"enforce-single-end-return": require("./rules/enforce-single-end-return")
 	}
 
 };
