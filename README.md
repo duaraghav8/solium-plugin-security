@@ -66,6 +66,7 @@ Below are the rules supplied by this plugin and the information on passing optio
 | no-unreachable-code            | Disallow unreachable code                                                                        |                                   |                                      |       |
 | no-user-defined-modifiers      | Disallow user-defined modifiers                                                                  |                                   |                                      |       |
 | no-void-returns                | Discourage use of void returns in functions prototypes                                           |                                   |                                      |       |
+| no-function-overriding         | Discourage function overriding                                                                   |                                   |                                      |       |
 
 An example `soliumrc.json` configuring and applying this plugin is:
 
