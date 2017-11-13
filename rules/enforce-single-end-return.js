@@ -58,12 +58,13 @@ module.exports = {
                 return;
             }
 
+            let function_name = node.name ? `"${node.name}"` : 'Fallback function';
             if (node.parent.type !== 'FunctionDeclaration') {
                 for (let statement of node.body) {
                     if (statement.type === 'ReturnStatement') {
                         context.report({
                             node: node,
-                            message: 'Missing return statement at end of function'
+                            message: `${function_name} should only have a single return statement at the end.`
                         });
                     }
                 }
