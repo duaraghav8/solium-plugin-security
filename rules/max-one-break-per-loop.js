@@ -50,7 +50,7 @@ module.exports = {
             ForStatement: inspectLoopStatement,
             WhileStatement: inspectLoopStatement,
             DoWhileStatement: inspectLoopStatement,
-            BreakStatement: inspectBreakStatement,
+            BreakStatement: inspectBreakStatement
         };
     }
 };
