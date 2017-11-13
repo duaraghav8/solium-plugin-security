@@ -33,11 +33,11 @@ Add `security` to your `soliumrc.json`'s `plugins` array. Your configuration fil
 ## List of rules
 Below are the rules supplied by this plugin and the information on passing options to them and their auto-fixing capabilities.
 
-
 | Name                           | Description                                                                                      | Options                           | Defaults                             | Fixes |
 |--------------------------------|--------------------------------------------------------------------------------------------------|-----------------------------------|--------------------------------------|-------|
 | enforce-explicit-visibility    | Encourage user to explicitly specify visibility of function                                      |                                   |                                      | YES   |
 | maximum-statements-in-function | Set a maximum number of statements per function                                                  | Maximum number of statements      | 25                                   |       |
+| max-one-break-per-loop         | Discourage use of multiple breaks in while/for/do loops                                          |                                   |                                      |       |
 | no-bit-operations              | Disallow bitwise operations                                                                      |                                   |                                      |       |
 | no-block-members               | Discourage use of members 'blockhash' & 'timestamp' (and alias 'now') of 'block' global variable | List of members to warn against   | ["blockhash", "timestamp"]           |       |
 | no-call-value                  | Discourage use of .call.value()()                                                                |                                   |                                      |       |
