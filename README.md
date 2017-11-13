@@ -33,6 +33,7 @@ Add `security` to your `soliumrc.json`'s `plugins` array. Your configuration fil
 ## List of rules
 Below are the rules supplied by this plugin and the information on passing options to them and their auto-fixing capabilities.
 
+
 | Name                           | Description                                                                                      | Options                           | Defaults                             | Fixes |
 |--------------------------------|--------------------------------------------------------------------------------------------------|-----------------------------------|--------------------------------------|-------|
 | enforce-explicit-visibility    | Encourage user to explicitly specify visibility of function                                      |                                   |                                      | YES   |
@@ -40,10 +41,12 @@ Below are the rules supplied by this plugin and the information on passing optio
 | no-bit-operations              | Disallow bitwise operations                                                                      |                                   |                                      |       |
 | no-block-members               | Discourage use of members 'blockhash' & 'timestamp' (and alias 'now') of 'block' global variable | List of members to warn against   | ["blockhash", "timestamp"]           |       |
 | no-call-value                  | Discourage use of .call.value()()                                                                |                                   |                                      |       |
+| no-continue                    | Discourage use of 'continue' statement.                                                          |                                   |                                      |       |
 | no-fixed                       | Disallow fixed point types                                                                       |                                   |                                      |       |
 | no-inline-assembly             | Discourage use of inline assemblym                                                               |                                   |                                      |       |
 | no-low-level-calls             | Discourage the use of low-level functions - call(), callcode() & delegatecall().                 | List of functions to warn against | ["call", "callcode", "delegatecall"] |       |
 | no-named-parameters            | Disallow named function parameters                                                               |                                   |                                      |       |
+| no-non-256-bit-ints            | Disallow non-256 bit integers                                                                    |                                   |                                      |       |
 | no-sha3                        | Encourage use of 'keccak256()' over 'sha3()' function                                            |                                   |                                      | YES   |
 | no-suicide-or-selfdestruct     | Disallow suicide and selfdestruct                                                                |                                   |                                      |       |
 | no-throw                       | Discourage use of 'throw' statement for error flagging                                           |                                   |                                      | YES   |

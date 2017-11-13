@@ -16,6 +16,7 @@ module.exports = {
 		"no-bit-operations": require("./rules/no-bit-operations"),
 		"no-block-members": require("./rules/no-block-members"),
 		"no-call-value": require("./rules/no-call-value"),
+		"no-continue": require("./rules/no-continue"),
 		"no-fixed": require("./rules/no-fixed"),
 		"no-inline-assembly": require("./rules/no-inline-assembly"),
 		"no-low-level-calls": require("./rules/no-low-level-calls"),
