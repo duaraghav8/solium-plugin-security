@@ -23,7 +23,7 @@ describe("Check Plugin's exported object", () => {
 		meta.description.should.be.type("string");
 
 		rules.should.be.type("object");
-		rules.should.have.size(27);
+		rules.should.have.size(28);
 
 		for (let ruleName in rules) {
 			rules[ruleName].should.be.type("object");

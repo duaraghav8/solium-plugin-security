@@ -62,6 +62,7 @@ Below are the rules supplied by this plugin and the information on passing optio
 | no-type-deduction              | Disallow type deduction via `var`                                                                |                                   |                                      |       |
 | no-unreachable-code            | Disallow unreachable code                                                                        |                                   |                                      |       |
 | no-user-defined-modifiers      | Disallow user-defined modifiers                                                                  |                                   |                                      |       |
+| enforce-single-end-return      | Discourage use of early returns in functions                                                     |                                   |                                      |       |
 
 An example `soliumrc.json` configuring and applying this plugin is:
 
