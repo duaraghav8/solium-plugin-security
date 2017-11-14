@@ -13,6 +13,7 @@ module.exports = {
 	rules: {
 		"enforce-else-after-else-if": require("./rules/enforce-else-after-else-if"),
 		"enforce-explicit-visibility": require("./rules/enforce-explicit-visibility"),
+		"enforce-loop-bounds": require("./rules/enforce-loop-bounds"),
 		"maximum-statements-in-function": require("./rules/maximum-statements-in-function"),
 		"max-one-break-per-loop": require('./rules/max-one-break-per-loop'),
 		"no-abstract-functions": require("./rules/no-abstract-functions"),
