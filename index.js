@@ -14,6 +14,7 @@ module.exports = {
 		"enforce-else-after-else-if": require("./rules/enforce-else-after-else-if"),
 		"enforce-explicit-visibility": require("./rules/enforce-explicit-visibility"),
 		"enforce-loop-bounds": require("./rules/enforce-loop-bounds"),
+		"enforce-single-end-return": require("./rules/enforce-single-end-return"),
 		"maximum-statements-in-function": require("./rules/maximum-statements-in-function"),
 		"max-one-break-per-loop": require('./rules/max-one-break-per-loop'),
 		"no-abstract-functions": require("./rules/no-abstract-functions"),
@@ -36,8 +37,8 @@ module.exports = {
 		"no-throw": require("./rules/no-throw"),
 		"no-type-deduction": require("./rules/no-type-deduction"),
 		"no-tx-origin": require("./rules/no-tx-origin"),
-		"enforce-single-end-return": require("./rules/enforce-single-end-return"),
 		"no-unreachable-code": require("./rules/no-unreachable-code"),
-		"no-user-defined-modifiers": require("./rules/no-user-defined-modifiers")
+		"no-user-defined-modifiers": require("./rules/no-user-defined-modifiers"),
+		"no-void-returns": require("./rules/no-void-returns")
 	}
 };

@@ -37,6 +37,7 @@ Below are the rules supplied by this plugin and the information on passing optio
 |--------------------------------|--------------------------------------------------------------------------------------------------|-----------------------------------|--------------------------------------|-------|
 | enforce-else-after-else-if     | Encourage user to use else statement after else-if statement                                     |                                   |                                      |       |
 | enforce-explicit-visibility    | Encourage user to explicitly specify visibility of function                                      |                                   |                                      | YES   |
+| enforce-single-end-return      | Discourage use of early returns in functions                                                     |                                   |                                      |       |
 | enforce-loop-bounds	           | Encourage use of loops with fixed bounds                                                         |                                   |                                      |       |
 | maximum-statements-in-function | Set a maximum number of statements per function                                                  | Maximum number of statements      | 25                                   |       |
 | max-one-break-per-loop         | Discourage use of multiple breaks in while/for/do loops                                          |                                   |                                      |       |
@@ -62,7 +63,7 @@ Below are the rules supplied by this plugin and the information on passing optio
 | no-type-deduction              | Disallow type deduction via `var`                                                                |                                   |                                      |       |
 | no-unreachable-code            | Disallow unreachable code                                                                        |                                   |                                      |       |
 | no-user-defined-modifiers      | Disallow user-defined modifiers                                                                  |                                   |                                      |       |
-| enforce-single-end-return      | Discourage use of early returns in functions                                                     |                                   |                                      |       |
+| no-void-returns                | Discourage use of void returns in functions prototypes                                           |                                   |                                      |       |
 
 An example `soliumrc.json` configuring and applying this plugin is:
 
