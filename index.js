@@ -9,8 +9,8 @@ module.exports = {
 	meta: {
 		description: "Official Security-focused lint rules for Solium"
 	},
-  
-  rules: {
+
+	rules: {
 		"enforce-else-after-else-if": require("./rules/enforce-else-after-else-if"),
 		"enforce-explicit-visibility": require("./rules/enforce-explicit-visibility"),
 		"maximum-statements-in-function": require("./rules/maximum-statements-in-function"),
