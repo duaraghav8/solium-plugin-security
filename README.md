@@ -35,19 +35,28 @@ Below are the rules supplied by this plugin and the information on passing optio
 
 | Name                           | Description                                                                                      | Options                           | Defaults                             | Fixes |
 |--------------------------------|--------------------------------------------------------------------------------------------------|-----------------------------------|--------------------------------------|-------|
+| enforce-else-after-else-if     | Encourage user to use else statement after else-if statement                                     |                                   |                                      |       |
 | enforce-explicit-visibility    | Encourage user to explicitly specify visibility of function                                      |                                   |                                      | YES   |
+| enforce-single-end-return      | Discourage use of early returns in functions                                                     |                                   |                                      |       |
+| enforce-loop-bounds	           | Encourage use of loops with fixed bounds                                                         |                                   |                                      |       |
 | maximum-statements-in-function | Set a maximum number of statements per function                                                  | Maximum number of statements      | 25                                   |       |
 | max-one-break-per-loop         | Discourage use of multiple breaks in while/for/do loops                                          |                                   |                                      |       |
+| no-abstract-functions          | Discourage use of abstract functions                                                             |                                   |                                      |       |
 | no-bit-operations              | Disallow bitwise operations                                                                      |                                   |                                      |       |
 | no-block-members               | Discourage use of members 'blockhash' & 'timestamp' (and alias 'now') of 'block' global variable | List of members to warn against   | ["blockhash", "timestamp"]           |       |
 | no-call-value                  | Discourage use of .call.value()()                                                                |                                   |                                      |       |
 | no-continue                    | Discourage use of 'continue' statement.                                                          |                                   |                                      |       |
 | no-assign-parameter            | Disallow assigning to function parameters.                                                       |                                   |                                      |       |
 | no-fixed                       | Disallow fixed point types                                                                       |                                   |                                      |       |
+| no-inheritance                 | Discourage use of inheritance                                                                    |                                   |                                      |       |
+| no-multiple-inheritance        | Discourage use of multiple inheritance                                                           |                                   |                                      |       |
 | no-inline-assembly             | Discourage use of inline assemblym                                                               |                                   |                                      |       |
 | no-low-level-calls             | Discourage the use of low-level functions - call(), callcode() & delegatecall().                 | List of functions to warn against | ["call", "callcode", "delegatecall"] |       |
+| no-mod-iter-var-for-loop       | Discourage user to modify a for loop iteration counting variable in the loop body                |                                   |                                      |       |
 | no-named-parameters            | Disallow named function parameters                                                               |                                   |                                      |       |
+| no-named-returns               | Discourage use of named returns in functions                                                     |                                   |                                      |       |
 | no-non-256-bit-ints            | Disallow non-256 bit integers                                                                    |                                   |                                      |       |
+| no-send                        | Discourage the use of unsafe method 'send'                                                       |                                   |                                      |       |
 | no-sha3                        | Encourage use of 'keccak256()' over 'sha3()' function                                            |                                   |                                      | YES   |
 | no-suicide-or-selfdestruct     | Disallow suicide and selfdestruct                                                                |                                   |                                      |       |
 | no-throw                       | Discourage use of 'throw' statement for error flagging                                           |                                   |                                      | YES   |
@@ -55,6 +64,7 @@ Below are the rules supplied by this plugin and the information on passing optio
 | no-type-deduction              | Disallow type deduction via `var`                                                                |                                   |                                      |       |
 | no-unreachable-code            | Disallow unreachable code                                                                        |                                   |                                      |       |
 | no-user-defined-modifiers      | Disallow user-defined modifiers                                                                  |                                   |                                      |       |
+| no-void-returns                | Discourage use of void returns in functions prototypes                                           |                                   |                                      |       |
 
 An example `soliumrc.json` configuring and applying this plugin is:
 
