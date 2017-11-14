@@ -22,6 +22,7 @@ module.exports = {
 		"no-fixed": require("./rules/no-fixed"),
 		"no-inline-assembly": require("./rules/no-inline-assembly"),
 		"no-low-level-calls": require("./rules/no-low-level-calls"),
+		"no-mod-iter-var-for-loop": require("./rules/no-mod-iter-var-for-loop"),
 		"no-named-parameters": require("./rules/no-named-parameters"),
 		"no-non-256-bit-ints": require("./rules/no-non-256-bit-ints"),
 		"no-send": require("./rules/no-send"),
