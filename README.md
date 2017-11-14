@@ -35,6 +35,7 @@ Below are the rules supplied by this plugin and the information on passing optio
 
 | Name                           | Description                                                                                      | Options                           | Defaults                             | Fixes |
 |--------------------------------|--------------------------------------------------------------------------------------------------|-----------------------------------|--------------------------------------|-------|
+| enforce-else-after-else-if     | Encourage user to use else statement after else-if statement                                     |                                   |                                      |       |
 | enforce-explicit-visibility    | Encourage user to explicitly specify visibility of function                                      |                                   |                                      | YES   |
 | maximum-statements-in-function | Set a maximum number of statements per function                                                  | Maximum number of statements      | 25                                   |       |
 | max-one-break-per-loop         | Discourage use of multiple breaks in while/for/do loops                                          |                                   |                                      |       |
