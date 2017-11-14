@@ -6,7 +6,9 @@
 'use strict';
 
 function isSend (calleeNode) {
-	return (calleeNode.property.type === 'Identifier' &&
+	return (
+		calleeNode.property &&
+		calleeNode.property.type === 'Identifier' &&
 		calleeNode.property.name === 'send'
 	);
 }
@@ -32,7 +34,7 @@ module.exports = {
 
 			var callee = emittedObject.node.callee;
 
-			if (isSend (callee.parent)) {
+			if (isSend (callee)) {
 				context.report ({
 					node: emittedObject.node,
 					message: '\'send\' is unsafe. Instead, consider using \'transfer\' or a pattern where the recipient withdraws the money.'
