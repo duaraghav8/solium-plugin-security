@@ -21,6 +21,8 @@ module.exports = {
 		"no-continue": require("./rules/no-continue"),
 		"no-fixed": require("./rules/no-fixed"),
 		"no-inline-assembly": require("./rules/no-inline-assembly"),
+		"no-inheritance": require("./rules/no-inheritance"),
+		"no-multiple-inheritance": require("./rules/no-multiple-inheritance"),
 		"no-low-level-calls": require("./rules/no-low-level-calls"),
 		"no-mod-iter-var-for-loop": require("./rules/no-mod-iter-var-for-loop"),
 		"no-named-parameters": require("./rules/no-named-parameters"),
