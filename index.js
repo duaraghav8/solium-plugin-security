@@ -24,6 +24,7 @@ module.exports = {
 		"no-low-level-calls": require("./rules/no-low-level-calls"),
 		"no-named-parameters": require("./rules/no-named-parameters"),
 		"no-non-256-bit-ints": require("./rules/no-non-256-bit-ints"),
+		"no-send": require("./rules/no-send"),
 		"no-sha3": require("./rules/no-sha3"),
 		"no-suicide-or-selfdestruct": require("./rules/no-suicide-or-selfdestruct"),
 		"no-throw": require("./rules/no-throw"),
