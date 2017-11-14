@@ -27,6 +27,7 @@ module.exports = {
 		"no-low-level-calls": require("./rules/no-low-level-calls"),
 		"no-mod-iter-var-for-loop": require("./rules/no-mod-iter-var-for-loop"),
 		"no-named-parameters": require("./rules/no-named-parameters"),
+		"no-named-returns": require("./rules/no-named-returns"),
 		"no-non-256-bit-ints": require("./rules/no-non-256-bit-ints"),
 		"no-send": require("./rules/no-send"),
 		"no-sha3": require("./rules/no-sha3"),
