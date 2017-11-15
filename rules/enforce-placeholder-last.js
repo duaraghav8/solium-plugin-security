@@ -5,6 +5,8 @@
 
 "use strict";
 
+const RE_PLACEHOLDER_WITH_SEMICOLON = /^\s*_\s*;\s*$/;
+
 function isFunctionPlaceholder(node) {
 	return (
 		node.type === "PlaceholderStatement" ||
@@ -40,7 +42,9 @@ module.exports = {
 			if (firstPlaceholderIndex === -1) {
 				context.report({
 					node: node,
-					message: "a function placeholder must exist and be the last statement in the modifier"
+					message:
+						"a function placeholder must exist and be the last statement in the " +
+						`modifier named ${node.name}`
 				});
 
 				return;
@@ -49,7 +53,7 @@ module.exports = {
 			const placeholder = topLevelStatements[firstPlaceholderIndex];
 			const text = sourceCode.getText(placeholder);
 
-			if (text !== "_;") {
+			if (!RE_PLACEHOLDER_WITH_SEMICOLON.exec(text)) {
 				context.report({
 					node: placeholder,
 					message: "the function placeholder must be followed with a semicolon"
@@ -59,7 +63,9 @@ module.exports = {
 			if (firstPlaceholderIndex !== lastIndex) {
 				context.report({
 					node: placeholder,
-					message: "the function placeholder must be the last statement in the modifier"
+					message:
+						"the function placeholder must be the last statement in the " +
+						`modifier named ${node.name}`
 				});
 			}
 		}

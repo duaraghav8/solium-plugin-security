@@ -54,12 +54,28 @@ describe("[RULE] enforce-placeholder-last: Rejections", function() {
 });
 
 describe("[RULE] enforce-placeholder-last: Acceptances", function() {
-	it("should accept contracts a placeholder that is the last statement", function(done) {
+	it("should accept contracts with a placeholder that is the last statement", function(done) {
 		var code = toContract("modifier foo() { require(true); _; }");
 		var errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");
 		errors.length.should.equal(0);
+
+		Solium.reset();
+
+		done();
+	});
+
+	it("should accept contracts with bad placeholder style", function(done) {
+		const badStyles = ["_ ;", "_\n;", "_\t;", "_   ;"];
+
+		badStyles.forEach(badStyle => {
+			var code = toContract(`modifier foo() { require(true); ${badStyle} }`);
+			var errors = Solium.lint(code, userConfig);
+
+			errors.constructor.name.should.equal("Array");
+			errors.length.should.equal(0);
+		});
 
 		Solium.reset();
 
