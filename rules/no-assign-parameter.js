@@ -32,11 +32,11 @@ module.exports = {
         }
 
         function checkExpressionStatement(statement, node, params) {
-            let function_name = node.name ? `"${node.name}"` : 'Fallback function';
+            let functionName = node.name ? `"${node.name}"` : 'Fallback function';
             if(isBadAssignment(statement, params) || isBadUpdate(statement, params)) {
                 context.report({
                     node: node,
-                    message: `${function_name}: Avoid assigning to function parameters.`
+                    message: `${functionName}: Avoid assigning to function parameters.`
                 });
             }
         }
