@@ -49,7 +49,7 @@ module.exports = {
 
                 if ('IfStatement' === statement['type']) {
                     inspectBody (statement['consequent']['body'], node, params);
-                    if(statement['alternate'] != null) {
+                    if (statement['alternate'] != null) {
                         inspectBody (statement['alternate']['body'], node, params);
                     }
                 }
