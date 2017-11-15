@@ -15,7 +15,7 @@ var config = {
 
 describe('[RULE] no-assign-parameter: Acceptances', function () {
         it('shouldn\'t raise an error for a non-assigned parameter', function(done) {
-                var code = 'contract Blah { function abc(uint256 a, uint256 b) { } }',
+                var code = 'contract Blah { function abc(uint a, uint b) { } }',
                         errors = Solium.lint(code, config);
 
                 errors.constructor.name.should.equal ('Array');
@@ -26,7 +26,7 @@ describe('[RULE] no-assign-parameter: Acceptances', function () {
         });
 
         it('shouldn\'t raise an error for an assigned local variable', function(done) {
-                var code = 'contract Blah { function abc(uint256 a) { uint256 b = 2; } }',
+                var code = 'contract Blah { function abc(uint a) { uint b = 2; } }',
                         errors = Solium.lint(code, config);
 
                 errors.constructor.name.should.equal ('Array');
@@ -50,111 +50,29 @@ describe('[RULE] no-assign-parameter: Acceptances', function () {
 
 describe('[RULE] no-assign-parameter: Rejections', function () {
         it('should raise an error for an assigned parameter', function(done) {
-                var code = 'contract Blah { function abc(uint256 a, uint256 b) { a = 12; } }',
-                        errors = Solium.lint(code, config);
+                var codes = ['contract Blah { function abc(uint a, uint b) { a = 12; } }',
+                             'contract Blah { function abc(uint a, uint b) { b = 12; } }',
+                             'contract Blah { function foo(uint abc) { for(uint i = 0; i<10; i++) { abc = 2; } } }',
+                             'contract Blah { function foo(uint abc) { if (true) { abc = 2; } } }',
+                             'contract Blah { function foo(uint abc) { if (false) { } else { abc = 2; } } }',
+                             'contract Blah { function foo(uint abc) { while (true) { abc = 2; } } }',
+                             'contract Blah { function foo(uint abc) { do { abc = 2; } while(true); } }',
+                             'contract Blah { function foo(uint abc) { abc++; } }',
+                             'contract Blah { function foo(uint abc) { abc--; } }',
+                             'contract Blah { function foo(uint abc) { abc += 1; } }',
+                             'contract Blah { function foo(uint abc) { if(true) abc = 12; } }',
+                             'contract Blah { function foo(uint abc) { if(true) {} else abc = 12; } }',
+                             'contract Blah { function foo(uint abc) { if(true) if (true) abc = 12; } }',
+                             'contract Blah { function foo(uint abc) { while(true) abc = 12; } }',
+                             'contract Blah { function foo(uint abc) { while(true) while(true) abc = 12; } }',
+                             'contract Blah { function foo(uint x) { if (true) { do { x += 1; } while (x < 10); } } }'
+                            ]
 
-                errors.constructor.name.should.equal ('Array');
-                errors.should.be.size(1);
-
-                Solium.reset();
-                done();
-        });
-
-        it('should raise an error for a later assigned parameter', function(done) {
-                var code = 'contract Blah { function abc(uint256 a, uint256 b) { b = 12; } }',
-                        errors = Solium.lint(code, config);
-
-                errors.constructor.name.should.equal ('Array');
-                errors.should.be.size(1);
-
-                Solium.reset();
-                done();
-        });
-
-        it('should raise an error for an assigned variable in a loop', function(done) {
-                var code = 'contract Blah { function foo(uint256 abc) { for(uint i = 0; i<10; i++) { abc = 2; } } }',
-                        errors = Solium.lint(code, config);
-
-                errors.constructor.name.should.equal ('Array');
-                errors.should.be.size(1);
-
-                Solium.reset();
-                done();
-        });
-
-        it('should raise an error for an assigned variable in an if statement', function(done) {
-                var code = 'contract Blah { function foo(uint256 abc) { if (true) { abc = 2; } } }',
-                        errors = Solium.lint(code, config);
-
-                errors.constructor.name.should.equal ('Array');
-                errors.should.be.size(1);
-
-                Solium.reset();
-                done();
-        });
-
-
-        it('should raise an error for an assigned variable in an else statement', function(done) {
-                var code = 'contract Blah { function foo(uint256 abc) { if (false) { } else { abc = 2; } } }',
-                        errors = Solium.lint(code, config);
-
-                errors.constructor.name.should.equal ('Array');
-                errors.should.be.size(1);
-
-                Solium.reset();
-                done();
-        });
-
-        it('should raise an error for an assigned variable in a while statement', function(done) {
-                var code = 'contract Blah { function foo(uint256 abc) { while (true) { abc = 2; } } }',
-                        errors = Solium.lint(code, config);
-
-                errors.constructor.name.should.equal ('Array');
-                errors.should.be.size(1);
-
-                Solium.reset();
-                done();
-        });
-
-        it('should raise an error for an assigned variable in a do-while statement', function(done) {
-                var code = 'contract Blah { function foo(uint256 abc) { do { abc = 2; } while(true); } }',
-                        errors = Solium.lint(code, config);
-
-                errors.constructor.name.should.equal ('Array');
-                errors.should.be.size(1);
-
-                Solium.reset();
-                done();
-        });
-
-        it('should raise an error for a incrementing', function(done) {
-                var code = 'contract Blah { function foo(uint256 abc) { abc++; } }',
-                        errors = Solium.lint(code, config);
-
-                errors.constructor.name.should.equal ('Array');
-                errors.should.be.size(1);
-
-                Solium.reset();
-                done();
-        });
-
-        it('should raise an error for a decrementing', function(done) {
-                var code = 'contract Blah { function foo(uint256 abc) { abc--; } }',
-                        errors = Solium.lint(code, config);
-
-                errors.constructor.name.should.equal ('Array');
-                errors.should.be.size(1);
-
-                Solium.reset();
-                done();
-        });
-
-        it('should raise an error for a decrementing', function(done) {
-                var code = 'contract Blah { function foo(uint256 abc) { abc += 1; } }',
-                        errors = Solium.lint(code, config);
-
-                errors.constructor.name.should.equal ('Array');
-                errors.should.be.size(1);
+                for (let code of codes) {
+                        var errors = Solium.lint(code, config);
+                        errors.constructor.name.should.equal ('Array');
+                        errors.should.be.size(1);
+                }
 
                 Solium.reset();
                 done();
