@@ -66,7 +66,7 @@ describe('[RULE] no-assign-parameter: Rejections', function () {
                              'contract Blah { function foo(uint abc) { while(true) abc = 12; } }',
                              'contract Blah { function foo(uint abc) { while(true) while(true) abc = 12; } }',
                              'contract Blah { function foo(uint x) { if (true) { do { x += 1; } while (x < 10); } } }'
-                            ]
+                            ];
 
                 for (let code of codes) {
                         var errors = Solium.lint(code, config);
