@@ -24,6 +24,8 @@ module.exports = {
 	},
 
 	create: function(context) {
+		var sourceCode = context.getSourceCode();
+
 		function inspectModifierDeclaration(emitted) {
 			if (emitted.exit) {
 				return;
@@ -44,9 +46,19 @@ module.exports = {
 				return;
 			}
 
+			const placeholder = topLevelStatements[firstPlaceholderIndex];
+			const text = sourceCode.getText(placeholder);
+
+			if (text !== "_;") {
+				context.report({
+					node: placeholder,
+					message: "the function placeholder must be followed with a semicolon"
+				});
+			}
+
 			if (firstPlaceholderIndex !== lastIndex) {
 				context.report({
-					node: topLevelStatements[firstPlaceholderIndex + 1],
+					node: placeholder,
 					message: "the function placeholder must be the last statement in the modifier"
 				});
 			}
