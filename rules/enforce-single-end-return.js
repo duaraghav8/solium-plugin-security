@@ -33,12 +33,13 @@ module.exports = {
             if (body.length === 0) {
                 return;
             }
-            let function_name = node.name ? `"${node.name}"` : 'Fallback function';
+
+            let functionName = node.name ? `"${node.name}"` : 'Fallback function';
             for (let statement of body.slice(0, -1)) {
                 if (statement['type'] === 'ReturnStatement') {
                     context.report({
                         node: node,
-                        message: `${function_name}: Return statement not at end of function`,
+                        message: `${functionName}: Return statement not at end of function`,
                     });
                 }
             }
@@ -46,7 +47,7 @@ module.exports = {
             if (last_statement['type'] !== 'ReturnStatement') {
                 context.report({
                     node: node,
-                    message: `${function_name}: Missing return statement at end of function`
+                    message: `${functionName}: Missing return statement at end of function`
                 });
             }
         }
@@ -58,13 +59,13 @@ module.exports = {
                 return;
             }
 
-            let function_name = node.name ? `"${node.name}"` : 'Fallback function';
+            let functionName = node.name ? `"${node.name}"` : 'Fallback function';
             if (node.parent.type !== 'FunctionDeclaration') {
                 for (let statement of node.body) {
                     if (statement.type === 'ReturnStatement') {
                         context.report({
                             node: node,
-                            message: `${function_name} should only have a single return statement at the end.`
+                            message: `${functionName} should only have a single return statement at the end.`
                         });
                     }
                 }
