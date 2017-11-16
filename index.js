@@ -34,7 +34,6 @@ module.exports = {
 		"no-non-256-bit-ints": require("./rules/no-non-256-bit-ints"),
 		"no-send": require("./rules/no-send"),
 		"no-sha3": require("./rules/no-sha3"),
-		"no-assign-parameter": require("./rules/no-assign-parameter"),
 		"no-suicide-or-selfdestruct": require("./rules/no-suicide-or-selfdestruct"),
 		"no-throw": require("./rules/no-throw"),
 		"no-type-deduction": require("./rules/no-type-deduction"),
