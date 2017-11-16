@@ -9,7 +9,7 @@ var Solium = require('solium');
 
 var config = {
         "rules": {
-                "no-assign-parameter": "error"
+                "security/no-assign-parameter": "error"
         }
 };
 
