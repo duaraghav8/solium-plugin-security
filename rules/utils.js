@@ -18,7 +18,7 @@ module.exports = {
    * @param {Object} node The node to check
    * @returns {Boolean} true if the given node is an BlockStatement
    */
-  isBlock: function (node) {
+  isBlockStatement: function (node) {
     return isNodeType(node, 'BlockStatement');
   },
 
@@ -26,7 +26,7 @@ module.exports = {
    * @param {Object} node The node to check
    * @returns {Boolean} true if the given node is an BreakStatement
    */
-  isBreak: function (node) {
+  isBreakStatement: function (node) {
     return isNodeType(node, 'BreakStatement');
   },
 
@@ -52,6 +52,14 @@ module.exports = {
    */
   isUpdate: function (node) {
     return isNodeType(node, 'UpdateExpression');
+  },
+
+  /**
+   * @param {Object} node The node to check
+   * @returns {Boolean} true if the given node is an MemberExpression
+   */
+  isMember: function (node) {
+    return isNodeType(node, 'MemberExpression');
   },
 
   /**

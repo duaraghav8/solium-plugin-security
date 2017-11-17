@@ -24,14 +24,14 @@ module.exports = {
     create: function (context) {
 
         function hasBreakStatement(expr, index, array) {
-            return utils.isBreak(expr);
+            return utils.isBreakStatement(expr);
         }
 
         function inspectIfStatement(node) {
             // This returns true if it finds a 'break' statement in the 'if' block
             if (node.alternate && utils.isIfStatement(node.alternate)) {
                 return inspectIfStatement(node.alternate)
-            } else if (node.alternate && utils.isBlock(node.alternate)) {
+            } else if (node.alternate && utils.isBlockStatement(node.alternate)) {
                 if (node.alternate.body.some(hasBreakStatement)) { return true; }
             }
 
@@ -44,7 +44,7 @@ module.exports = {
             var hasBreak = false;
 
             for (let expr of node.body.body) {
-                if (utils.isBreak(expr)) {
+                if (utils.isBreakStatement(expr)) {
                     hasBreak = true;
                     break;
                 } else if (utils.isIfStatement(expr)) {
