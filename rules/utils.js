@@ -16,6 +16,14 @@ module.exports = {
 
   /**
    * @param {Object} node The node to check
+   * @returns {Boolean} true if the given node is an BlockStatement
+   */
+  isBlock: function (node) {
+    return isNodeType(node, 'BlockStatement');
+  },
+
+  /**
+   * @param {Object} node The node to check
    * @returns {Boolean} true if the given node is an BreakStatement
    */
   isBreak: function (node) {

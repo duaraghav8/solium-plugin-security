@@ -31,7 +31,7 @@ module.exports = {
             // This returns true if it finds a 'break' statement in the 'if' block
             if (node.alternate && utils.isIfStatement(node.alternate)) {
                 return inspectIfStatement(node.alternate)
-            } else if (node.alternate && node.alternate.type === 'BlockStatement') {
+            } else if (node.alternate && utils.isBlock(node.alternate)) {
                 if (node.alternate.body.some(hasBreakStatement)) { return true; }
             }
 
