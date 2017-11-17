@@ -36,4 +36,11 @@ module.exports = {
   isIfStatement: function (node) {
     return node['type'] === 'IfStatement';
   }
+
+  /**
+   * @param {Object} node The node to check
+   * @returns {Boolean} isObject true if the given node is a type of loop statement
+   */
+  isLoopStatement: function (node) {
+    return ['ForStatement', 'WhileStatement', 'DoWhileStatement'].indexOf(node['type'])
 };

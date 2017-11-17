@@ -48,7 +48,7 @@ module.exports = {
                 checkExpressionStatement (following, node, params);
             } else if (utils.isIfStatement(following)) {
                 inspectIf (following, node, params);
-            } else if (['ForStatement', 'WhileStatement', 'DoWhileStatement'].indexOf(following['type']) >= 0) {
+            } else if (utils.isLoopStatement(following)) {
                 inspectLoop (following, node, params);
             } else {
                 inspectBody (following['body'], node, params);
@@ -70,7 +70,7 @@ module.exports = {
             for (let statement of body) {
                 if (utils.isExpression(statement)) {
                     checkExpressionStatement (statement, node, params);
-                } else if (['ForStatement', 'WhileStatement', 'DoWhileStatement'].indexOf(statement['type']) >= 0) {
+                } else if (utils.isLoopStatement(statement)) {
                     inspectLoop (statement, node, params);
                 } else if (utils.isIfStatement(statement)) {
                     inspectIf (statement, node, params);
