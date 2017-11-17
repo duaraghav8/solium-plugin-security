@@ -27,5 +27,13 @@ module.exports = {
    */
   isUpdate: function (node) {
     return node['type'] === 'UpdateExpression';
+  },
+
+  /**
+   * @param {Object} node The node to check
+   * @returns {Boolean} isObject true if the given node is an IfStatement
+   */
+  isIfStatement: function (node) {
+    return node['type'] === 'IfStatement';
   }
 };

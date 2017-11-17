@@ -5,6 +5,8 @@
 
 'use strict';
 
+var utils = require('./utils.js');
+
 module.exports = {
 
     meta: {
@@ -27,7 +29,7 @@ module.exports = {
 
         function inspectIfStatement(node) {
             // This returns true if it finds a 'break' statement in the 'if' block
-            if (node.alternate && node.alternate.type === "IfStatement") {
+            if (node.alternate && utils.isIfStatement(node.alternate)) {
                 return inspectIfStatement(node.alternate)
             } else if (node.alternate && node.alternate.type === 'BlockStatement') {
                 if (node.alternate.body.some(hasBreakStatement)) { return true; }
@@ -45,7 +47,7 @@ module.exports = {
                 if (expr.type === 'BreakStatement') {
                     hasBreak = true;
                     break;
-                } else if (expr.type === 'IfStatement') {
+                } else if (utils.isIfStatement(expr)) {
                     hasBreak = inspectIfStatement(expr);
                 }
             }

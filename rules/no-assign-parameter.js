@@ -46,7 +46,7 @@ module.exports = {
         function inspectStatement (statement, node, params, following) {
             if (utils.isExpression(following)) {
                 checkExpressionStatement (following, node, params);
-            } else if ('IfStatement' === following['type']) {
+            } else if (utils.isIfStatement(following)) {
                 inspectIf (following, node, params);
             } else if (['ForStatement', 'WhileStatement', 'DoWhileStatement'].indexOf(following['type']) >= 0) {
                 inspectLoop (following, node, params);
@@ -72,7 +72,7 @@ module.exports = {
                     checkExpressionStatement (statement, node, params);
                 } else if (['ForStatement', 'WhileStatement', 'DoWhileStatement'].indexOf(statement['type']) >= 0) {
                     inspectLoop (statement, node, params);
-                } else if ('IfStatement' === statement['type']) {
+                } else if (utils.isIfStatement(statement)) {
                     inspectIf (statement, node, params);
                 }
             }
