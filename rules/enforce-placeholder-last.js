@@ -7,10 +7,12 @@
 
 const RE_PLACEHOLDER_WITH_SEMICOLON = /^\s*_\s*;\s*$/;
 
+var utils = require('./utils.js');
+
 function isFunctionPlaceholder(node) {
 	return (
 		node.type === "PlaceholderStatement" ||
-		(node.type === "ExpressionStatement" && node.expression.name === "_")
+		(utils.isExpression(node) && node.expression.name === "_")
 	);
 }
 
