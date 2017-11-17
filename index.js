@@ -41,6 +41,7 @@ module.exports = {
 		"no-tx-origin": require("./rules/no-tx-origin"),
 		"no-unreachable-code": require("./rules/no-unreachable-code"),
 		"no-user-defined-modifiers": require("./rules/no-user-defined-modifiers"),
-		"no-void-returns": require("./rules/no-void-returns")
+		"no-void-returns": require("./rules/no-void-returns"),
+		"no-function-overriding": require("./rules/no-function-overriding")
 	}
 };
