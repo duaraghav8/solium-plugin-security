@@ -7,6 +7,14 @@ module.exports = {
 
   /**
    * @param {Object} node The node to check
+   * @returns {Boolean} isObject true if the given node is an BreakStatement
+   */
+  isBreak: function (node) {
+    return node['type'] === 'BreakStatement';
+  },
+
+  /**
+   * @param {Object} node The node to check
    * @returns {Boolean} isObject true if the given node is an ExpressionStatement
    */
   isExpression: function (node) {

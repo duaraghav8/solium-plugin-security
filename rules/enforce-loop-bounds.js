@@ -24,7 +24,7 @@ module.exports = {
     create: function (context) {
 
         function hasBreakStatement(expr, index, array) {
-            return expr.type === 'BreakStatement';
+            return utils.isBreak(expr);
         }
 
         function inspectIfStatement(node) {
@@ -44,7 +44,7 @@ module.exports = {
             var hasBreak = false;
 
             for (let expr of node.body.body) {
-                if (expr.type === 'BreakStatement') {
+                if (utils.isBreak(expr)) {
                     hasBreak = true;
                     break;
                 } else if (utils.isIfStatement(expr)) {
