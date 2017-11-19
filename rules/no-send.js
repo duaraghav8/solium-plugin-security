@@ -3,13 +3,13 @@
  * @author Tristan Homsi <tristanhomsi@gmail.com>
  */
 
-'use strict';
+"use strict";
 
 function isSend (calleeNode) {
 	return (
 		calleeNode.property &&
-		calleeNode.property.type === 'Identifier' &&
-		calleeNode.property.name === 'send'
+		calleeNode.property.type === "Identifier" &&
+		calleeNode.property.name === "send"
 	);
 }
 
@@ -19,8 +19,8 @@ module.exports = {
 
 		docs: {
 			recommended: true,
-			type: 'warning',
-			description: 'Ensure no use of \'send\' in the code'
+			type: "warning",
+			description: "Ensure no use of 'send' in the code"
 		},
 
 		schema: []
@@ -37,7 +37,7 @@ module.exports = {
 			if (isSend (callee)) {
 				context.report ({
 					node: emittedObject.node,
-					message: '\'send\' is unsafe. Instead, consider using \'transfer\' or a pattern where the recipient withdraws the money.'
+					message: "'send' is unsafe. Instead, consider using 'transfer' or a pattern where the recipient withdraws the money."
 				});
 
 			}

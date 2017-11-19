@@ -9,12 +9,12 @@ module.exports = {
 
 		docs: {
 			recommended: true,
-			type: 'warning',
-			description: 'Avoid use of \'continue\' statement.'
+			type: "warning",
+			description: "Avoid use of 'continue' statement."
 		},
 
 		schema: [],
-		fixable: 'code'
+		fixable: "code"
 
 	},
 
@@ -25,7 +25,7 @@ module.exports = {
 
 			context.report ({
 				node: emitted.node,
-				message: 'Avoid use of \'continue\' statement.'
+				message: "Avoid use of 'continue' statement."
 			});
 		}
 

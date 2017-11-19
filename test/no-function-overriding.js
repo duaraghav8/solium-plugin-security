@@ -3,21 +3,21 @@
  * @author Nicolas Feignon <nfeignon@gmail.com>
  */
 
-'use strict';
+"use strict";
 
-var Solium = require ('solium');
+var Solium = require ("solium");
 
 var userConfig = {
-    rules: {
-        "security/no-function-overriding": "error"
-    }
+	rules: {
+		"security/no-function-overriding": "error"
+	}
 };
 
-describe ('[RULE] no-function-overriding: Acceptances', function () {
+describe ("[RULE] no-function-overriding: Acceptances", function () {
 
-    it ('should accept contracts that don\'t override their inherited functions', function (done) {
-        var code = [
-            `
+	it ("should accept contracts that don't override their inherited functions", function (done) {
+		var code = [
+			`
                 contract A {
                     function foo();
                     function ();
@@ -27,7 +27,7 @@ describe ('[RULE] no-function-overriding: Acceptances', function () {
                     function ();
                 }
             `,
-            `
+			`
                 contract A {
                     function foo();
                 }
@@ -39,7 +39,7 @@ describe ('[RULE] no-function-overriding: Acceptances', function () {
                     function foo();
                 }
             `,
-            `
+			`
                 contract A {
                     function foo();
                 }
@@ -48,7 +48,7 @@ describe ('[RULE] no-function-overriding: Acceptances', function () {
                     function foo(uint);
                 }
             `,
-            `
+			`
                 contract A {
                     function foo();
                 }
@@ -59,7 +59,7 @@ describe ('[RULE] no-function-overriding: Acceptances', function () {
                     function foo(uint);
                 }
             `,
-            `
+			`
                 contract A {
                     function foo() returns (string);
                 }
@@ -70,24 +70,24 @@ describe ('[RULE] no-function-overriding: Acceptances', function () {
                     function foo(uint);
                 }
             `
-        ];
-        var errors;
+		];
+		var errors;
 
-        for (let expr of code) {
-            errors = Solium.lint (expr, userConfig);
-            errors.length.should.equal (0);
-        }
+		for (let expr of code) {
+			errors = Solium.lint (expr, userConfig);
+			errors.length.should.equal (0);
+		}
 
-        Solium.reset ();
-        done ();
-    });
+		Solium.reset ();
+		done ();
+	});
 });
 
-describe ('[RULE] no-function-overriding: Rejections', function () {
+describe ("[RULE] no-function-overriding: Rejections", function () {
 
-    it ('should reject contracts that override their inherited functions', function (done) {
-        var code = [
-            `
+	it ("should reject contracts that override their inherited functions", function (done) {
+		var code = [
+			`
                 contract A {
                     function foo();
                 }
@@ -95,7 +95,7 @@ describe ('[RULE] no-function-overriding: Rejections', function () {
                     function foo() { return; }
                 }
             `,
-            `
+			`
                 contract A {
                     function foo();
                     function bar(uint, string);
@@ -111,7 +111,7 @@ describe ('[RULE] no-function-overriding: Rejections', function () {
                     function foo(uint);
                 }
             `,
-            `
+			`
                 contract A {
                     function foo() returns (string);
                     function();
@@ -122,7 +122,7 @@ describe ('[RULE] no-function-overriding: Rejections', function () {
                     function foo() returns (string);
                 }
             `,
-            `
+			`
                 contract A {
                     function bar(string s, uint u) public;
                 }
@@ -130,7 +130,7 @@ describe ('[RULE] no-function-overriding: Rejections', function () {
                     function bar(string s, uint u) public;
                 }
             `,
-            `
+			`
                 contract A {
                     function bar(string s, uint u) public;
                 }
@@ -140,7 +140,7 @@ describe ('[RULE] no-function-overriding: Rejections', function () {
                     function bar(string s, uint u) public;
                 }
             `,
-            `
+			`
                 contract A {
                     function bar(string s, uint u) public;
                 }
@@ -151,23 +151,23 @@ describe ('[RULE] no-function-overriding: Rejections', function () {
                     function bar(string s, uint u) public;
                 }
             `
-        ];
-        var errors;
+		];
+		var errors;
 
-        errors = Solium.lint (code[0], userConfig);
-        errors.length.should.equal (1);
-        errors = Solium.lint (code[1], userConfig);
-        errors.length.should.equal (2);
-        errors = Solium.lint (code[2], userConfig);
-        errors.length.should.equal (1);
-        errors = Solium.lint (code[3], userConfig);
-        errors.length.should.equal (1);
-        errors = Solium.lint (code[4], userConfig);
-        errors.length.should.equal (1);
-        errors = Solium.lint (code[5], userConfig);
-        errors.length.should.equal (2);
+		errors = Solium.lint (code[0], userConfig);
+		errors.length.should.equal (1);
+		errors = Solium.lint (code[1], userConfig);
+		errors.length.should.equal (2);
+		errors = Solium.lint (code[2], userConfig);
+		errors.length.should.equal (1);
+		errors = Solium.lint (code[3], userConfig);
+		errors.length.should.equal (1);
+		errors = Solium.lint (code[4], userConfig);
+		errors.length.should.equal (1);
+		errors = Solium.lint (code[5], userConfig);
+		errors.length.should.equal (2);
 
-        Solium.reset ();
-        done ();
-    });
+		Solium.reset ();
+		done ();
+	});
 });

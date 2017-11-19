@@ -3,43 +3,42 @@
  * @author Nicolas Feignon <nfeignon@gmail.com>
  */
 
-'use strict';
+"use strict";
 
 module.exports = {
 
-    meta: {
+	meta: {
 
-        docs: {
-            recommended: true,
-            type: 'error',
-            description: 'Discourage use of void returns in functions prototypes'
-        },
+		docs: {
+			recommended: true,
+			type: "error",
+			description: "Discourage use of void returns in functions prototypes"
+		},
 
-        schema: []
+		schema: []
 
-    },
+	},
 
-    create: function (context) {
+	create: function (context) {
 
-        function inspectFunctionDeclaration(emitted) {
-            var node = emitted.node;
-            if (emitted.exit || node.returnParams) { return; }
+		function inspectFunctionDeclaration(emitted) {
+			var node = emitted.node, message;
 
-            if (node.name) {
-                var message = 'Avoid using a void return in function ' + node.name;
-            } else {
-                var message = 'Avoid using a void return in fallback function';
-            }
-            context.report({
-                node: node,
-                message: message
-            });
-        }
+			if (emitted.exit || node.returnParams) { return; }
 
-        return {
-            FunctionDeclaration: inspectFunctionDeclaration
-        };
+			if (node.name) {
+				message = "Avoid using a void return in function " + node.name;
+			} else {
+				message = "Avoid using a void return in fallback function";
+			}
 
-    }
+			context.report({ node, message });
+		}
+
+		return {
+			FunctionDeclaration: inspectFunctionDeclaration
+		};
+
+	}
 
 };

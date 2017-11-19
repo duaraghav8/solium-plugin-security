@@ -3,47 +3,47 @@
  * @author Nicolas Feignon <nfeignon@gmail.com>
  */
 
-'use strict';
+"use strict";
 
 module.exports = {
 
-    meta: {
+	meta: {
 
-        docs: {
-            recommended: true,
-            type: 'error',
-            description: 'Discourage use of named returns in functions'
-        },
+		docs: {
+			recommended: true,
+			type: "error",
+			description: "Discourage use of named returns in functions"
+		},
 
-        schema: []
+		schema: []
 
-    },
+	},
 
-    create: function (context) {
+	create: function (context) {
 
-        function inspectFunctionDeclaration(emitted) {
-            var node = emitted.node;
-            if (emitted.exit || !node.returnParams) { return; }
+		function inspectFunctionDeclaration(emitted) {
+			var node = emitted.node;
+			if (emitted.exit || !node.returnParams) { return; }
 
-            for (let param of node.returnParams) {
-                if (!param.id) { continue; }
+			for (let param of node.returnParams) {
+				if (!param.id) { continue; }
 
-                if (node.name) {
-                    var message = 'Avoid using named returns in function ' + node.name;
-                } else {
-                    var message = 'Avoid using named returns in fallback function';
-                }
-                context.report({
-                    node: node,
-                    message: message
-                });
-            }
-        }
+				var message;
 
-        return {
-            FunctionDeclaration: inspectFunctionDeclaration
-        };
+				if (node.name) {
+					message = "Avoid using named returns in function " + node.name;
+				} else {
+					message = "Avoid using named returns in fallback function";
+				}
 
-    }
+				context.report({ node, message });
+			}
+		}
+
+		return {
+			FunctionDeclaration: inspectFunctionDeclaration
+		};
+
+	}
 
 };

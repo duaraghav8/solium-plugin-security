@@ -3,35 +3,35 @@
  * @author Raghav Dua <duaraghav8@gmail.com>
  */
 
-'use strict';
+"use strict";
 
 module.exports = {
 
-    meta: {
-        docs: {
-            description: "Discourage use of inline assembly",
-            recommended: true,
-            type: "error"
-        },
+	meta: {
+		docs: {
+			description: "Discourage use of inline assembly",
+			recommended: true,
+			type: "error"
+		},
 
-        schema: []
-    },
+		schema: []
+	},
 
-    create(context) {
-        function reportUse(emitted) {
-            if (emitted.exit) { return; }
+	create(context) {
+		function reportUse(emitted) {
+			if (emitted.exit) { return; }
 
-            const {node} = emitted;
+			const {node} = emitted;
 
-            context.report({
-                node,
-                message: "Inline Assembly discards several safety features of Solidity and should thus be avoided."
-            });
-        }
+			context.report({
+				node,
+				message: "Inline Assembly discards several safety features of Solidity and should thus be avoided."
+			});
+		}
 
-        return {
-            InlineAssemblyStatement: reportUse
-        };
-    }
+		return {
+			InlineAssemblyStatement: reportUse
+		};
+	}
 
 };

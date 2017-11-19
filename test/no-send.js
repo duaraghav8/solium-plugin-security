@@ -3,7 +3,7 @@
  * @author Tristan Homsi <tristanhomsi@gmail.com>
  */
 
-'use strict';
+"use strict";
 
 var Solium = require("solium");
 
@@ -13,9 +13,9 @@ var userConfig = {
 	}
 };
 
-describe ('[RULE] no-send: Rejections', function () {
+describe ("[RULE] no-send: Rejections", function () {
 
-	it ('should reject contracts using send', function (done) {
+	it ("should reject contracts using send", function (done) {
 		// Example from here:
 		// http://solidity.readthedocs.io/en/develop/security-considerations.html#re-entrancy
 		var code = "contract Fund {\
@@ -29,14 +29,14 @@ describe ('[RULE] no-send: Rejections', function () {
 		}",
 			errors = Solium.lint (code, userConfig);
 
-		errors.constructor.name.should.equal ('Array');
+		errors.constructor.name.should.equal ("Array");
 		errors.length.should.equal (1);
 
 		Solium.reset ();
 		done ();
 	});
 
-	it ('should work correctly for non-property functions, regardless of name', function (done) {
+	it ("should work correctly for non-property functions, regardless of name", function (done) {
 		var code = "contract Fund {\
 			mapping(address => uint) shares; \
 			function send() {return 0;}\

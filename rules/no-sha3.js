@@ -3,41 +3,41 @@
  * @author Raghav Dua <duaraghav8@gmail.com>
  */
 
-'use strict';
+"use strict";
 
 module.exports = {
 
-    meta: {
-        docs: {
-            description: "Encourage use of 'keccak256()' over 'sha3()' function",
-            recommended: true,
-            type: "error"
-        },
+	meta: {
+		docs: {
+			description: "Encourage use of 'keccak256()' over 'sha3()' function",
+			recommended: true,
+			type: "error"
+		},
 
-        schema: [],
-        fixable: "code"
-    },
+		schema: [],
+		fixable: "code"
+	},
 
-    create(context) {
-        function reportIfsha3Used(emitted) {
-            if (emitted.exit) { return; }
+	create(context) {
+		function reportIfsha3Used(emitted) {
+			if (emitted.exit) { return; }
 
-            const {node} = emitted, {type, name} = node.callee
+			const {node} = emitted, {type, name} = node.callee;
 
-            if (type !== "Identifier") { return; }
+			if (type !== "Identifier") { return; }
 
-            name === "sha3" && context.report({
-                node,
-                fix(fixer) {
-                    return fixer.replaceTextRange([node.callee.start, node.callee.end], "keccak256");
-                },
-                message: "Avoid using 'sha3(...)'. Use --fix to replace it with 'keccak256(...)'."
-            });
-        }
+			name === "sha3" && context.report({
+				node,
+				fix(fixer) {
+					return fixer.replaceTextRange([node.callee.start, node.callee.end], "keccak256");
+				},
+				message: "Avoid using 'sha3(...)'. Use --fix to replace it with 'keccak256(...)'."
+			});
+		}
 
-        return {
-            CallExpression: reportIfsha3Used
-        };
-    }
+		return {
+			CallExpression: reportIfsha3Used
+		};
+	}
 
 };
