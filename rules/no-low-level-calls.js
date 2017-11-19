@@ -5,6 +5,8 @@
 
 'use strict';
 
+var utils = require('./utils.js');
+
 const DEFAULT_FUNCS_TO_AVOID = ["call", "callcode", "delegatecall"];
 
 module.exports = {
@@ -32,7 +34,7 @@ module.exports = {
         function reportIfUsingFuncToAvoid(emitted) {
             const {node} = emitted;
 
-            if (emitted.exit || node.callee.type !== "MemberExpression") {
+            if (emitted.exit || !utils.isMember(node.callee)) {
                 return;
             }
 

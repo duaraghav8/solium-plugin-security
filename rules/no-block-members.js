@@ -34,7 +34,7 @@ module.exports = {
 
             const {node} = emitted;
 
-            if (node.callee.type !== "MemberExpression") { return; }
+            if (!utils.isMember(node.callee)) { return; }
 
             const {object, property} = node.callee;
 

@@ -5,6 +5,8 @@
 
 'use strict';
 
+var utils = require('./utils.js');
+
 module.exports = {
 
     meta: {
@@ -21,12 +23,12 @@ module.exports = {
     create: function (context) {
 
         function isBadAssignment (statement, params) {
-            return statement['expression']['type'] === 'AssignmentExpression' &&
+            return utils.isAssignment(statement['expression']) &&
                    params.indexOf(statement['expression']['left']['name']) >= 0
         }
 
         function isBadUpdate (statement, params) {
-            return statement['expression']['type'] === 'UpdateExpression' &&
+            return utils.isUpdate(statement['expression']) &&
                    params.indexOf(statement['expression']['argument']['name']) >= 0
 
         }
@@ -42,11 +44,11 @@ module.exports = {
         }
 
         function inspectStatement (statement, node, params, following) {
-            if ('ExpressionStatement' === following['type']) {
+            if (utils.isExpression(following)) {
                 checkExpressionStatement (following, node, params);
-            } else if ('IfStatement' === following['type']) {
+            } else if (utils.isIfStatement(following)) {
                 inspectIf (following, node, params);
-            } else if (['ForStatement', 'WhileStatement', 'DoWhileStatement'].indexOf(following['type']) >= 0) {
+            } else if (utils.isLoopStatement(following)) {
                 inspectLoop (following, node, params);
             } else {
                 inspectBody (following['body'], node, params);
@@ -66,11 +68,11 @@ module.exports = {
 
         function inspectBody (body, node, params) {
             for (let statement of body) {
-                if ('ExpressionStatement' === statement['type']) {
+                if (utils.isExpression(statement)) {
                     checkExpressionStatement (statement, node, params);
-                } else if (['ForStatement', 'WhileStatement', 'DoWhileStatement'].indexOf(statement['type']) >= 0) {
+                } else if (utils.isLoopStatement(statement)) {
                     inspectLoop (statement, node, params);
-                } else if ('IfStatement' === statement['type']) {
+                } else if (utils.isIfStatement(statement)) {
                     inspectIf (statement, node, params);
                 }
             }

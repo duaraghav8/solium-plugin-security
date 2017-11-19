@@ -5,6 +5,8 @@
 
 'use strict';
 
+var utils = require('./utils.js');
+
 module.exports = {
 
     meta: {
@@ -23,8 +25,8 @@ module.exports = {
 
             const {node} = emitted, {object, property} = node.callee;
 
-            if (node.callee.type === "MemberExpression" && property.type === "Identifier" && property.name === "value"
-                && object.type === "MemberExpression" && object.property.type === "Identifier"
+            if (utils.isMember(node.callee) && property.type === "Identifier" && property.name === "value"
+                && utils.isMember(object) && object.property.type === "Identifier"
                 && object.property.name === "call") {
 
                 context.report({

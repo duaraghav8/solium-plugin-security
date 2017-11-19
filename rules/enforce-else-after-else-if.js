@@ -5,6 +5,8 @@
 
 'use strict';
 
+var utils = require('./utils.js');
+
 module.exports = {
 
     meta: {
@@ -26,8 +28,8 @@ module.exports = {
                     node: node,
                     message: '"else if" statement must be followed by an "else" statement'
                 });
-            } else if (node['alternate']['type'] === "IfStatement") {
-                inspectElseIfStatement(node['alternate']) 
+            } else if (utils.isIfStatement(node['alternate'])) {
+                inspectElseIfStatement(node['alternate']);
             }
         }
 
@@ -39,17 +41,17 @@ module.exports = {
             var parent = sourceCode.getParent(node);
 
             // only inspect top-level if statements
-            if (parent['type'] == "IfStatement") {
+            if (utils.isIfStatement(parent)) {
                 return;
             }
 
-            if (node['alternate'] && node['alternate']['type'] === "IfStatement") {
+            if (node['alternate'] && utils.isIfStatement(node['alternate'])) {
                 inspectElseIfStatement(node['alternate'])
             }
         }
 
         return {
-            IfStatement: inspectIfStatement 
+            IfStatement: inspectIfStatement
         };
     }
 
