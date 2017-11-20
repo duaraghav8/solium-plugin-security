@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for end-return rule
+ * @fileoverview Test for enforce-single-end-return rule
  * @author Mitchell Van Der Hoeff <mitchellvanderhoeff@gmail.com>
  * @author Simon Hajjar <simon.j.hajjar@gmail.com>
  */
@@ -17,9 +17,20 @@ var userConfig = {
 describe ("[RULE] enforce-single-end-return: Acceptances", function () {
 
 	it ("should accept functions that have a single return statement at the end", function (done) {
-		var code = "contract Foo { function foo () {uint256 x = 3; return;} }";
-		var errors;
+		var errors, code = "contract Foo { function foo () {uint256 x = 3; return;} }";
 
+		errors = Solium.lint (code, userConfig);
+		errors.should.be.size (0);
+
+		code = "contract Foo { function foo () {return;} }";
+		errors = Solium.lint (code, userConfig);
+		errors.should.be.size (0);
+
+		code = "contract Foo { function foo () {hello('world'); boo(); if (true) {} return;} }";
+		errors = Solium.lint (code, userConfig);
+		errors.should.be.size (0);
+
+		code = "contract Foo { function foo () { return callMyFunc(100, 'hello'); } }";
 		errors = Solium.lint (code, userConfig);
 		errors.should.be.size (0);
 
@@ -52,12 +63,16 @@ describe ("[RULE] enforce-single-end-return: Rejections", function () {
 		done ();
 	});
 
-	it ("should reject return statements whose parent isn't a function", function (done) {
+	it ("should reject return statements whose parent isn't a function, ie, that is not top-level", function (done) {
 		var code = "contract Foo { function foo () { do { return 100; } while(true); return; } }";
 		var errors;
 
 		errors = Solium.lint (code, userConfig);
 		errors.should.be.size (1);
+
+		code = "contract Foo { function foo () { if (true) { return; } else { return; } } }";
+		errors = Solium.lint (code, userConfig);
+		errors.should.be.size (3);
 
 		Solium.reset ();
 		done ();

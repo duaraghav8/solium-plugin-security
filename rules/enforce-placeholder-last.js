@@ -56,7 +56,7 @@ module.exports = {
 			if (!RE_PLACEHOLDER_WITH_SEMICOLON.exec(text)) {
 				context.report({
 					node: placeholder,
-					message: "the function placeholder must be followed with a semicolon"
+					message: "function placeholder must be followed by a semicolon"
 				});
 			}
 

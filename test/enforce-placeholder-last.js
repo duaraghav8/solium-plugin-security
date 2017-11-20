@@ -23,6 +23,12 @@ describe("[RULE] enforce-placeholder-last: Rejections", function() {
 		errors.constructor.name.should.equal("Array");
 		errors.length.should.equal(1);
 
+		code = toContract("modifier foo() {_; _;}");
+		errors = Solium.lint(code, userConfig);
+
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(1);
+
 		Solium.reset();
 
 		done();
@@ -31,6 +37,18 @@ describe("[RULE] enforce-placeholder-last: Rejections", function() {
 	it("should reject contracts with no placeholder", function(done) {
 		var code = toContract("modifier foo() { require(true); }"),
 			errors = Solium.lint(code, userConfig);
+
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(1);
+
+		code = toContract("modifier foo() {}");
+		errors = Solium.lint(code, userConfig);
+
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(1);
+
+		code = toContract("modifier foo() { boo(); hola('hello world'); }");
+		errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");
 		errors.length.should.equal(1);
@@ -46,6 +64,18 @@ describe("[RULE] enforce-placeholder-last: Rejections", function() {
 
 		errors.constructor.name.should.equal("Array");
 		errors.length.should.equal(1);
+
+		code = toContract("modifier foo() { hello(); var x = 100; _ }");
+		errors = Solium.lint(code, userConfig);
+
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(1);
+
+		code = toContract("modifier foo() { hello(); var x = 100; _\nbar(); }");
+		errors = Solium.lint(code, userConfig);
+
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(2);
 
 		Solium.reset();
 

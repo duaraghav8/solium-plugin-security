@@ -23,7 +23,7 @@ describe("Check Plugin's exported object", () => {
 		meta.description.should.be.type("string");
 
 		rules.should.be.type("object");
-		rules.should.have.size(32);
+		rules.should.have.size(32); // This number changes every time we add/remove a rule in index.js.
 
 		for (let ruleName in rules) {
 			rules[ruleName].should.be.type("object");
