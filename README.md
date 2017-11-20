@@ -1,5 +1,7 @@
 # The official Security Plugin for Solium
 
+[![Build Status](https://travis-ci.org/duaraghav8/solium-plugin-security.svg?branch=master)](https://travis-ci.org/duaraghav8/solium-plugin-security)
+
 This Plugin provides security-focused lint rules for [Solium](https://github.com/duaraghav8/Solium).
 
 The rules have been taken from Consensys' [Recommended Smart Contract Practices](https://consensys.github.io/smart-contract-best-practices/recommendations/) and Solium's [Rule Wishlist](https://github.com/duaraghav8/Solium/issues/44).
