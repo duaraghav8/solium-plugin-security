@@ -1,5 +1,5 @@
 /**
- * @fileoverview Tests for no-type-deduction rule
+ * @fileoverview Tests for maximum-statements-in-function rule
  * @author Beau Gunderson <beau@beaugunderson.com>
  */
 
@@ -11,13 +11,13 @@ var toContract = wrappers.toContract;
 
 var userConfig = {
 	rules: {
-		"security/no-type-deduction": "error"
+		"security/max-statements-in-func": ["error", 1]
 	}
 };
 
-describe("[RULE] no-type-deduction: Rejections", function() {
-	it("should reject contracts using type deduction through 'var'", function(done) {
-		var code = toContract("function foo () { var a = 8; }"),
+describe("[RULE] max-statements-in-func: Rejections", function() {
+	it("should reject contracts with functions with many lines", function(done) {
+		var code = toContract("function foo () { uint8 a;\n  uint8 b;\n  uint8 c; }"),
 			errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");

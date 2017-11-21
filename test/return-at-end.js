@@ -10,11 +10,11 @@ var Solium = require ("solium");
 
 var userConfig = {
 	rules: {
-		"security/enforce-single-end-return": "error"
+		"security/return-at-end": "error"
 	}
 };
 
-describe ("[RULE] enforce-single-end-return: Acceptances", function () {
+describe ("[RULE] return-at-end: Acceptances", function () {
 
 	it ("should accept functions that have a single return statement at the end", function (done) {
 		var errors, code = "contract Foo { function foo () {uint256 x = 3; return;} }";
@@ -39,7 +39,7 @@ describe ("[RULE] enforce-single-end-return: Acceptances", function () {
 	});
 });
 
-describe ("[RULE] enforce-single-end-return: Rejections", function () {
+describe ("[RULE] return-at-end: Rejections", function () {
 
 	it ("should reject functions that have a return statement not at the end", function (done) {
 		var code = "contract Foo { function foo () {return; return;} }";

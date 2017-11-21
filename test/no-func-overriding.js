@@ -9,11 +9,11 @@ var Solium = require ("solium");
 
 var userConfig = {
 	rules: {
-		"security/no-function-overriding": "error"
+		"security/no-func-overriding": "error"
 	}
 };
 
-describe ("[RULE] no-function-overriding: Acceptances", function () {
+describe ("[RULE] no-func-overriding: Acceptances", function () {
 
 	it ("should accept contracts that don't override their inherited functions", function (done) {
 		var code = [
@@ -91,7 +91,7 @@ describe ("[RULE] no-function-overriding: Acceptances", function () {
 	});
 });
 
-describe ("[RULE] no-function-overriding: Rejections", function () {
+describe ("[RULE] no-func-overriding: Rejections", function () {
 
 	it ("should reject contracts that override their inherited functions", function (done) {
 		var code = [

@@ -12,7 +12,7 @@ function isNameValueAssignment(argument) {
 module.exports = {
 	meta: {
 		docs: {
-			description: "Disallow named function parameters",
+			description: "Discourage named function parameters",
 			recommended: true,
 			type: "error"
 		},

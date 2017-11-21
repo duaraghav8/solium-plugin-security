@@ -11,11 +11,11 @@ var toContract = wrappers.toContract;
 
 var userConfig = {
 	"rules": {
-		"security/max-one-break-per-loop": "error"
+		"security/one-break-per-loop": "error"
 	}
 };
 
-describe ("[RULE] max-one-break-per-loop: Acceptances", function () {
+describe ("[RULE] one-break-per-loop: Acceptances", function () {
 
 	it ("should accept all loops that have one or less breaks in them", function (done) {
 		var code = [
@@ -57,7 +57,7 @@ describe ("[RULE] max-one-break-per-loop: Acceptances", function () {
 });
 
 
-describe ("[RULE] max-one-break-per-loop: Rejections", function () {
+describe ("[RULE] one-break-per-loop: Rejections", function () {
 
 	it ("should reject all loops that have two or more breaks in them", function (done) {
 		var code = [

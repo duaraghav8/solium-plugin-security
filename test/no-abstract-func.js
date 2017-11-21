@@ -9,11 +9,11 @@ var Solium = require ("solium");
 
 var userConfig = {
 	rules: {
-		"security/no-abstract-functions": "error"
+		"security/no-abstract-func": "error"
 	}
 };
 
-describe ("[RULE] no-abstract-functions: Rejections", function () {
+describe ("[RULE] no-abstract-func: Rejections", function () {
 
 	it ("should reject contracts that use abstract functions", function (done) {
 		var code = [

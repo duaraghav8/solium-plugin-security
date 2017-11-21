@@ -9,11 +9,11 @@ var Solium = require("solium");
 
 var config = {
 	"rules": {
-		"security/no-assign-parameter": "error"
+		"security/no-assign-params": "error"
 	}
 };
 
-describe("[RULE] no-assign-parameter: Acceptances", function () {
+describe("[RULE] no-assign-params: Acceptances", function () {
 	it("shouldn't raise an error for a non-assigned parameter", function(done) {
 		var code = "contract Blah { function abc(uint a, uint b) { } }",
 			errors = Solium.lint(code, config);
@@ -48,7 +48,7 @@ describe("[RULE] no-assign-parameter: Acceptances", function () {
 	});
 });
 
-describe("[RULE] no-assign-parameter: Rejections", function () {
+describe("[RULE] no-assign-params: Rejections", function () {
 	it("should raise an error for an assigned parameter", function(done) {
 		var codes = ["contract Blah { function abc(uint a, uint b) { a = 12; } }",
 			"contract Blah { function abc(uint a, uint b) { b = 12; } }",

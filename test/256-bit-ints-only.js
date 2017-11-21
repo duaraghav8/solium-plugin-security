@@ -11,11 +11,11 @@ var toContract = wrappers.toContract;
 
 var userConfig = {
 	rules: {
-		"security/no-non-256-bit-ints": "error"
+		"security/256-bit-ints-only": "error"
 	}
 };
 
-describe("[RULE] no-non-256-bit-ints: Rejections", function() {
+describe("[RULE] 256-bit-ints-only: Rejections", function() {
 	it("should reject contracts using non-256 bit ints", function(done) {
 		var code = toContract("function foo () { int8 a; uint8 b; int16 c; }"),
 			errors = Solium.lint(code, userConfig);
@@ -60,7 +60,7 @@ describe("[RULE] no-non-256-bit-ints: Rejections", function() {
 });
 
 
-describe("[RULE] no-non-256-bit-ints: Acceptances", function() {
+describe("[RULE] 256-bit-ints-only: Acceptances", function() {
 	it("should accept contracts using 256 bit ints", function(done) {
 		var code = toContract("function foo () { int a; uint b; int256 c; uint256d; }"),
 			errors = Solium.lint(code, userConfig);

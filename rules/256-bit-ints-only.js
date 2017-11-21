@@ -42,7 +42,7 @@ module.exports = {
 			) {
 				context.report({
 					node: node,
-					message: `${variableType} is a non-256 bit integer. Avoid usage.`
+					message: `${variableType}: Only use 256-bit integers.`
 				});
 			}
 		}

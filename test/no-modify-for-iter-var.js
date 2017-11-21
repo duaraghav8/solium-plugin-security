@@ -11,11 +11,11 @@ var toContract = wrappers.toContract;
 
 var userConfig = {
 	rules: {
-		"security/no-mod-iter-var-for-loop": "error"
+		"security/no-modify-for-iter-var": "error"
 	}
 };
 
-describe ("[RULE] no-mod-iter-var-for-loop: Acceptances", function () {
+describe ("[RULE] no-modify-for-iter-var: Acceptances", function () {
 
 	it ("should accept for loops that don't modifify their iteration variable", function (done) {
 		var code = [
@@ -36,7 +36,7 @@ describe ("[RULE] no-mod-iter-var-for-loop: Acceptances", function () {
 });
 
 
-describe ("[RULE] no-mod-iter-var-for-loop: Rejections", function () {
+describe ("[RULE] no-modify-for-iter-var: Rejections", function () {
 
 	it ("should reject for loops that modify their iteration variable", function (done) {
 		var code = [

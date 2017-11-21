@@ -9,11 +9,11 @@ var Solium = require("solium");
 
 var userConfig = {
 	"rules": {
-		"security/enforce-else-after-else-if": "error"
+		"security/else-after-elseif": "error"
 	}
 };
 
-describe("[RULE] enforce-else-after-else-if: Rejections", function () {
+describe("[RULE] else-after-elseif: Rejections", function () {
 	it("should raise an error for an else if with no else after it", function(done) {
 		var code = [
 			"contract Foo { function bar(n) { if (n > 10) { return n; } else if (n < 10) { return -n; } } }",
@@ -58,7 +58,7 @@ describe("[RULE] enforce-else-after-else-if: Rejections", function () {
 	});
 });
 
-describe("[RULE] enforce-else-after-else-if: Acceptances", function () {
+describe("[RULE] else-after-elseif: Acceptances", function () {
 	it("should not raise any errors for an \"else if\" block followed by an \"else\" block", function(done) {
 		var code = [
 			"contract Foo { function bar(n) { if (n > 10) { return n; } else if (n < 10) { return -n; } else { return 100; } } }",
