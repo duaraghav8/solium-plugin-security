@@ -22,7 +22,7 @@ module.exports = {
 	create: function (context) {
 
 		function inspectLoopStatement(emitted) {
-			var node = emitted.node;
+			const node = emitted.node;
 
 			if (emitted.exit || !node.init || node.init.type !== "AssignmentExpression") {
 				return;
@@ -48,7 +48,7 @@ module.exports = {
 				if (name === iterationVariable) {
 					context.report({
 						node: expr,
-						message: "Iterator variable modified in for loop"
+						message: "Iterator variable modified in for loop."
 					});
 				}
 			}

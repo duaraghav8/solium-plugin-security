@@ -28,13 +28,8 @@ module.exports = {
 			for (let param of node.returnParams) {
 				if (!param.id) { continue; }
 
-				var message;
-
-				if (node.name) {
-					message = "Avoid using named returns in function " + node.name;
-				} else {
-					message = "Avoid using named returns in fallback function";
-				}
+				const message = node.name ?
+					`Avoid using named returns in function ${node.name}` : "Avoid using named returns in fallback function";
 
 				context.report({ node, message });
 			}

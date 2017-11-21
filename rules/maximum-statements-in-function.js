@@ -10,57 +10,44 @@ module.exports = {
 		docs: {
 			recommended: false,
 			type: "error",
-			description: "Set a maximum number of statements per function"
+			description: "Enforce upper limit on number of statements present in a function"
 		},
 
-		schema: [
-			{
-				type: "integer",
-				minimum: 0
-			}
-		]
+		schema: [{
+			type: "integer",
+			minimum: 0
+		}]
 	},
 
 	create: function(context) {
-		var maximumStatements = context.options ? context.options : 25;
-		var sourceCode = context.getSourceCode();
+		const maximumStatements = context.options ? context.options[0] : 25;
+		const sourceCode = context.getSourceCode();
 
 		function getStatementLines(node) {
-			var lines = sourceCode
-				.getText(node)
-				.split(/[\r\n]/g)
-				.map(line => line.trim())
-				.filter(line => line);
+			const lines = sourceCode.getText(node)
+				.split(/[\r\n]/g).map(line => line.trim()).filter(line => line);
 
 			return lines.length;
 		}
 
 		function inspectFunctionDeclaration(emitted) {
-			if (emitted.exit) {
+			const node = emitted.node;
+
+			// If abstract function, exit now
+			if (emitted.exit || node.is_abstract) {
 				return;
 			}
 
-			var node = emitted.node;
-
-			if (!node.body) {
-				return;
-			}
-
-			var topLevelStatements = node.body.body;
-
-			var numberOfStatements = topLevelStatements.reduce((total, statement) => {
+			const topLevelStatements = node.body.body;
+			const numberOfStatements = topLevelStatements.reduce((total, statement) => {
 				return total + getStatementLines(statement);
 			}, 0);
 
 			if (numberOfStatements > maximumStatements) {
 				context.report({
 					node: node,
-					message:
-						"function contains " +
-						numberOfStatements +
-						" statements, " +
-						maximumStatements +
-						" is the maximum allowed"
+					message: `${node.name}: Number of statements ` +
+						`inside function(${numberOfStatements}) exceeds the upper limit(${maximumStatements}).`
 				});
 			}
 		}

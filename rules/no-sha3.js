@@ -31,7 +31,7 @@ module.exports = {
 				fix(fixer) {
 					return fixer.replaceTextRange([node.callee.start, node.callee.end], "keccak256");
 				},
-				message: "Avoid using 'sha3(...)'. Use --fix to replace it with 'keccak256(...)'."
+				message: "'sha3(...)' should be replaced with 'keccak256(...)'."
 			});
 		}
 

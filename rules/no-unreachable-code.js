@@ -37,7 +37,7 @@ module.exports = {
 			if (firstTopLevelReturnIndex !== lastIndex) {
 				context.report({
 					node: topLevelStatements[firstTopLevelReturnIndex + 1],
-					message: "unreachable code should be avoided"
+					message: "Code is unreachable."
 				});
 			}
 		}

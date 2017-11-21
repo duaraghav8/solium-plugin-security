@@ -25,7 +25,7 @@ module.exports = {
 
 			context.report({
 				node,
-				message: "Inline Assembly discards several safety features of Solidity and should thus be avoided."
+				message: "Avoid using Inline Assembly."
 			});
 		}
 

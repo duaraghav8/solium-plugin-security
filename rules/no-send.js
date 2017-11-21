@@ -20,7 +20,7 @@ module.exports = {
 		docs: {
 			recommended: true,
 			type: "warning",
-			description: "Ensure no use of 'send' in the code"
+			description: "Discourage the use of 'send'."
 		},
 
 		schema: []
@@ -32,14 +32,13 @@ module.exports = {
 				return;
 			}
 
-			var callee = emittedObject.node.callee;
+			const callee = emittedObject.node.callee;
 
 			if (isSend (callee)) {
 				context.report ({
 					node: emittedObject.node,
-					message: "'send' is unsafe. Instead, consider using 'transfer' or a pattern where the recipient withdraws the money."
+					message: "Consider using 'transfer' in place of 'send'."
 				});
-
 			}
 		}
 

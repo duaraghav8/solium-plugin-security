@@ -27,12 +27,12 @@ module.exports = {
 				return;
 			}
 
-			var callee = emittedObject.node.callee;
+			const callee = emittedObject.node.callee;
 
 			if (isSuicideOrSelfDestruct(callee)) {
 				context.report({
 					node: emittedObject.node,
-					message: "'suicide' and 'selfdestruct' are disallowed"
+					message: "Avoid using 'suicide' and 'selfdestruct'."
 				});
 			}
 		}

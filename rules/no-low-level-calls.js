@@ -43,7 +43,7 @@ module.exports = {
 				location: {
 					column: context.getSourceCode().getColumn(property)
 				},
-				message: `Avoid the use of low-level function '${property.name}'.`
+				message: `Avoid using low-level function '${property.name}'.`
 			});
 		}
 

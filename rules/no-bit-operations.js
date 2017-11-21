@@ -21,21 +21,22 @@ module.exports = {
 
 	create: function(context) {
 		function inspectAssignmentExpression(emitted) {
+			const node = emitted.node;
+
 			if (emitted.exit) {
 				return;
 			}
-			var node = emitted.node;
 
 			if (DISALLOWED_ASSIGNMENTS.indexOf(node.operator.trim()) !== -1) {
 				context.report({
 					node: node,
-					message: node.operator + " is a bit operation and these are disallowed"
+					message: `Avoid use of bit operation '${node.operator}'.`
 				});
 			}
 		}
 
 		function inspectBinaryExpression(emitted) {
-			var node = emitted.node;
+			const node = emitted.node;
 
 			if (emitted.exit) {
 				return;
@@ -44,7 +45,7 @@ module.exports = {
 			if (DISALLOWED_OPERATORS.indexOf(node.operator.trim()) !== -1) {
 				context.report({
 					node: node,
-					message: node.operator + " is a bit operation and these are disallowed"
+					message: `Avoid use of bit operation '${node.operator}'.`
 				});
 			}
 		}

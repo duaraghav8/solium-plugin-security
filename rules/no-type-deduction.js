@@ -26,7 +26,7 @@ module.exports = {
 
 			context.report({
 				node: node,
-				message: "type deduction is disallowed"
+				message: "Avoid type deduction through 'var'. Specify the data type instead."
 			});
 		}
 

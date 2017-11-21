@@ -19,7 +19,7 @@ module.exports = {
 		docs: {
 			recommended: false,
 			type: "error",
-			description: "Enforce that the function placeholder is the last statement in the modifier"
+			description: "Encourage use of function placeholder as the last statement in the modifier"
 		},
 
 		schema: []
@@ -42,9 +42,7 @@ module.exports = {
 			if (firstPlaceholderIndex === -1) {
 				context.report({
 					node: node,
-					message:
-						"a function placeholder must exist and be the last statement in the " +
-						`modifier named ${node.name}`
+					message: `${node.name}: no function placeholder found.`
 				});
 
 				return;
@@ -56,16 +54,14 @@ module.exports = {
 			if (!RE_PLACEHOLDER_WITH_SEMICOLON.exec(text)) {
 				context.report({
 					node: placeholder,
-					message: "function placeholder must be followed by a semicolon"
+					message: `${node.name}: function placeholder must be followed by a semicolon.`
 				});
 			}
 
 			if (firstPlaceholderIndex !== lastIndex) {
 				context.report({
 					node: placeholder,
-					message:
-						"the function placeholder must be the last statement in the " +
-						`modifier named ${node.name}`
+					message: `${node.name}: function placeholder must be the last statement in the modifier.`
 				});
 			}
 		}

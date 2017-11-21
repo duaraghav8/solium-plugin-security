@@ -13,7 +13,7 @@ module.exports = {
 		docs: {
 			recommended: false,
 			type: "error",
-			description: "Functions must have a single return at the end of the function."
+			description: "Encourage functions to only have a single return statement at the end of the function."
 		},
 
 		schema: []

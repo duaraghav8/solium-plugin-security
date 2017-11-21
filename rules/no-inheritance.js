@@ -27,13 +27,13 @@ module.exports = {
 
 	create: function (context) {
 
-		var interfaces = [];
-		var contracts = {};
-
-		var noInterface = context.options && context.options[0]["no-interface"];
+		var interfaces = [], contracts = {};
+		const noInterface = context.options && context.options[0]["no-interface"];
 
 		function inspectInterfaceStatement(emitted) {
-			if (emitted.exit || noInterface) { return; }
+			if (emitted.exit || noInterface) {
+				return;
+			}
 
 			interfaces.push(emitted.node.name);
 		}
@@ -45,8 +45,9 @@ module.exports = {
 			if (noInterface && (node.is.length > 0)) {
 				context.report({
 					node: node,
-					message: "Avoid using inheritance for Contract " + node.name
+					message: `Avoid using inheritance for contract ${node.name}.`
 				});
+
 				return;
 			}
 
@@ -58,7 +59,9 @@ module.exports = {
 		}
 
 		function inspectProgram(emitted) {
-			if (!emitted.exit || noInterface) { return; }
+			if (!emitted.exit || noInterface) {
+				return;
+			}
 
 			for (let name in contracts) {
 				let contract = contracts[name];
@@ -67,8 +70,9 @@ module.exports = {
 					if (!interfaces.includes(parent)) {
 						context.report({
 							node: contract.node,
-							message: "Avoid using inheritance for Contract " + name
+							message: `Avoid using inheritance for contract ${name}.`
 						});
+
 						break;
 					}
 				}

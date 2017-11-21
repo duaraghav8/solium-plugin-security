@@ -22,15 +22,14 @@ module.exports = {
 	create: function (context) {
 
 		function inspectFunctionDeclaration(emitted) {
-			var node = emitted.node, message;
+			const node = emitted.node;
 
-			if (emitted.exit || node.returnParams) { return; }
-
-			if (node.name) {
-				message = "Avoid using a void return in function " + node.name;
-			} else {
-				message = "Avoid using a void return in fallback function";
+			if (emitted.exit || node.returnParams) {
+				return;
 			}
+
+			const message = node.name ?
+				`Avoid using a void return in function ${node.name}.` : "Avoid using a void return in fallback function.";
 
 			context.report({ node, message });
 		}

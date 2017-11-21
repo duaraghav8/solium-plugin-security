@@ -17,7 +17,7 @@ module.exports = {
 		docs: {
 			recommended: false,
 			type: "error",
-			description: "Disallow fixed point types"
+			description: "Discourage use of non-256 bit integers"
 		},
 
 		schema: []
@@ -42,7 +42,7 @@ module.exports = {
 			) {
 				context.report({
 					node: node,
-					message: variableType + " is a non-256 bit integer"
+					message: `${variableType} is a non-256 bit integer. Avoid usage.`
 				});
 			}
 		}

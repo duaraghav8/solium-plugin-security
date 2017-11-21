@@ -26,7 +26,7 @@ module.exports = {
 
 			context.report({
 				node: node,
-				message: "User-defined modifiers should be avoided"
+				message: "User-defined modifiers should be avoided."
 			});
 		}
 

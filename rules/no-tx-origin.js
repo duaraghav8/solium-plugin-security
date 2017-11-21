@@ -30,7 +30,7 @@ module.exports = {
 
 			isAtxoriginExpression(object, property) && context.report({
 				node,
-				message: "Avoid use of 'tx.origin' global variable. Consider using 'msg.sender' instead."
+				message: "Consider using 'msg.sender' in place of 'tx.origin'."
 			});
 		}
 

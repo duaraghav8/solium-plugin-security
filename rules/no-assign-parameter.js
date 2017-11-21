@@ -12,7 +12,7 @@ module.exports = {
 		docs: {
 			recommended: true,
 			type: "error",
-			description: "Disallow assigning to function parameters"
+			description: "Discourage assigning values to function parameters"
 		},
 
 		schema: []
@@ -33,6 +33,8 @@ module.exports = {
 
 		function checkExpressionStatement(statement, node, params) {
 			let functionName = node.name ? `"${node.name}"` : "Fallback function";
+
+			// TODO: Specify the exact parameter that is being updated and location of updation inside the func
 			if(isBadAssignment(statement, params) || isBadUpdate(statement, params)) {
 				context.report({
 					node: node,
@@ -79,7 +81,7 @@ module.exports = {
 		function inspectFunctionDeclaration (emitted) {
 			if (emitted.exit || emitted.node.is_abstract) { return; }
 
-			var node = emitted.node;
+			const node = emitted.node;
 
 			let params = node.params.map(x => x["id"]);
 			inspectBody (node.body.body, node, params);

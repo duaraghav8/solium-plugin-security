@@ -13,8 +13,7 @@ module.exports = {
 			description: "Avoid use of 'continue' statement."
 		},
 
-		schema: [],
-		fixable: "code"
+		schema: []
 
 	},
 

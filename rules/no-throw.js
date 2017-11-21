@@ -29,7 +29,7 @@ module.exports = {
 				fix(fixer) {
 					return fixer.replaceText(node, "revert();");
 				},
-				message: "'throw' statement is deprecated. Use --fix to replace with 'revert()'."
+				message: "Consider using 'revert()' in place of deprecated 'throw'."
 			});
 		}
 

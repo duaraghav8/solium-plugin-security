@@ -12,7 +12,7 @@ module.exports = {
 		docs: {
 			recommended: true,
 			type: "error",
-			description: "Flag all loops which contain two or more break statements"
+			description: "Discourage use of multiple break statements in a loop"
 		},
 
 		schema: []
@@ -37,7 +37,7 @@ module.exports = {
 				if (breakCount > 1) {
 					context.report({
 						node: node,
-						message: "Loop contains too many breaks."
+						message: "Avoid using multiple break statements in a loop."
 					});
 				}
 			} else {

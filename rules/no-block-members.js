@@ -42,7 +42,7 @@ module.exports = {
                 && object.name === "block" && property.name === "blockhash") {
 				context.report({
 					node,
-					message: "block.blockhash can be influenced by miners to some extent. Avoid usage."
+					message: "Avoid using 'block.blockhash'."
 				});
 			}
 		}
@@ -56,7 +56,7 @@ module.exports = {
                 && object.name === "block" && property.name === "timestamp") {
 				context.report({
 					node,
-					message: "block.timestamp can be influenced by miners to some extent. Avoid usage."
+					message: "Avoid using 'block.timestamp'."
 				});
 			}
 		}
@@ -68,7 +68,7 @@ module.exports = {
 
 			node.name === "now" && context.report({
 				node,
-				message: "'now' is an alias for block.timestamp which can be influenced by miners to some extent. Avoid usage."
+				message: "Avoid using 'now' (alias to 'block.timestamp')."
 			});
 		}
 

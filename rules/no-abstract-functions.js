@@ -5,8 +5,6 @@
 
 "use strict";
 
-var util = require("util");
-
 module.exports = {
 
 	meta: {
@@ -24,16 +22,17 @@ module.exports = {
 	create: function (context) {
 
 		function inspectFunctionDeclaration(emitted) {
-			var node = emitted.node, message;
-			if (!emitted.exit && node.is_abstract) {
-				if (node.name) {
-					message = util.format("\"%s\": Avoid using abstract functions", node.name);
-				} else {
-					message = "Avoid using abstract fallback function";
-				}
+			const node = emitted.node;
 
-				context.report({ node, message });
+			// If function is NOT abstract, exit now.
+			if (emitted.exit || !node.is_abstract) {
+				return;
 			}
+
+			const message = node.name ?
+				`${node.name}: Avoid using abstract functions.` : "Avoid using abstract fallback function.";
+
+			context.report({ node, message });
 		}
 
 		return {

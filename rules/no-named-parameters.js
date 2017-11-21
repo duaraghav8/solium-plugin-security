@@ -56,18 +56,20 @@ module.exports = {
 		// disallow calls with named parameters but filter out struct
 		// instantiations, which look identical to the AST
 		function inspectProgram(emitted) {
-			if (emitted.exit) {
-				Object.keys(namedParameterCalls).forEach(function(name) {
-					if (structs[name]) {
-						return;
-					}
-
-					context.report({
-						node: namedParameterCalls[name],
-						message: "named parameters are disallowed"
-					});
-				});
+			if (!emitted.exit) {
+				return;
 			}
+
+			Object.keys(namedParameterCalls).forEach(name => {
+				if (structs[name]) {
+					return;
+				}
+
+				context.report({
+					node: namedParameterCalls[name],
+					message: "Avoid using named parameters."
+				});
+			});
 		}
 
 		return {

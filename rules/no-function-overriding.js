@@ -19,13 +19,15 @@ module.exports = {
 
 	},
 
+	// This rule can currently only catch overriding if both child & parent contract are in the same file.
+	// If parent contract is in some other file, rule simply ignores the child contract.
 	create: function (context) {
 
 		var contracts = {};
 
 		function inspectContractStatement(emitted) {
 			if (emitted.exit) { return; }
-			var node = emitted.node;
+			const node = emitted.node;
 
 			contracts[node.name] = {"functions": {}, "parents": [], "node": node};
 			for (let expr of node.body) {
@@ -87,7 +89,7 @@ module.exports = {
 				if (sameName && sameSignature) {
 					context.report({
 						node: contracts[origin].node,
-						message: "Function " + func_name + " redefined in contract " + origin
+						message: `${func_name} redefined in contract ${origin}. Avoid function overriding.`
 					});
 				}
 

@@ -33,7 +33,9 @@ module.exports = {
 		var noInterface = context.options && context.options[0]["no-interface"];
 
 		function inspectInterfaceStatement(emitted) {
-			if (emitted.exit || noInterface) { return; }
+			if (emitted.exit || noInterface) {
+				return;
+			}
 
 			interfaces.push(emitted.node.name);
 		}
@@ -45,7 +47,7 @@ module.exports = {
 			if (noInterface && (node.is.length > 1)) {
 				context.report({
 					node: node,
-					message: "Avoid using multiple inheritance for Contract " + node.name
+					message: `Avoid using multiple inheritance for Contract ${node.name}.`
 				});
 				return;
 			}
@@ -67,8 +69,9 @@ module.exports = {
 					if (!interfaces.includes(parent) && contract.parents.length > 1) {
 						context.report({
 							node: contract.node,
-							message: "Avoid using multiple inheritance for Contract " + name
+							message: `Avoid using multiple inheritance for Contract ${name}.`
 						});
+
 						break;
 					}
 				}

@@ -18,6 +18,8 @@ describe ("[RULE] no-function-overriding: Acceptances", function () {
 	it ("should accept contracts that don't override their inherited functions", function (done) {
 		var code = [
 			`
+                pragma solidity ^0.4.0;
+
                 contract A {
                     function foo();
                     function ();
@@ -28,6 +30,9 @@ describe ("[RULE] no-function-overriding: Acceptances", function () {
                 }
             `,
 			`
+                pragma solidity ^0.4.0;
+                pragma experimental "ABIEncoderV2";
+
                 contract A {
                     function foo();
                 }
@@ -40,6 +45,9 @@ describe ("[RULE] no-function-overriding: Acceptances", function () {
                 }
             `,
 			`
+                library Foo {}
+                library Bar {}
+
                 contract A {
                     function foo();
                 }
@@ -141,6 +149,8 @@ describe ("[RULE] no-function-overriding: Rejections", function () {
                 }
             `,
 			`
+                pragma solidity ^0.4.0;
+
                 contract A {
                     function bar(string s, uint u) public;
                 }

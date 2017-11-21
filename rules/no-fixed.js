@@ -32,7 +32,7 @@ module.exports = {
 			if (variableType.indexOf("fixed") === 0 || variableType.indexOf("ufixed") === 0) {
 				context.report({
 					node: node,
-					message: variableType + " is a fixed type and these are disallowed"
+					message: `${variableType}: Avoid using fixed types.`
 				});
 			}
 		}
