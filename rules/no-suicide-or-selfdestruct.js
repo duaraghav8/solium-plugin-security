@@ -13,7 +13,7 @@ function isSuicideOrSelfDestruct(node) {
 module.exports = {
 	meta: {
 		docs: {
-			recommended: true,
+			recommended: false,
 			type: "warning",
 			description: "Disallow 'suicide' and 'selfdestruct'"
 		},

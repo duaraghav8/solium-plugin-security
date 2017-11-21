@@ -13,7 +13,7 @@ module.exports = {
 	meta: {
 		docs: {
 			description: "Discourage named function parameters",
-			recommended: true,
+			recommended: false,
 			type: "error"
 		},
 

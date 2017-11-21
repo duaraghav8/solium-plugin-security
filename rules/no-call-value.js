@@ -32,7 +32,7 @@ module.exports = {
 					location: {
 						column: context.getSourceCode().getColumn(object.property)
 					},
-					message: "Consider using 'send' or 'transfer' in place of 'call.value()'."
+					message: "Consider using 'transfer' in place of 'call.value()'."
 				});
 
 			}

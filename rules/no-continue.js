@@ -8,7 +8,7 @@ module.exports = {
 	meta: {
 
 		docs: {
-			recommended: true,
+			recommended: false,
 			type: "warning",
 			description: "Avoid use of 'continue' statement."
 		},

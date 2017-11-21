@@ -10,7 +10,7 @@ module.exports = {
 	meta: {
 
 		docs: {
-			recommended: true,
+			recommended: false,
 			type: "error",
 			description: "Discourage use of inheritance"
 		},

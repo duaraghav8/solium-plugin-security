@@ -8,7 +8,7 @@
 module.exports = {
 	meta: {
 		docs: {
-			recommended: false,
+			recommended: true,
 			type: "error",
 			description: "Disallow fixed point types"
 		},

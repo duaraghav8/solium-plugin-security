@@ -10,7 +10,7 @@ module.exports = {
 	meta: {
 		docs: {
 			description: "Encourage else blocks after else-if blocks",
-			recommended: true,
+			recommended: false,
 			type: "error"
 		},
 
