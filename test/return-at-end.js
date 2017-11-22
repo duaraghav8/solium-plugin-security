@@ -34,6 +34,21 @@ describe ("[RULE] return-at-end: Acceptances", function () {
 		errors = Solium.lint (code, userConfig);
 		errors.should.be.size (0);
 
+		code = `
+			contract A {
+			    struct Ab {
+        			uint a;
+        			string b;
+    			}
+    
+    			function foo() returns (Ab) {
+        			return Ab({a: 10290, b: "Hello"});
+    			}
+			}
+		`;
+		errors = Solium.lint (code, userConfig);
+		errors.should.be.size (0);
+
 		Solium.reset ();
 		done ();
 	});

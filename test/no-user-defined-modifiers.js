@@ -24,7 +24,6 @@ describe("[RULE] no-user-defined-modifiers: Rejections", function() {
 		errors.length.should.equal(1);
 
 		Solium.reset();
-
 		done();
 	});
 });

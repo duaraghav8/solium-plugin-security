@@ -23,6 +23,17 @@ describe("[RULE] no-var: Rejections", function() {
 		errors.constructor.name.should.equal("Array");
 		errors.length.should.equal(1);
 
+
+		code = toContract(`
+			function foo() {
+				var (a, b, c, d) = ("helo", 190, true, getSomeValue());
+				var c = 9.23;
+			}
+		`);
+		errors = Solium.lint(code, userConfig);
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(5);
+
 		Solium.reset();
 
 		done();

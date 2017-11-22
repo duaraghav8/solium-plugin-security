@@ -23,8 +23,47 @@ describe("[RULE] no-unreachable-code: Rejections", function() {
 		errors.constructor.name.should.equal("Array");
 		errors.length.should.equal(1);
 
-		Solium.reset();
+		code = toContract(`
+			uint abc = 100;
 
+			function foo() {
+				var x = 100;
+				return bleh("Hello world");
+				abc;
+			}
+		`);
+		errors = Solium.lint(code, userConfig);
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(1);
+
+
+		code = toContract(`
+			function foo() {
+				if (blah) {
+					return;
+				}
+
+				return;
+				call(100, 0x00);
+			}
+		`);
+		errors = Solium.lint(code, userConfig);
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(1);
+
+
+		code = toContract(`
+			function foo() {
+				return 100;
+				return 100;
+			}
+		`);
+		errors = Solium.lint(code, userConfig);
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(1);
+
+
+		Solium.reset();
 		done();
 	});
 });
@@ -36,6 +75,53 @@ describe("[RULE] no-unreachable-code: Acceptances", function() {
 
 		errors.constructor.name.should.equal("Array");
 		errors.length.should.equal(0);
+
+		// Below cases are beyond the scope of a static analyzer to detect, so not flagged
+		code = toContract(`
+			function foo() {
+				do {
+					blah();
+					return;
+				} while (true);
+
+				callMyMethod();
+			}
+		`);
+		errors = Solium.lint(code, userConfig);
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(0);
+
+
+		code = toContract(`
+			function foo() {
+				if (foobae) {
+					haxor("blah");
+				} else {
+					return 100;
+				}
+
+				someFunc();
+			}
+		`);
+		errors = Solium.lint(code, userConfig);
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(0);
+
+		code = toContract(`
+			function foo() {
+				if (x) {
+					return;
+				} else {
+					return;
+				}
+
+				someFunc();
+			}
+		`);
+		errors = Solium.lint(code, userConfig);
+		errors.constructor.name.should.equal("Array");
+		errors.length.should.equal(0);
+
 
 		Solium.reset();
 
