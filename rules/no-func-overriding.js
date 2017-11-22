@@ -23,7 +23,7 @@ module.exports = {
 	// If parent contract is in some other file, rule simply ignores the child contract.
 	create: function (context) {
 
-		var contracts = {};
+		let contracts = {};
 
 		function inspectContractStatement(emitted) {
 			if (emitted.exit) { return; }
@@ -33,7 +33,7 @@ module.exports = {
 			for (let expr of node.body) {
 				if (expr.type !== "FunctionDeclaration" || !expr.name) { continue; }
 
-				var signature = [];
+				let signature = [];
 				if (expr.params) {
 					for (let param of expr.params) {
 						signature.push(param.literal.literal);
@@ -62,7 +62,7 @@ module.exports = {
 		}
 
 		function inspectHigherLevelContracts(contract_name, func_name, origin) {
-			var contract = contracts[contract_name];
+			let contract = contracts[contract_name];
 			for (let parent of contract.parents) {
 				if (!Object.keys(contracts).includes(parent)) { continue; }
 

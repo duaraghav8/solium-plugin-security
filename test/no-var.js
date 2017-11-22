@@ -5,11 +5,11 @@
 
 "use strict";
 
-var Solium = require("solium");
-var wrappers = require("./utils/wrappers");
-var toContract = wrappers.toContract;
+let Solium = require("solium");
+let wrappers = require("./utils/wrappers");
+let toContract = wrappers.toContract;
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-var": "error"
 	}
@@ -17,7 +17,7 @@ var userConfig = {
 
 describe("[RULE] no-var: Rejections", function() {
 	it("should reject contracts using type deduction through 'var'", function(done) {
-		var code = toContract("function foo () { var a = 8; }"),
+		let code = toContract("function foo () { var a = 8; }"),
 			errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");

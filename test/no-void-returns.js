@@ -5,9 +5,9 @@
 
 "use strict";
 
-var Solium = require ("solium");
+let Solium = require ("solium");
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-void-returns": "error"
 	}
@@ -16,12 +16,12 @@ var userConfig = {
 describe ("[RULE] no-void-returns: Acceptances", function () {
 
 	it ("should accept functions that don't have a void return", function (done) {
-		var code = [
+		let code = [
 			"contract Foo { function () returns (uint256, string) {} }",
 			"contract Foo { function foo () payable public returns (string); }",
 			"contract Foo { function foo () returns (string) {} }"
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (expr, userConfig);
@@ -36,12 +36,12 @@ describe ("[RULE] no-void-returns: Acceptances", function () {
 describe ("[RULE] no-void-returns: Rejections", function () {
 
 	it ("should reject functions that have a void return", function (done) {
-		var code = [
+		let code = [
 			"contract Foo { function () {} }",
 			"contract Foo { function foo () MyOwnModifier; }",
 			"contract Foo { function foo () payable public; }"
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (expr, userConfig);

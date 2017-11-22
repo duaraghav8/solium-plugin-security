@@ -5,15 +5,15 @@
 
 "use strict";
 
-var Solium = require ("solium");
+let Solium = require ("solium");
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-multiple-inheritance": "error"
 	}
 };
 
-var userConfigNoInterface = {
+let userConfigNoInterface = {
 	rules: {
 		"security/no-multiple-inheritance": ["error", { "no-interface": true }]
 	}
@@ -22,8 +22,8 @@ var userConfigNoInterface = {
 describe ("[RULE] no-multiple-inheritance: Acceptances", function () {
 
 	it ("should accept programs that don't use multiple inheritance and don't allow interfaces", function (done) {
-		var code = "contract Parent {}\ncontract Child is Parent{}";
-		var errors;
+		let code = "contract Parent {}\ncontract Child is Parent{}";
+		let errors;
 
 		errors = Solium.lint (code, userConfigNoInterface);
 		errors.length.should.equal (0);
@@ -33,11 +33,11 @@ describe ("[RULE] no-multiple-inheritance: Acceptances", function () {
 	});
 
 	it ("should accept programs that use multiple inheritance with interfaces", function (done) {
-		var code = [
+		let code = [
 			"interface Foo {}\ninterface Bar {}\ncontract FooBar is Foo,Bar {}",
 			"interface One {}\ninterface Two {}\ninterface Three {}\ncontract Foo is One,Two,Three {}"
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (expr, userConfig);
@@ -52,11 +52,11 @@ describe ("[RULE] no-multiple-inheritance: Acceptances", function () {
 describe ("[RULE] no-multiple-inheritance: Rejections", function () {
 
 	it ("should reject programs that use multiple inheritance and don't allow interfaces", function (done) {
-		var code = [
+		let code = [
 			"interface Parent {}\ninterface Uncle {}\ncontract Child is Parent,Uncle {}",
 			"contract Parent {}\ncontract Uncle {}\ncontract Child is Parent,Uncle {}"
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (expr, userConfigNoInterface);
@@ -68,11 +68,11 @@ describe ("[RULE] no-multiple-inheritance: Rejections", function () {
 	});
 
 	it ("should reject programs that use multiple inheritance without interfaces", function (done) {
-		var code = [
+		let code = [
 			"contract Foo {}\ncontract Bar {}\ncontract FooBar is Foo,Bar {}",
 			"interface Foo {}\ncontract Bar {}\ncontract FooBar is Foo,Bar {}"
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (expr, userConfig);
@@ -87,8 +87,8 @@ describe ("[RULE] no-multiple-inheritance: Rejections", function () {
 describe ("[RULE] no-multiple-inheritance: Handling options", function () {
 
 	it ("should reject rules with invalid user options", function (done) {
-		var code = "contract Foo {}";
-		var options = [
+		let code = "contract Foo {}";
+		let options = [
 			["error", { "no-interffff": true }],
 			["error", { 1: 2 }],
 			["error", { "no-interface": null }],

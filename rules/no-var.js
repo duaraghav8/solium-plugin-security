@@ -22,7 +22,7 @@ module.exports = {
 				return;
 			}
 
-			var node = emitted.node;
+			let node = emitted.node;
 
 			context.report({
 				node: node,

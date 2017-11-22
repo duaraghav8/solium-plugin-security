@@ -27,7 +27,7 @@ module.exports = {
 
 	create: function (context) {
 
-		var interfaces = [], contracts = {};
+		let interfaces = [], contracts = {};
 		const noInterface = context.options && context.options[0]["no-interface"];
 
 		function inspectInterfaceStatement(emitted) {
@@ -40,7 +40,7 @@ module.exports = {
 
 		function inspectContractStatement(emitted) {
 			if (emitted.exit) { return; }
-			var node = emitted.node;
+			let node = emitted.node;
 
 			if (noInterface && (node.is.length > 0)) {
 				context.report({

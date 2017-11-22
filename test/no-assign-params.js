@@ -5,9 +5,9 @@
 
 "use strict";
 
-var Solium = require("solium");
+let Solium = require("solium");
 
-var config = {
+let config = {
 	"rules": {
 		"security/no-assign-params": "error"
 	}
@@ -15,7 +15,7 @@ var config = {
 
 describe("[RULE] no-assign-params: Acceptances", function () {
 	it("shouldn't raise an error for a non-assigned parameter", function(done) {
-		var code = "contract Blah { function abc(uint a, uint b) { } }",
+		let code = "contract Blah { function abc(uint a, uint b) { } }",
 			errors = Solium.lint(code, config);
 
 		errors.constructor.name.should.equal ("Array");
@@ -26,7 +26,7 @@ describe("[RULE] no-assign-params: Acceptances", function () {
 	});
 
 	it("shouldn't raise an error for an assigned local variable", function(done) {
-		var code = "contract Blah { function abc(uint a) { uint b = 2; } }",
+		let code = "contract Blah { function abc(uint a) { uint b = 2; } }",
 			errors = Solium.lint(code, config);
 
 		errors.constructor.name.should.equal ("Array");
@@ -37,7 +37,7 @@ describe("[RULE] no-assign-params: Acceptances", function () {
 	});
 
 	it("shouldn't raise an error for an abstract function", function(done) {
-		var code = "contract Blah { function my_func() returns (bytes32); }",
+		let code = "contract Blah { function my_func() returns (bytes32); }",
 			errors = Solium.lint(code, config);
 
 		errors.constructor.name.should.equal ("Array");
@@ -50,7 +50,7 @@ describe("[RULE] no-assign-params: Acceptances", function () {
 
 describe("[RULE] no-assign-params: Rejections", function () {
 	it("should raise an error for an assigned parameter", function(done) {
-		var codes = ["contract Blah { function abc(uint a, uint b) { a = 12; } }",
+		let codes = ["contract Blah { function abc(uint a, uint b) { a = 12; } }",
 			"contract Blah { function abc(uint a, uint b) { b = 12; } }",
 			"contract Blah { function foo(uint abc) { for(uint i = 0; i<10; i++) { abc = 2; } } }",
 			"contract Blah { function foo(uint abc) { if (true) { abc = 2; } } }",
@@ -69,7 +69,7 @@ describe("[RULE] no-assign-params: Rejections", function () {
 		];
 
 		for (let code of codes) {
-			var errors = Solium.lint(code, config);
+			let errors = Solium.lint(code, config);
 			errors.constructor.name.should.equal ("Array");
 			errors.should.be.size(1);
 		}

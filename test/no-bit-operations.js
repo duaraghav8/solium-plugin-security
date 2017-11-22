@@ -5,11 +5,11 @@
 
 "use strict";
 
-var Solium = require("solium");
-var wrappers = require("./utils/wrappers");
-var toContract = wrappers.toContract;
+let Solium = require("solium");
+let wrappers = require("./utils/wrappers");
+let toContract = wrappers.toContract;
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-bit-operations": 1
 	}
@@ -17,7 +17,7 @@ var userConfig = {
 
 describe("[RULE] no-bit-operations: Rejections", function() {
 	it("should reject contracts using bit operations (in declaration)", function(done) {
-		var code = toContract("function foo () { uint a = 2 >> 4; }"),
+		let code = toContract("function foo () { uint a = 2 >> 4; }"),
 			errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");
@@ -29,8 +29,8 @@ describe("[RULE] no-bit-operations: Rejections", function() {
 	});
 
 	it("should reject contracts using bit operations (in assignment)", function(done) {
-		var code = toContract("function foo () { uint a = 2; a >>= 4; }");
-		var errors = Solium.lint(code, userConfig);
+		let code = toContract("function foo () { uint a = 2; a >>= 4; }");
+		let errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");
 		errors.length.should.equal(1);
@@ -41,7 +41,7 @@ describe("[RULE] no-bit-operations: Rejections", function() {
 	});
 
 	it("should reject contracts using bit operations (in statements)", function(done) {
-		var code = toContract("function foo () { if (2 >> 4) { } }"),
+		let code = toContract("function foo () { if (2 >> 4) { } }"),
 			errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");

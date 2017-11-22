@@ -5,11 +5,11 @@
 
 "use strict";
 
-var Solium = require("solium");
-var wrappers = require("./utils/wrappers");
-var toContract = wrappers.toContract;
+let Solium = require("solium");
+let wrappers = require("./utils/wrappers");
+let toContract = wrappers.toContract;
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-fixed": "error"
 	}
@@ -17,11 +17,18 @@ var userConfig = {
 
 describe("[RULE] no-fixed: Rejections", function() {
 	it("should reject contracts using fixed point declarations", function(done) {
-		var code = toContract("function foo () { fixed a; }"),
+		let code = toContract(`
+			fixed x;
+			ufixed y;
+
+			function foo () {
+				fixed a; ufixed b;
+			}
+		`),
 			errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(1);
+		errors.length.should.equal(4);
 
 		Solium.reset();
 
@@ -29,11 +36,18 @@ describe("[RULE] no-fixed: Rejections", function() {
 	});
 
 	it("should reject contracts using fixed point assignments", function(done) {
-		var code = toContract("function foo () { fixed a = 2.0; }");
-		var errors = Solium.lint(code, userConfig);
+		let code = toContract(`
+			fixed x = 100.89;
+			ufixed y = 1.2;
+
+			function foo () {
+				fixed a = 2.0; ufixed b = 90.2;
+			}
+		`);
+		let errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(1);
+		errors.length.should.equal(4);
 
 		Solium.reset();
 

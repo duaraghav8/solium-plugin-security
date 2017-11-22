@@ -5,11 +5,11 @@
 
 "use strict";
 
-var Solium = require("solium");
-var wrappers = require("./utils/wrappers");
-var toContract = wrappers.toContract;
+let Solium = require("solium");
+let wrappers = require("./utils/wrappers");
+let toContract = wrappers.toContract;
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/256-bit-ints-only": "error"
 	}
@@ -17,7 +17,7 @@ var userConfig = {
 
 describe("[RULE] 256-bit-ints-only: Rejections", function() {
 	it("should reject contracts using non-256 bit ints", function(done) {
-		var code = toContract("function foo () { int8 a; uint8 b; int16 c; }"),
+		let code = toContract("function foo () { int8 a; uint8 b; int16 c; }"),
 			errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");
@@ -62,7 +62,7 @@ describe("[RULE] 256-bit-ints-only: Rejections", function() {
 
 describe("[RULE] 256-bit-ints-only: Acceptances", function() {
 	it("should accept contracts using 256 bit ints", function(done) {
-		var code = toContract("function foo () { int a; uint b; int256 c; uint256d; }"),
+		let code = toContract("function foo () { int a; uint b; int256 c; uint256d; }"),
 			errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");

@@ -22,8 +22,8 @@ module.exports = {
 				return;
 			}
 
-			var node = emitted.node;
-			var variableType = node.literal.literal;
+			let node = emitted.node;
+			let variableType = node.literal.literal;
 
 			if (typeof variableType !== "string") {
 				return;

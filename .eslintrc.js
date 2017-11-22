@@ -24,6 +24,7 @@ module.exports = {
         ],
         "no-undef": [
             "off"
-        ]
+        ],
+        "no-var": "error"
     }
 };

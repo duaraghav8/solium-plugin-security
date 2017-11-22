@@ -5,11 +5,11 @@
 
 "use strict";
 
-var Solium = require("solium");
-var wrappers = require("./utils/wrappers");
-var toContract = wrappers.toContract;
+let Solium = require("solium");
+let wrappers = require("./utils/wrappers");
+let toContract = wrappers.toContract;
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-user-defined-modifiers": "error"
 	}
@@ -17,7 +17,7 @@ var userConfig = {
 
 describe("[RULE] no-user-defined-modifiers: Rejections", function() {
 	it("should reject contracts that defined modifiers", function(done) {
-		var code = toContract("modifier foo () { require(1 == 1); }"),
+		let code = toContract("modifier foo () { require(1 == 1); }"),
 			errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");

@@ -5,15 +5,15 @@
 
 "use strict";
 
-var Solium = require ("solium");
+let Solium = require ("solium");
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-inheritance": "error"
 	}
 };
 
-var userConfigNoInterface = {
+let userConfigNoInterface = {
 	rules: {
 		"security/no-inheritance": ["error", { "no-interface": true }]
 	}
@@ -22,8 +22,8 @@ var userConfigNoInterface = {
 describe ("[RULE] no-inheritance: Acceptances", function () {
 
 	it ("should accept programs that don't use inheritance and don't allow interfaces", function (done) {
-		var code = "contract Foo {}";
-		var errors;
+		let code = "contract Foo {}";
+		let errors;
 
 		errors = Solium.lint (code, userConfigNoInterface);
 		errors.length.should.equal (0);
@@ -33,11 +33,11 @@ describe ("[RULE] no-inheritance: Acceptances", function () {
 	});
 
 	it ("should accept programs that use inheritance with interfaces", function (done) {
-		var code = [
+		let code = [
 			"interface Foo {}\ncontract Bar is Foo {}",
 			"interface Foo {}\ninterface Bar {}\ncontract FooBar is Foo,Bar {}"
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (expr, userConfig);
@@ -52,11 +52,11 @@ describe ("[RULE] no-inheritance: Acceptances", function () {
 describe ("[RULE] no-inheritance: Rejections", function () {
 
 	it ("should reject programs that use inheritance and don't allow interfaces", function (done) {
-		var code = [
+		let code = [
 			"contract Parent {}\ncontract Child is Parent {}",
 			"interface Foo {}\ncontract Bar is Foo {}"
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (expr, userConfigNoInterface);
@@ -68,11 +68,11 @@ describe ("[RULE] no-inheritance: Rejections", function () {
 	});
 
 	it ("should reject programs that use inheritance without interfaces", function (done) {
-		var code = [
+		let code = [
 			"contract Foo {}\ncontract Bar is Foo {}",
 			"contract Foo {}\ncontract Bar {}\ncontract FooBar is Foo,Bar {}"
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (expr, userConfig);
@@ -87,8 +87,8 @@ describe ("[RULE] no-inheritance: Rejections", function () {
 describe ("[RULE] no-inheritance: Handling options", function () {
 
 	it ("should reject rules with invalid user options", function (done) {
-		var code = "contract Foo {}";
-		var options = [
+		let code = "contract Foo {}";
+		let options = [
 			["error", { "no-interffff": true }],
 			["error", { 1: 2 }],
 			["error", { "no-interface": null }],

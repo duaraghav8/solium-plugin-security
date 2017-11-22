@@ -5,11 +5,11 @@
 
 "use strict";
 
-var Solium = require("solium");
-var wrappers = require("./utils/wrappers");
-var toContract = wrappers.toContract;
+let Solium = require("solium");
+let wrappers = require("./utils/wrappers");
+let toContract = wrappers.toContract;
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-suicide-or-selfdestruct": "error"
 	}
@@ -17,7 +17,7 @@ var userConfig = {
 
 describe("[RULE] no-suicide-or-selfdestruct: Rejections", function() {
 	it("should reject contracts using suicide", function(done) {
-		var code = toContract("function foo () { suicide(0x0); }"),
+		let code = toContract("function foo () { suicide(0x0); }"),
 			errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");
@@ -29,7 +29,7 @@ describe("[RULE] no-suicide-or-selfdestruct: Rejections", function() {
 	});
 
 	it("should reject contracts using selfdestruct", function(done) {
-		var code = toContract("function foo () { selfdestruct(0x0); }"),
+		let code = toContract("function foo () { selfdestruct(0x0); }"),
 			errors = Solium.lint(code, userConfig);
 
 		errors.constructor.name.should.equal("Array");

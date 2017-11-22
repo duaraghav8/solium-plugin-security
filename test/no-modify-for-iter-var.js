@@ -5,11 +5,11 @@
 
 "use strict";
 
-var Solium = require ("solium");
-var wrappers = require("./utils/wrappers");
-var toContract = wrappers.toContract;
+let Solium = require ("solium");
+let wrappers = require("./utils/wrappers");
+let toContract = wrappers.toContract;
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-modify-for-iter-var": "error"
 	}
@@ -18,12 +18,12 @@ var userConfig = {
 describe ("[RULE] no-modify-for-iter-var: Acceptances", function () {
 
 	it ("should accept for loops that don't modifify their iteration variable", function (done) {
-		var code = [
+		let code = [
 			"function foo() { for(i = 0; i < 10; i++) { i + 1; } }",
 			"function foo() { for(;;) {} }",
 			"function foo() { for(a;;) { a++; } }",
 		];
-		var errors;
+		let errors;
 
 		for (let e of code) {
 			errors = Solium.lint (toContract(e), userConfig);
@@ -39,13 +39,13 @@ describe ("[RULE] no-modify-for-iter-var: Acceptances", function () {
 describe ("[RULE] no-modify-for-iter-var: Rejections", function () {
 
 	it ("should reject for loops that modify their iteration variable", function (done) {
-		var code = [
+		let code = [
 			"function foo () { for(i = 0; i < 10; i++) { i = 5; } }",
 			"function foo () { for(i = 0; i < 10; i++) { i++; } }",
 			"function foo () { for(i = 0; i < 10; i++) { i += 1; } }",
 			"uint i = 2093; function foo() { for(uint i = 0; i < 3; i++) { i+= 10; } }"
 		];
-		var errors;
+		let errors;
 
 		for (let e of code) {
 			errors = Solium.lint (toContract(e), userConfig);

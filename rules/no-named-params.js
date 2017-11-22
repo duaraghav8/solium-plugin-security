@@ -46,7 +46,7 @@ module.exports = {
 
 		// keep track of all struct names
 		function inspectStructDeclaration(emitted) {
-			var node = emitted.node;
+			let node = emitted.node;
 
 			if (!emitted.exit) {
 				structs[node.name] = node;

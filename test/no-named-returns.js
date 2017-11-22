@@ -5,9 +5,9 @@
 
 "use strict";
 
-var Solium = require ("solium");
+let Solium = require ("solium");
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-named-returns": "error"
 	}
@@ -16,12 +16,12 @@ var userConfig = {
 describe ("[RULE] no-named-returns: Acceptances", function () {
 
 	it ("should accept functions that don't have a named return", function (done) {
-		var code = [
+		let code = [
 			"contract Foo { function () returns (uint256, string) {} }",
 			"contract Foo { function foo () returns (string) {} }",
 			"contract Foo { function () {} }"
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (expr, userConfig);
@@ -36,12 +36,12 @@ describe ("[RULE] no-named-returns: Acceptances", function () {
 describe ("[RULE] no-named-returns: Rejections", function () {
 
 	it ("should reject functions that have a named return", function (done) {
-		var code = [
+		let code = [
 			"contract Foo { function () returns (uint256 foo, string bar) {} }",
 			"contract Foo { function foo () returns (uint256 foo) {} }",
 			"contract Foo { function () returns (string bar) {} }"
 		];
-		var errors;
+		let errors;
 
 		errors = Solium.lint (code [0], userConfig);
 		errors.length.should.equal (2);

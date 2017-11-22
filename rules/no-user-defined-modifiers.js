@@ -18,7 +18,7 @@ module.exports = {
 
 	create: function(context) {
 		function inspectModifierDeclaration(emitted) {
-			var node = emitted.node;
+			let node = emitted.node;
 
 			if (emitted.exit) {
 				return;

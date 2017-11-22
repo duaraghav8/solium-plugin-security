@@ -5,9 +5,9 @@
 
 "use strict";
 
-var Solium = require ("solium");
+let Solium = require ("solium");
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-func-overriding": "error"
 	}
@@ -16,7 +16,7 @@ var userConfig = {
 describe ("[RULE] no-func-overriding: Acceptances", function () {
 
 	it ("should accept contracts that don't override their inherited functions", function (done) {
-		var code = [
+		let code = [
 			`
                 pragma solidity ^0.4.0;
 
@@ -79,7 +79,7 @@ describe ("[RULE] no-func-overriding: Acceptances", function () {
                 }
             `
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (expr, userConfig);
@@ -94,7 +94,7 @@ describe ("[RULE] no-func-overriding: Acceptances", function () {
 describe ("[RULE] no-func-overriding: Rejections", function () {
 
 	it ("should reject contracts that override their inherited functions", function (done) {
-		var code = [
+		let code = [
 			`
                 contract A {
                     function foo();
@@ -162,7 +162,7 @@ describe ("[RULE] no-func-overriding: Rejections", function () {
                 }
             `
 		];
-		var errors;
+		let errors;
 
 		errors = Solium.lint (code[0], userConfig);
 		errors.length.should.equal (1);

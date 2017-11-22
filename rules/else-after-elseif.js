@@ -33,10 +33,10 @@ module.exports = {
 
 		function inspectIfStatement(emitted) {
 			if (emitted.exit) { return; }
-			var node = emitted.node;
+			let node = emitted.node;
 
-			var sourceCode = context.getSourceCode();
-			var parent = sourceCode.getParent(node);
+			let sourceCode = context.getSourceCode();
+			let parent = sourceCode.getParent(node);
 
 			// only inspect top-level if statements
 			if (parent["type"] == "IfStatement") {

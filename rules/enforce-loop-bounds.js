@@ -39,8 +39,8 @@ module.exports = {
 
 		function inspectLoopStatement(emitted) {
 			if (emitted.exit) { return; }
-			var node = emitted.node;
-			var hasBreak = false;
+			let node = emitted.node;
+			let hasBreak = false;
 
 			for (let expr of node.body.body) {
 				if (expr.type === "BreakStatement") {

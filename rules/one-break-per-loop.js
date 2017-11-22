@@ -22,7 +22,7 @@ module.exports = {
 	create: function (context) {
 
 		// loop stack will keep track of break counts inside each loop
-		var loopStack = [];
+		let loopStack = [];
 		function inspectBreakStatement(emitted) {
 			if (!emitted.exit) {
 				loopStack[loopStack.length-1] += 1;
@@ -31,9 +31,9 @@ module.exports = {
 
 		//While exiting for loop Node, Report if the current top of stack is more than 1
 		function inspectLoopStatement(emitted) {
-			var node = emitted.node;
+			let node = emitted.node;
 			if (emitted.exit) {
-				var breakCount = loopStack.pop();
+				let breakCount = loopStack.pop();
 				if (breakCount > 1) {
 					context.report({
 						node: node,

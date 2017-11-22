@@ -23,7 +23,7 @@ module.exports = {
 	create: function (context) {
 
 		function inspectFunctionDeclaration(emitted) {
-			var node = emitted.node;
+			let node = emitted.node;
 
 			if (emitted.exit) {
 				return;
@@ -53,7 +53,7 @@ module.exports = {
 		}
 
 		function inspectBlockStatement(emitted) {
-			var node = emitted.node;
+			let node = emitted.node;
 
 			if (emitted.exit) {
 				return;

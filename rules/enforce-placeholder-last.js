@@ -26,18 +26,18 @@ module.exports = {
 	},
 
 	create: function(context) {
-		var sourceCode = context.getSourceCode();
+		let sourceCode = context.getSourceCode();
 
 		function inspectModifierDeclaration(emitted) {
 			if (emitted.exit) {
 				return;
 			}
 
-			var node = emitted.node;
-			var topLevelStatements = node.body.body;
-			var lastIndex = topLevelStatements.length - 1;
+			let node = emitted.node;
+			let topLevelStatements = node.body.body;
+			let lastIndex = topLevelStatements.length - 1;
 
-			var firstPlaceholderIndex = topLevelStatements.findIndex(isFunctionPlaceholder);
+			let firstPlaceholderIndex = topLevelStatements.findIndex(isFunctionPlaceholder);
 
 			if (firstPlaceholderIndex === -1) {
 				context.report({

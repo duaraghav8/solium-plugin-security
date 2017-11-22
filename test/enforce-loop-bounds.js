@@ -5,11 +5,11 @@
 
 "use strict";
 
-var Solium = require ("solium");
-var wrappers = require("./utils/wrappers");
-var toContract = wrappers.toContract;
+let Solium = require ("solium");
+let wrappers = require("./utils/wrappers");
+let toContract = wrappers.toContract;
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/enforce-loop-bounds": "error"
 	}
@@ -18,7 +18,7 @@ var userConfig = {
 describe ("[RULE] enforce-loop-bounds: Acceptances", function () {
 
 	it ("should accept all loops that have fixed bounds", function (done) {
-		var code = [
+		let code = [
 			"function foo () { for(int i=0; i<10; i++) {} }",
 			"function foo () { for(;0;) {} }",
 			"function foo () { while(0 > 1) {} }",
@@ -32,7 +32,7 @@ describe ("[RULE] enforce-loop-bounds: Acceptances", function () {
 			"function foo () { while (true) { if (true) {} else if (1) {} else if (1) {} else { break; } } }",
 			"function foo () { do { if (1) {} else if (true) { break; } } while(true); }"
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (toContract(expr), userConfig);
@@ -48,14 +48,14 @@ describe ("[RULE] enforce-loop-bounds: Acceptances", function () {
 describe ("[RULE] enforce-loop-bounds: Rejections", function () {
 
 	it ("should reject all loops that don't have fixed bounds", function (done) {
-		var code = [
+		let code = [
 			"function foo () { for(;;) {} }",
 			"function foo () { while(true) {} }",
 			"function foo () { for(;;) {} }",
 			"function foo () { do {} while(1); }",
 			"function foo () { do { do { break; } while (true); } while(true); }"
 		];
-		var errors;
+		let errors;
 
 		for (let expr of code) {
 			errors = Solium.lint (toContract(expr), userConfig);

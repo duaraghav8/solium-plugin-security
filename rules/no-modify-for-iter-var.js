@@ -28,14 +28,14 @@ module.exports = {
 				return;
 			}
 
-			var iterationVariable = node.init.left.name;
+			let iterationVariable = node.init.left.name;
 
 			for (let expr of node.body.body) {
 				if (expr.type !== "ExpressionStatement") {
 					continue;
 				}
 
-				var name;
+				let name;
 
 				if (expr.expression.type === "AssignmentExpression" && expr.expression.left.type === "Identifier") {
 					name = expr.expression.left.name;

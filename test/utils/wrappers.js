@@ -7,8 +7,8 @@ module.exports = {
 	 * @return {String}      wrapped snippet
 	 */
 	toContract: function(code) {
-		var pre = "pragma solidity ^0.4.3;\n\n\ncontract Wrap {\n\t";
-		var post = "\n}";
+		let pre = "pragma solidity ^0.4.3;\n\n\ncontract Wrap {\n\t";
+		let post = "\n}";
 		return pre + code + post;
 	}
 };

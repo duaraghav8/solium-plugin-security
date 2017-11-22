@@ -5,9 +5,9 @@
 
 "use strict";
 
-var Solium = require("solium");
+let Solium = require("solium");
 
-var userConfig = {
+let userConfig = {
 	rules: {
 		"security/no-send": "error"
 	}
@@ -18,7 +18,7 @@ describe ("[RULE] no-send: Rejections", function () {
 	it ("should reject contracts using send", function (done) {
 		// Example from here:
 		// http://solidity.readthedocs.io/en/develop/security-considerations.html#re-entrancy
-		var code = "contract Fund {\
+		let code = "contract Fund {\
 			mapping(address => uint) shares; \
 			function other() {return 0;}\
 			function withdraw() {\
@@ -37,7 +37,7 @@ describe ("[RULE] no-send: Rejections", function () {
 	});
 
 	it ("should work correctly for non-property functions, regardless of name", function (done) {
-		var code = "contract Fund {\
+		let code = "contract Fund {\
 			mapping(address => uint) shares; \
 			function send() {return 0;}\
 			function main() {\

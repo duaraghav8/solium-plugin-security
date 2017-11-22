@@ -5,11 +5,11 @@
 
 "use strict";
 
-var Solium = require ("solium");
-var wrappers = require("./utils/wrappers");
-var toContract = wrappers.toContract;
+let Solium = require ("solium");
+let wrappers = require("./utils/wrappers");
+let toContract = wrappers.toContract;
 
-var userConfig = {
+let userConfig = {
 	"rules": {
 		"security/one-break-per-loop": "error"
 	}
@@ -18,7 +18,7 @@ var userConfig = {
 describe ("[RULE] one-break-per-loop: Acceptances", function () {
 
 	it ("should accept all loops that have one or less breaks in them", function (done) {
-		var code = [
+		let code = [
 			"function foo () { for(uint i = 0; i<10; i++) {break; for(uint j = 0; j<10; j++) {break;}} }",
 			"function foo () { for(uint i = 0; i<10; i++) {for(uint j = 0; j<10; j++) {break;} break;} }",
 			"function foo () { do { break;} while (1);  for(uint i = 0; i < 10; i++) { break; } }",
@@ -29,7 +29,7 @@ describe ("[RULE] one-break-per-loop: Acceptances", function () {
 			"function foo () { do { break; } while (i < 20); }",
 			"function foo () { if(1=1){break;} do { break; } while (i < 20); }",
 		];
-		var errors;
+		let errors;
 
 		code = code.map(function(item){return toContract(item);});
 
@@ -60,7 +60,7 @@ describe ("[RULE] one-break-per-loop: Acceptances", function () {
 describe ("[RULE] one-break-per-loop: Rejections", function () {
 
 	it ("should reject all loops that have two or more breaks in them", function (done) {
-		var code = [
+		let code = [
 			"function foo () { for(uint i = 0; i<10; i++) {break; break;} }",
 			"function foo () { for(uint i = 0; i < 10; i++) { uint x=1; if(x=1){break;} if(x=2){break;} } }",
 			"function foo () { while(true) {break;break;} }",
@@ -70,7 +70,7 @@ describe ("[RULE] one-break-per-loop: Rejections", function () {
 			"function foo () { for(uint i = 0; i<10; i++) {break; for(uint j = 0; j<10; j++) {break;} break;} }",
 			"function foo () { for(uint i = 0; i<10; i++) {for(uint j = 0; j<10; j++) {break; break;} break;} }",
 		];
-		var errors;
+		let errors;
 
 		code = code.map(function(item){return toContract(item);});
 

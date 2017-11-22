@@ -22,7 +22,7 @@ module.exports = {
 	create: function (context) {
 
 		function inspectFunctionDeclaration(emitted) {
-			var node = emitted.node;
+			let node = emitted.node;
 			if (emitted.exit || !node.returnParams) { return; }
 
 			for (let param of node.returnParams) {
