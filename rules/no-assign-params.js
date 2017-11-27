@@ -18,16 +18,17 @@ module.exports = {
 		schema: []
 	},
 
-	create: function (context) {
+	create(context) {
+		let source = context.getSourceCode();
 
 		function isBadAssignment (statement, params) {
-			return statement["expression"]["type"] === "AssignmentExpression" &&
-                   params.indexOf(statement["expression"]["left"]["name"]) >= 0;
+			return source.isAssignment(statement["expression"]) &&
+						 params.indexOf(statement["expression"]["left"]["name"]) >= 0;
 		}
 
 		function isBadUpdate (statement, params) {
-			return statement["expression"]["type"] === "UpdateExpression" &&
-                   params.indexOf(statement["expression"]["argument"]["name"]) >= 0;
+			return source.isUpdate(statement["expression"]) &&
+						 params.indexOf(statement["expression"]["argument"]["name"]) >= 0;
 
 		}
 
@@ -44,11 +45,11 @@ module.exports = {
 		}
 
 		function inspectStatement (statement, node, params, following) {
-			if ("ExpressionStatement" === following["type"]) {
+			if (source.isExpression(following)) {
 				checkExpressionStatement (following, node, params);
-			} else if ("IfStatement" === following["type"]) {
+			} else if (source.isIfStatement(following)) {
 				inspectIf (following, node, params);
-			} else if (["ForStatement", "WhileStatement", "DoWhileStatement"].indexOf(following["type"]) >= 0) {
+			} else if (source.isLoopStatement(following)) {
 				inspectLoop (following, node, params);
 			} else {
 				inspectBody (following["body"], node, params);
@@ -68,11 +69,11 @@ module.exports = {
 
 		function inspectBody (body, node, params) {
 			for (let statement of body) {
-				if ("ExpressionStatement" === statement["type"]) {
+				if (source.isExpression(statement)) {
 					checkExpressionStatement (statement, node, params);
-				} else if (["ForStatement", "WhileStatement", "DoWhileStatement"].indexOf(statement["type"]) >= 0) {
+				} else if (source.isLoopStatement(statement)) {
 					inspectLoop (statement, node, params);
-				} else if ("IfStatement" === statement["type"]) {
+				} else if (source.isIfStatement(statement)) {
 					inspectIf (statement, node, params);
 				}
 			}
