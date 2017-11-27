@@ -23,8 +23,9 @@ module.exports = {
 
 		function inspectLoopStatement(emitted) {
 			const node = emitted.node;
+			let source = context.getSourceCode();
 
-			if (emitted.exit || !node.init || node.init.type !== "AssignmentExpression") {
+			if (emitted.exit || !node.init || source.isAssignment(node.init)) {
 				return;
 			}
 
@@ -37,9 +38,9 @@ module.exports = {
 
 				let name;
 
-				if (expr.expression.type === "AssignmentExpression" && expr.expression.left.type === "Identifier") {
+				if (source.isAssignment(expr.expression) && expr.expression.left.type === "Identifier") {
 					name = expr.expression.left.name;
-				} else if (expr.expression.type === "UpdateExpression" && expr.expression.argument.type === "Identifier") {
+				} else if (source.isUpdate(expr.expression) && expr.expression.argument.type === "Identifier") {
 					name = expr.expression.argument.name;
 				} else {
 					continue;

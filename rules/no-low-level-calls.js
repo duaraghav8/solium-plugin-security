@@ -27,12 +27,13 @@ module.exports = {
 	},
 
 	create(context) {
+		let source = context.getSourceCode();
 		const functionsToAvoid = new Set(context.options ? context.options[0] : DEFAULT_FUNCS_TO_AVOID);
 
 		function reportIfUsingFuncToAvoid(emitted) {
 			const {node} = emitted;
 
-			if (emitted.exit || node.callee.type !== "MemberExpression") {
+			if (emitted.exit || !source.isMember(node.callee)) {
 				return;
 			}
 

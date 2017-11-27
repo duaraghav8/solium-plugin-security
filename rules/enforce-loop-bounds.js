@@ -20,17 +20,18 @@ module.exports = {
 	},
 
 	create: function (context) {
+		let source = context.getSourceCode();
 
 		// eslint-disable-next-line no-unused-vars
 		function hasBreakStatement(expr, index, array) {
-			return expr.type === "BreakStatement";
+			return source.isBreakStatement(expr);
 		}
 
 		function inspectIfStatement(node) {
 			// This returns true if it finds a 'break' statement in the 'if' block
-			if (node.alternate && node.alternate.type === "IfStatement") {
+			if (node.alternate && source.isIfStatement(node.alternate)) {
 				return inspectIfStatement(node.alternate);
-			} else if (node.alternate && node.alternate.type === "BlockStatement") {
+			} else if (node.alternate && source.isBlockStatement(node.alternate)) {
 				if (node.alternate.body.some(hasBreakStatement)) { return true; }
 			}
 
@@ -43,10 +44,10 @@ module.exports = {
 			let hasBreak = false;
 
 			for (let expr of node.body.body) {
-				if (expr.type === "BreakStatement") {
+				if (source.isBreakStatement(expr)) {
 					hasBreak = true;
 					break;
-				} else if (expr.type === "IfStatement") {
+				} else if (source.isIfStatement(expr)) {
 					hasBreak = inspectIfStatement(expr);
 				}
 			}

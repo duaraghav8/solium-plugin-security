@@ -18,6 +18,8 @@ module.exports = {
 	},
 
 	create(context) {
+		let source = context.getSourceCode();
+
 		function inspectElseIfStatement(node) {
 			// if the else if does not have an alternate, that means there is
 			// no else - report an error
@@ -26,8 +28,8 @@ module.exports = {
 					node: node,
 					message: "\"else if\" statement must be followed by an \"else\" statement"
 				});
-			} else if (node["alternate"]["type"] === "IfStatement") {
-				inspectElseIfStatement(node["alternate"]); 
+			} else if (source.isIfStatement(node["alternate"])) {
+				inspectElseIfStatement(node["alternate"]);
 			}
 		}
 
@@ -39,17 +41,17 @@ module.exports = {
 			let parent = sourceCode.getParent(node);
 
 			// only inspect top-level if statements
-			if (parent["type"] == "IfStatement") {
+			if (source.isIfStatement(parent)) {
 				return;
 			}
 
-			if (node["alternate"] && node["alternate"]["type"] === "IfStatement") {
+			if (node["alternate"] && source.isIfStatement(node["alternate"])) {
 				inspectElseIfStatement(node["alternate"]);
 			}
 		}
 
 		return {
-			IfStatement: inspectIfStatement 
+			IfStatement: inspectIfStatement
 		};
 	}
 

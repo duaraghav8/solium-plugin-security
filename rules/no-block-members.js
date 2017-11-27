@@ -27,6 +27,7 @@ module.exports = {
 	},
 
 	create(context) {
+		let source = context.getSourceCode();
 		const membersToAvoid = new Set(context.options ? context.options[0] : MEMBERS_TO_AVOID);
 
 		function reportIfblockhashUsed(emitted) {
@@ -34,7 +35,7 @@ module.exports = {
 
 			const {node} = emitted;
 
-			if (node.callee.type !== "MemberExpression") { return; }
+			if (!source.isMember(node.callee)) { return; }
 
 			const {object, property} = node.callee;
 

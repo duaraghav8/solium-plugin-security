@@ -18,19 +18,21 @@ module.exports = {
 	},
 
 	create(context) {
+		let source = context.getSourceCode();
+
 		function reportIfcallvalueUsed(emitted) {
 			if (emitted.exit) { return; }
 
 			const {node} = emitted, {object, property} = node.callee;
 
-			if (node.callee.type === "MemberExpression" && property.type === "Identifier" && property.name === "value"
-                && object.type === "MemberExpression" && object.property.type === "Identifier"
+			if (source.isMember(node.callee) && property.type === "Identifier" && property.name === "value"
+                && source.isMember(object) && object.property.type === "Identifier"
                 && object.property.name === "call") {
 
 				context.report({
 					node,
 					location: {
-						column: context.getSourceCode().getColumn(object.property)
+						column: source.getColumn(object.property)
 					},
 					message: "Consider using 'transfer' in place of 'call.value()'."
 				});
