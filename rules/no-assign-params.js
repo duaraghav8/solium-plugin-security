@@ -23,12 +23,12 @@ module.exports = {
 
 		function isBadAssignment (statement, params) {
 			return source.isAssignment(statement["expression"]) &&
-						 params.indexOf(statement["expression"]["left"]["name"]) >= 0;
+			       params.indexOf(statement["expression"]["left"]["name"]) >= 0;
 		}
 
 		function isBadUpdate (statement, params) {
 			return source.isUpdate(statement["expression"]) &&
-						 params.indexOf(statement["expression"]["argument"]["name"]) >= 0;
+			       params.indexOf(statement["expression"]["argument"]["name"]) >= 0;
 
 		}
 
