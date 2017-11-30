@@ -18,9 +18,7 @@ module.exports = {
 
 	create: function(context) {
 		function inspectVariableDeclaration(emitted) {
-			if (emitted.exit) {
-				return;
-			}
+			if (emitted.exit) { return; }
 
 			let node = emitted.node;
 
@@ -31,7 +29,8 @@ module.exports = {
 		}
 
 		return {
-			VariableDeclaration: inspectVariableDeclaration
+			VariableDeclaration: inspectVariableDeclaration,
+			VariableDeclarationTuple: inspectVariableDeclaration
 		};
 	}
 };
