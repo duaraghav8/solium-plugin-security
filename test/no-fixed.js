@@ -39,6 +39,8 @@ describe("[RULE] no-fixed: Rejections", function() {
 		let code = toContract(`
 			fixed x = 100.89;
 			ufixed y = 1.2;
+			uint z = 3;
+			uint[] a;
 
 			function foo () {
 				fixed a = 2.0; ufixed b = 90.2;

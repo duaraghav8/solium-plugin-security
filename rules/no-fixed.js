@@ -17,28 +17,22 @@ module.exports = {
 	},
 
 	create: function(context) {
-		function inspectDeclarationExpression(emitted) {
+		function inspectType(emitted) {
 			if (emitted.exit) {
 				return;
 			}
 
-			let node = emitted.node;
-			let variableType = node.literal.literal;
-
-			if (typeof variableType !== "string") {
-				return;
-			}
-
-			if (variableType.indexOf("fixed") === 0 || variableType.indexOf("ufixed") === 0) {
+			let type = emitted.node.literal;
+			if (type.indexOf("fixed") === 0 || type.indexOf("ufixed") === 0) {
 				context.report({
-					node: node,
-					message: `${variableType}: Avoid using fixed types.`
+					node: emitted.node,
+					message: `${type}: Avoid using fixed types.`
 				});
 			}
 		}
 
 		return {
-			DeclarativeExpression: inspectDeclarationExpression
+			Type: inspectType
 		};
 	}
 };
