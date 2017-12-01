@@ -7,37 +7,37 @@
 
 module.exports = {
 
-	meta: {
+    meta: {
 
-		docs: {
-			recommended: false,
-			type: "error",
-			description: "Discourage use of void returns in functions prototypes"
-		},
+        docs: {
+            recommended: false,
+            type: "error",
+            description: "Discourage use of void returns in functions prototypes"
+        },
 
-		schema: []
+        schema: []
 
-	},
+    },
 
-	create: function (context) {
+    create: function(context) {
 
-		function inspectFunctionDeclaration(emitted) {
-			const node = emitted.node;
+        function inspectFunctionDeclaration(emitted) {
+            const node = emitted.node;
 
-			if (emitted.exit || node.returnParams) {
-				return;
-			}
+            if (emitted.exit || node.returnParams) {
+                return;
+            }
 
-			const message = node.name ?
-				`Avoid using a void return in function ${node.name}.` : "Avoid using a void return in fallback function.";
+            const message = node.name ?
+                `Avoid using a void return in function ${node.name}.` : "Avoid using a void return in fallback function.";
 
-			context.report({ node, message });
-		}
+            context.report({ node, message });
+        }
 
-		return {
-			FunctionDeclaration: inspectFunctionDeclaration
-		};
+        return {
+            FunctionDeclaration: inspectFunctionDeclaration
+        };
 
-	}
+    }
 
 };

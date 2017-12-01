@@ -7,38 +7,38 @@
  */
 
 function isSuicideOrSelfDestruct(node) {
-	return node.type === "Identifier" && (node.name === "suicide" || node.name === "selfdestruct");
+    return node.type === "Identifier" && (node.name === "suicide" || node.name === "selfdestruct");
 }
 
 module.exports = {
-	meta: {
-		docs: {
-			recommended: false,
-			type: "warning",
-			description: "Disallow 'suicide' and 'selfdestruct'"
-		},
+    meta: {
+        docs: {
+            recommended: false,
+            type: "warning",
+            description: "Disallow 'suicide' and 'selfdestruct'"
+        },
 
-		schema: []
-	},
+        schema: []
+    },
 
-	create: function(context) {
-		function inspectCallExpression(emittedObject) {
-			if (!emittedObject.exit) {
-				return;
-			}
+    create: function(context) {
+        function inspectCallExpression(emittedObject) {
+            if (!emittedObject.exit) {
+                return;
+            }
 
-			const callee = emittedObject.node.callee;
+            const callee = emittedObject.node.callee;
 
-			if (isSuicideOrSelfDestruct(callee)) {
-				context.report({
-					node: emittedObject.node,
-					message: "Avoid using 'suicide' and 'selfdestruct'."
-				});
-			}
-		}
+            if (isSuicideOrSelfDestruct(callee)) {
+                context.report({
+                    node: emittedObject.node,
+                    message: "Avoid using 'suicide' and 'selfdestruct'."
+                });
+            }
+        }
 
-		return {
-			CallExpression: inspectCallExpression
-		};
-	}
+        return {
+            CallExpression: inspectCallExpression
+        };
+    }
 };

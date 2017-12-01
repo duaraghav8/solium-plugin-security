@@ -7,38 +7,38 @@
 
 module.exports = {
 
-	meta: {
+    meta: {
 
-		docs: {
-			recommended: false,
-			type: "error",
-			description: "Discourage use of abstract functions"
-		},
+        docs: {
+            recommended: false,
+            type: "error",
+            description: "Discourage use of abstract functions"
+        },
 
-		schema: []
+        schema: []
 
-	},
+    },
 
-	create: function (context) {
+    create: function(context) {
 
-		function inspectFunctionDeclaration(emitted) {
-			const node = emitted.node;
+        function inspectFunctionDeclaration(emitted) {
+            const node = emitted.node;
 
-			// If function is NOT abstract, exit now.
-			if (emitted.exit || !node.is_abstract) {
-				return;
-			}
+            // If function is NOT abstract, exit now.
+            if (emitted.exit || !node.is_abstract) {
+                return;
+            }
 
-			const message = node.name ?
-				`${node.name}: Avoid using abstract functions.` : "Avoid using abstract fallback function.";
+            const message = node.name ?
+                `${node.name}: Avoid using abstract functions.` : "Avoid using abstract fallback function.";
 
-			context.report({ node, message });
-		}
+            context.report({ node, message });
+        }
 
-		return {
-			FunctionDeclaration: inspectFunctionDeclaration
-		};
+        return {
+            FunctionDeclaration: inspectFunctionDeclaration
+        };
 
-	}
+    }
 
 };

@@ -6,31 +6,31 @@
 "use strict";
 
 module.exports = {
-	meta: {
-		docs: {
-			recommended: true,
-			type: "error",
-			description: "Disallow type deduction via 'var'"
-		},
+    meta: {
+        docs: {
+            recommended: true,
+            type: "error",
+            description: "Disallow type deduction via 'var'"
+        },
 
-		schema: []
-	},
+        schema: []
+    },
 
-	create: function(context) {
-		function inspectVariableDeclaration(emitted) {
-			if (emitted.exit) { return; }
+    create: function(context) {
+        function inspectVariableDeclaration(emitted) {
+            if (emitted.exit) { return; }
 
-			let node = emitted.node;
+            let node = emitted.node;
 
-			context.report({
-				node: node,
-				message: "Avoid type deduction through 'var'. Specify the data type instead."
-			});
-		}
+            context.report({
+                node: node,
+                message: "Avoid type deduction through 'var'. Specify the data type instead."
+            });
+        }
 
-		return {
-			VariableDeclaration: inspectVariableDeclaration,
-			VariableDeclarationTuple: inspectVariableDeclaration
-		};
-	}
+        return {
+            VariableDeclaration: inspectVariableDeclaration,
+            VariableDeclarationTuple: inspectVariableDeclaration
+        };
+    }
 };

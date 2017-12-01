@@ -8,14 +8,14 @@
 let Solium = require("solium");
 
 let userConfig = {
-	rules: {
-		"security/no-named-params": "error"
-	}
+    rules: {
+        "security/no-named-params": "error"
+    }
 };
 
 describe("[RULE] no-named-params: Rejections", function() {
-	it("should reject contracts using named parameters but allow structs", function(done) {
-		let code = `
+    it("should reject contracts using named parameters but allow structs", function(done) {
+        let code = `
 			pragma solidity 0.4.17;
 			contract TestContract {
 					struct C {
@@ -37,13 +37,13 @@ describe("[RULE] no-named-params: Rejections", function() {
 			}
 		`;
 
-		let errors = Solium.lint(code, userConfig);
+        let errors = Solium.lint(code, userConfig);
 
-		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(1);
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(1);
 
-		Solium.reset();
+        Solium.reset();
 
-		done();
-	});
+        done();
+    });
 });

@@ -5,46 +5,46 @@
 
 "use strict";
 
-function isSend (calleeNode) {
-	return (
-		calleeNode.property &&
-		calleeNode.property.type === "Identifier" &&
-		calleeNode.property.name === "send"
-	);
+function isSend(calleeNode) {
+    return (
+        calleeNode.property &&
+        calleeNode.property.type === "Identifier" &&
+        calleeNode.property.name === "send"
+    );
 }
 
 module.exports = {
 
-	meta: {
+    meta: {
 
-		docs: {
-			recommended: true,
-			type: "warning",
-			description: "Discourage the use of 'send'."
-		},
+        docs: {
+            recommended: true,
+            type: "warning",
+            description: "Discourage the use of 'send'."
+        },
 
-		schema: []
-	},
+        schema: []
+    },
 
-	create: function (context) {
-		function inspectCallExpression (emittedObject) {
-			if (!emittedObject.exit) {
-				return;
-			}
+    create: function(context) {
+        function inspectCallExpression(emittedObject) {
+            if (!emittedObject.exit) {
+                return;
+            }
 
-			const callee = emittedObject.node.callee;
+            const callee = emittedObject.node.callee;
 
-			if (isSend (callee)) {
-				context.report ({
-					node: emittedObject.node,
-					message: "Consider using 'transfer' in place of 'send'."
-				});
-			}
-		}
+            if (isSend(callee)) {
+                context.report({
+                    node: emittedObject.node,
+                    message: "Consider using 'transfer' in place of 'send'."
+                });
+            }
+        }
 
-		return {
-			CallExpression: inspectCallExpression
-		};
-	}
+        return {
+            CallExpression: inspectCallExpression
+        };
+    }
 
 };

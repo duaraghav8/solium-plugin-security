@@ -10,20 +10,20 @@ let wrappers = require("./utils/wrappers");
 let toContract = wrappers.toContract;
 
 let userConfig = {
-	rules: {
-		"security/no-unreachable-code": "error"
-	}
+    rules: {
+        "security/no-unreachable-code": "error"
+    }
 };
 
 describe("[RULE] no-unreachable-code: Rejections", function() {
-	it("should reject contracts with unreachable code", function(done) {
-		let code = toContract("function foo () { return; fixed a; }"),
-			errors = Solium.lint(code, userConfig);
+    it("should reject contracts with unreachable code", function(done) {
+        let code = toContract("function foo () { return; fixed a; }"),
+            errors = Solium.lint(code, userConfig);
 
-		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(1);
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(1);
 
-		code = toContract(`
+        code = toContract(`
 			uint abc = 100;
 
 			function foo() {
@@ -32,12 +32,12 @@ describe("[RULE] no-unreachable-code: Rejections", function() {
 				abc;
 			}
 		`);
-		errors = Solium.lint(code, userConfig);
-		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(1);
+        errors = Solium.lint(code, userConfig);
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(1);
 
 
-		code = toContract(`
+        code = toContract(`
 			function foo() {
 				if (blah) {
 					return;
@@ -47,37 +47,37 @@ describe("[RULE] no-unreachable-code: Rejections", function() {
 				call(100, 0x00);
 			}
 		`);
-		errors = Solium.lint(code, userConfig);
-		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(1);
+        errors = Solium.lint(code, userConfig);
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(1);
 
 
-		code = toContract(`
+        code = toContract(`
 			function foo() {
 				return 100;
 				return 100;
 			}
 		`);
-		errors = Solium.lint(code, userConfig);
-		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(1);
+        errors = Solium.lint(code, userConfig);
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(1);
 
 
-		Solium.reset();
-		done();
-	});
+        Solium.reset();
+        done();
+    });
 });
 
 describe("[RULE] no-unreachable-code: Acceptances", function() {
-	it("should accept contracts without a return", function(done) {
-		let code = toContract("function foo () { fixed a = 2.0; }");
-		let errors = Solium.lint(code, userConfig);
+    it("should accept contracts without a return", function(done) {
+        let code = toContract("function foo () { fixed a = 2.0; }");
+        let errors = Solium.lint(code, userConfig);
 
-		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(0);
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(0);
 
-		// Below cases are beyond the scope of a static analyzer to detect, so not flagged
-		code = toContract(`
+        // Below cases are beyond the scope of a static analyzer to detect, so not flagged
+        code = toContract(`
 			function foo() {
 				do {
 					blah();
@@ -87,12 +87,12 @@ describe("[RULE] no-unreachable-code: Acceptances", function() {
 				callMyMethod();
 			}
 		`);
-		errors = Solium.lint(code, userConfig);
-		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(0);
+        errors = Solium.lint(code, userConfig);
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(0);
 
 
-		code = toContract(`
+        code = toContract(`
 			function foo() {
 				if (foobae) {
 					haxor("blah");
@@ -103,11 +103,11 @@ describe("[RULE] no-unreachable-code: Acceptances", function() {
 				someFunc();
 			}
 		`);
-		errors = Solium.lint(code, userConfig);
-		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(0);
+        errors = Solium.lint(code, userConfig);
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(0);
 
-		code = toContract(`
+        code = toContract(`
 			function foo() {
 				if (x) {
 					return;
@@ -118,13 +118,13 @@ describe("[RULE] no-unreachable-code: Acceptances", function() {
 				someFunc();
 			}
 		`);
-		errors = Solium.lint(code, userConfig);
-		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(0);
+        errors = Solium.lint(code, userConfig);
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(0);
 
 
-		Solium.reset();
+        Solium.reset();
 
-		done();
-	});
+        done();
+    });
 });

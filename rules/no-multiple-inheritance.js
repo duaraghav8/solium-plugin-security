@@ -7,83 +7,83 @@
 
 module.exports = {
 
-	meta: {
+    meta: {
 
-		docs: {
-			recommended: false,
-			type: "error",
-			description: "Discourage use of multiple inheritance"
-		},
+        docs: {
+            recommended: false,
+            type: "error",
+            description: "Discourage use of multiple inheritance"
+        },
 
-		schema: [{
-			type: "object",
-			properties: {
-				"no-interface": { type: "boolean" }
-			},
-			additionalProperties: false
-		}]
+        schema: [{
+            type: "object",
+            properties: {
+                "no-interface": { type: "boolean" }
+            },
+            additionalProperties: false
+        }]
 
-	},
+    },
 
-	create: function (context) {
+    create: function(context) {
 
-		let interfaces = [];
-		let contracts = {};
+        let interfaces = [];
+        let contracts = {};
 
-		let noInterface = context.options && context.options[0]["no-interface"];
+        let noInterface = context.options && context.options[0]["no-interface"];
 
-		function inspectInterfaceStatement(emitted) {
-			if (emitted.exit || noInterface) {
-				return;
-			}
+        function inspectInterfaceStatement(emitted) {
+            if (emitted.exit || noInterface) {
+                return;
+            }
 
-			interfaces.push(emitted.node.name);
-		}
+            interfaces.push(emitted.node.name);
+        }
 
-		function inspectContractStatement(emitted) {
-			if (emitted.exit) { return; }
-			let node = emitted.node;
+        function inspectContractStatement(emitted) {
+            if (emitted.exit) { return; }
+            let node = emitted.node;
 
-			if (noInterface && (node.is.length > 1)) {
-				context.report({
-					node: node,
-					message: `Avoid using multiple inheritance for Contract ${node.name}.`
-				});
-				return;
-			}
+            if (noInterface && (node.is.length > 1)) {
+                context.report({
+                    node: node,
+                    message: `Avoid using multiple inheritance for Contract ${node.name}.`
+                });
+                return;
+            }
 
-			contracts[node.name] = {"parents": [], "node": node};
-			for (let parent of node.is) {
-				contracts[node.name].parents.push(parent.name);
-			}
+            contracts[node.name] = {"parents": [], "node": node};
+            for (let parent of node.is) {
+                contracts[node.name].parents.push(parent.name);
+            }
 
-		}
+        }
 
-		function inspectProgram(emitted) {
-			if (!emitted.exit || noInterface) { return; }
+        function inspectProgram(emitted) {
+            if (!emitted.exit || noInterface) { return; }
 
-			for (let name in contracts) {
-				let contract = contracts[name];
+            for (let name in contracts) {
+                let contract = contracts[name];
 
-				for (let parent of contract.parents) {
-					if (!interfaces.includes(parent) && contract.parents.length > 1) {
-						context.report({
-							node: contract.node,
-							message: `Avoid using multiple inheritance for Contract ${name}.`
-						});
+                for (let parent of contract.parents) {
+                    if (!interfaces.includes(parent) && contract.parents.length > 1) {
+                        context.report({
+                            node: contract.node,
+                            message: `Avoid using multiple inheritance for Contract ${name}.`
+                        });
 
-						break;
-					}
-				}
-			}
-		}
+                        break;
+                    }
+                }
+            }
+        }
 
-		return {
-			InterfaceStatement: inspectInterfaceStatement,
-			ContractStatement: inspectContractStatement,
-			Program: inspectProgram
-		};
+        return {
+            InterfaceStatement: inspectInterfaceStatement,
+            ContractStatement: inspectContractStatement,
+            Program: inspectProgram
+        };
 
-	}
+    }
 
 };

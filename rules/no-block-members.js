@@ -9,81 +9,81 @@ const MEMBERS_TO_AVOID = ["blockhash", "timestamp"];
 
 module.exports = {
 
-	meta: {
-		docs: {
-			description: "Discourage use of members 'blockhash' & 'timestamp' (and alias 'now') of block global variable",
-			recommended: true,
-			type: "error"
-		},
+    meta: {
+        docs: {
+            description: "Discourage use of members 'blockhash' & 'timestamp' (and alias 'now') of block global variable",
+            recommended: true,
+            type: "error"
+        },
 
-		schema: [{
-			type: "array",
-			items: {
-				type: "string",
-				enum: MEMBERS_TO_AVOID
-			},
-			minItems: 1
-		}]
-	},
+        schema: [{
+            type: "array",
+            items: {
+                type: "string",
+                enum: MEMBERS_TO_AVOID
+            },
+            minItems: 1
+        }]
+    },
 
-	create(context) {
-		const membersToAvoid = new Set(context.options ? context.options[0] : MEMBERS_TO_AVOID);
+    create(context) {
+        const membersToAvoid = new Set(context.options ? context.options[0] : MEMBERS_TO_AVOID);
 
-		function reportIfblockhashUsed(emitted) {
-			if (emitted.exit) { return; }
+        function reportIfblockhashUsed(emitted) {
+            if (emitted.exit) { return; }
 
-			const {node} = emitted;
+            const {node} = emitted;
 
-			if (node.callee.type !== "MemberExpression") { return; }
+            if (node.callee.type !== "MemberExpression") { return; }
 
-			const {object, property} = node.callee;
+            const {object, property} = node.callee;
 
-			if (object.type === "Identifier" && property.type === "Identifier"
+            if (object.type === "Identifier" && property.type === "Identifier"
                 && object.name === "block" && property.name === "blockhash") {
-				context.report({
-					node,
-					message: "Avoid using 'block.blockhash'."
-				});
-			}
-		}
+                context.report({
+                    node,
+                    message: "Avoid using 'block.blockhash'."
+                });
+            }
+        }
 
-		function reportIftimestampUsed(emitted) {
-			if (emitted.exit) { return; }
+        function reportIftimestampUsed(emitted) {
+            if (emitted.exit) { return; }
 
-			const {node} = emitted, {object, property} = node;
+            const {node} = emitted, {object, property} = node;
 
-			if (object.type === "Identifier" && property.type === "Identifier"
+            if (object.type === "Identifier" && property.type === "Identifier"
                 && object.name === "block" && property.name === "timestamp") {
-				context.report({
-					node,
-					message: "Avoid using 'block.timestamp'."
-				});
-			}
-		}
+                context.report({
+                    node,
+                    message: "Avoid using 'block.timestamp'."
+                });
+            }
+        }
 
-		function reportIfnowUsed(emitted) {
-			if (emitted.exit) { return; }
+        function reportIfnowUsed(emitted) {
+            if (emitted.exit) { return; }
 
-			const {node} = emitted;
+            const {node} = emitted;
 
-			node.name === "now" && context.report({
-				node,
-				message: "Avoid using 'now' (alias to 'block.timestamp')."
-			});
-		}
+            node.name === "now" && context.report({
+                node,
+                message: "Avoid using 'now' (alias to 'block.timestamp')."
+            });
+        }
 
-		const nodesToCatch = {};
+        const nodesToCatch = {};
 
-		if (membersToAvoid.has("blockhash")) {
-			nodesToCatch.CallExpression = reportIfblockhashUsed;
-		}
+        if (membersToAvoid.has("blockhash")) {
+            nodesToCatch.CallExpression = reportIfblockhashUsed;
+        }
 
-		if (membersToAvoid.has("timestamp")) {
-			nodesToCatch.MemberExpression = reportIftimestampUsed;
-			nodesToCatch.Identifier = reportIfnowUsed;
-		}
+        if (membersToAvoid.has("timestamp")) {
+            nodesToCatch.MemberExpression = reportIftimestampUsed;
+            nodesToCatch.Identifier = reportIfnowUsed;
+        }
 
-		return nodesToCatch;
-	}
+        return nodesToCatch;
+    }
 
 };

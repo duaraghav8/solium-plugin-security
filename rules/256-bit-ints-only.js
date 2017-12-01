@@ -6,49 +6,47 @@
 "use strict";
 
 const ALLOWED_INTS = [
-	"int", // alias for int256
-	"int256",
-	"uint", // alias for uint256
-	"uint256"
+    "int", // alias for int256
+    "int256",
+    "uint", // alias for uint256
+    "uint256"
 ];
 
 module.exports = {
-	meta: {
-		docs: {
-			recommended: false,
-			type: "error",
-			description: "Discourage use of non-256 bit integers"
-		},
+    meta: {
+        docs: {
+            recommended: false,
+            type: "error",
+            description: "Discourage use of non-256 bit integers"
+        },
 
-		schema: []
-	},
+        schema: []
+    },
 
-	create: function(context) {
-		function inspectDeclarationExpression(emitted) {
-			if (emitted.exit) {
-				return;
-			}
+    create: function(context) {
+        function inspectDeclarationExpression(emitted) {
+            if (emitted.exit) {
+                return;
+            }
 
-			let node = emitted.node;
-			let variableType = node.literal.literal;
+            let node = emitted.node;
+            let variableType = node.literal.literal;
 
-			if (typeof variableType !== "string") {
-				return;
-			}
+            if (typeof variableType !== "string") {
+                return;
+            }
 
-			if (
-				(variableType.indexOf("int") === 0 || variableType.indexOf("uint") === 0) &&
-				ALLOWED_INTS.indexOf(variableType) === -1
-			) {
-				context.report({
-					node: node,
-					message: `${variableType}: Only use 256-bit integers.`
-				});
-			}
-		}
+            if ((variableType.indexOf("int") === 0 || variableType.indexOf("uint") === 0) &&
+                ALLOWED_INTS.indexOf(variableType) === -1) {
+                context.report({
+                    node: node,
+                    message: `${variableType}: Only use 256-bit integers.`
+                });
+            }
+        }
 
-		return {
-			DeclarativeExpression: inspectDeclarationExpression
-		};
-	}
+        return {
+            DeclarativeExpression: inspectDeclarationExpression
+        };
+    }
 };

@@ -7,36 +7,36 @@
 
 module.exports = {
 
-	meta: {
-		docs: {
-			description: "Discourage use of 'tx.origin' global variable.",
-			recommended: true,
-			type: "error"
-		},
+    meta: {
+        docs: {
+            description: "Discourage use of 'tx.origin' global variable.",
+            recommended: true,
+            type: "error"
+        },
 
-		schema: []
-	},
+        schema: []
+    },
 
-	create(context) {
-		function isAtxoriginExpression(object, property) {
-			return (object.type === "Identifier" &&
+    create(context) {
+        function isAtxoriginExpression(object, property) {
+            return (object.type === "Identifier" &&
                 property.type === "Identifier" && object.name === "tx" && property.name === "origin");
-		}
+        }
 
-		function reportIfIstxorigin(emitted) {
-			if (emitted.exit) { return; }
+        function reportIfIstxorigin(emitted) {
+            if (emitted.exit) { return; }
 
-			const {node} = emitted, {object, property} = node;
+            const {node} = emitted, {object, property} = node;
 
-			isAtxoriginExpression(object, property) && context.report({
-				node,
-				message: "Consider using 'msg.sender' in place of 'tx.origin'."
-			});
-		}
+            isAtxoriginExpression(object, property) && context.report({
+                node,
+                message: "Consider using 'msg.sender' in place of 'tx.origin'."
+            });
+        }
 
-		return {
-			MemberExpression: reportIfIstxorigin
-		};
-	}
+        return {
+            MemberExpression: reportIfIstxorigin
+        };
+    }
 
 };

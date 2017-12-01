@@ -7,40 +7,40 @@
 
 module.exports = {
 
-	meta: {
-		docs: {
-			description: "Discourage use of .call.value()()",
-			recommended: true,
-			type: "error"
-		},
+    meta: {
+        docs: {
+            description: "Discourage use of .call.value()()",
+            recommended: true,
+            type: "error"
+        },
 
-		schema: []
-	},
+        schema: []
+    },
 
-	create(context) {
-		function reportIfcallvalueUsed(emitted) {
-			if (emitted.exit) { return; }
+    create(context) {
+        function reportIfcallvalueUsed(emitted) {
+            if (emitted.exit) { return; }
 
-			const {node} = emitted, {object, property} = node.callee;
+            const {node} = emitted, {object, property} = node.callee;
 
-			if (node.callee.type === "MemberExpression" && property.type === "Identifier" && property.name === "value"
+            if (node.callee.type === "MemberExpression" && property.type === "Identifier" && property.name === "value"
                 && object.type === "MemberExpression" && object.property.type === "Identifier"
                 && object.property.name === "call") {
 
-				context.report({
-					node,
-					location: {
-						column: context.getSourceCode().getColumn(object.property)
-					},
-					message: "Consider using 'transfer' in place of 'call.value()'."
-				});
+                context.report({
+                    node,
+                    location: {
+                        column: context.getSourceCode().getColumn(object.property)
+                    },
+                    message: "Consider using 'transfer' in place of 'call.value()'."
+                });
 
-			}
-		}
+            }
+        }
 
-		return {
-			CallExpression: reportIfcallvalueUsed
-		};
-	}
+        return {
+            CallExpression: reportIfcallvalueUsed
+        };
+    }
 
 };

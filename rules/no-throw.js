@@ -7,35 +7,35 @@
 
 module.exports = {
 
-	meta: {
-		docs: {
-			description: "Discourage use of 'throw' statement. Fixes by replacing statement with 'revert();'",
-			recommended: true,
-			type: "error"
-		},
+    meta: {
+        docs: {
+            description: "Discourage use of 'throw' statement. Fixes by replacing statement with 'revert();'",
+            recommended: true,
+            type: "error"
+        },
 
-		schema: [],
-		fixable: "code"
-	},
+        schema: [],
+        fixable: "code"
+    },
 
-	create(context) {
-		function reportUseOfThrow(emitted) {
-			if (emitted.exit) { return; }
+    create(context) {
+        function reportUseOfThrow(emitted) {
+            if (emitted.exit) { return; }
 
-			const {node} = emitted;
+            const {node} = emitted;
 
-			context.report({
-				node,
-				fix(fixer) {
-					return fixer.replaceText(node, "revert();");
-				},
-				message: "Consider using 'revert()' in place of deprecated 'throw'."
-			});
-		}
+            context.report({
+                node,
+                fix(fixer) {
+                    return fixer.replaceText(node, "revert();");
+                },
+                message: "Consider using 'revert()' in place of deprecated 'throw'."
+            });
+        }
 
-		return {
-			ThrowStatement: reportUseOfThrow
-		};
-	}
+        return {
+            ThrowStatement: reportUseOfThrow
+        };
+    }
 
 };

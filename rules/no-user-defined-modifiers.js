@@ -6,32 +6,32 @@
 "use strict";
 
 module.exports = {
-	meta: {
-		docs: {
-			recommended: false,
-			type: "error",
-			description: "Disallow user-defined modifiers"
-		},
+    meta: {
+        docs: {
+            recommended: false,
+            type: "error",
+            description: "Disallow user-defined modifiers"
+        },
 
-		schema: []
-	},
+        schema: []
+    },
 
-	create: function(context) {
-		function inspectModifierDeclaration(emitted) {
-			let node = emitted.node;
+    create: function(context) {
+        function inspectModifierDeclaration(emitted) {
+            let node = emitted.node;
 
-			if (emitted.exit) {
-				return;
-			}
+            if (emitted.exit) {
+                return;
+            }
 
-			context.report({
-				node: node,
-				message: "User-defined modifiers should be avoided."
-			});
-		}
+            context.report({
+                node: node,
+                message: "User-defined modifiers should be avoided."
+            });
+        }
 
-		return {
-			ModifierDeclaration: inspectModifierDeclaration
-		};
-	}
+        return {
+            ModifierDeclaration: inspectModifierDeclaration
+        };
+    }
 };

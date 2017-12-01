@@ -10,32 +10,32 @@ let wrappers = require("./utils/wrappers");
 let toContract = wrappers.toContract;
 
 let userConfig = {
-	rules: {
-		"security/no-var": "error"
-	}
+    rules: {
+        "security/no-var": "error"
+    }
 };
 
 describe("[RULE] no-var: Rejections", function() {
-	it("should reject contracts using type deduction through 'var'", function(done) {
-		let code = toContract("function foo () { var a = 8; }"),
-			errors = Solium.lint(code, userConfig);
+    it("should reject contracts using type deduction through 'var'", function(done) {
+        let code = toContract("function foo () { var a = 8; }"),
+            errors = Solium.lint(code, userConfig);
 
-		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(1);
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(1);
 
 
-		code = toContract(`
+        code = toContract(`
 			function foo() {
 				var (a, b, c, d) = ("helo", 190, true, getSomeValue());
 				var c = 9.23;
 			}
 		`);
-		errors = Solium.lint(code, userConfig);
-		errors.constructor.name.should.equal("Array");
-		errors.length.should.equal(2);
+        errors = Solium.lint(code, userConfig);
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(2);
 
-		Solium.reset();
+        Solium.reset();
 
-		done();
-	});
+        done();
+    });
 });

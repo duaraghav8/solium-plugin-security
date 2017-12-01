@@ -8,66 +8,66 @@
 const RE_PLACEHOLDER_WITH_SEMICOLON = /^\s*_\s*;\s*$/;
 
 function isFunctionPlaceholder(node) {
-	return (
-		node.type === "PlaceholderStatement" ||
-		(node.type === "ExpressionStatement" && node.expression.name === "_")
-	);
+    return (
+        node.type === "PlaceholderStatement" ||
+        (node.type === "ExpressionStatement" && node.expression.name === "_")
+    );
 }
 
 module.exports = {
-	meta: {
-		docs: {
-			recommended: false,
-			type: "error",
-			description: "Encourage use of function placeholder as the last statement in the modifier"
-		},
+    meta: {
+        docs: {
+            recommended: false,
+            type: "error",
+            description: "Encourage use of function placeholder as the last statement in the modifier"
+        },
 
-		schema: []
-	},
+        schema: []
+    },
 
-	create: function(context) {
-		let sourceCode = context.getSourceCode();
+    create: function(context) {
+        let sourceCode = context.getSourceCode();
 
-		function inspectModifierDeclaration(emitted) {
-			if (emitted.exit) {
-				return;
-			}
+        function inspectModifierDeclaration(emitted) {
+            if (emitted.exit) {
+                return;
+            }
 
-			let node = emitted.node;
-			let topLevelStatements = node.body.body;
-			let lastIndex = topLevelStatements.length - 1;
+            let node = emitted.node;
+            let topLevelStatements = node.body.body;
+            let lastIndex = topLevelStatements.length - 1;
 
-			let firstPlaceholderIndex = topLevelStatements.findIndex(isFunctionPlaceholder);
+            let firstPlaceholderIndex = topLevelStatements.findIndex(isFunctionPlaceholder);
 
-			if (firstPlaceholderIndex === -1) {
-				context.report({
-					node: node,
-					message: `${node.name}: no function placeholder found.`
-				});
+            if (firstPlaceholderIndex === -1) {
+                context.report({
+                    node: node,
+                    message: `${node.name}: no function placeholder found.`
+                });
 
-				return;
-			}
+                return;
+            }
 
-			const placeholder = topLevelStatements[firstPlaceholderIndex];
-			const text = sourceCode.getText(placeholder);
+            const placeholder = topLevelStatements[firstPlaceholderIndex];
+            const text = sourceCode.getText(placeholder);
 
-			if (!RE_PLACEHOLDER_WITH_SEMICOLON.exec(text)) {
-				context.report({
-					node: placeholder,
-					message: `${node.name}: function placeholder must be followed by a semicolon.`
-				});
-			}
+            if (!RE_PLACEHOLDER_WITH_SEMICOLON.exec(text)) {
+                context.report({
+                    node: placeholder,
+                    message: `${node.name}: function placeholder must be followed by a semicolon.`
+                });
+            }
 
-			if (firstPlaceholderIndex !== lastIndex) {
-				context.report({
-					node: placeholder,
-					message: `${node.name}: function placeholder must be the last statement in the modifier.`
-				});
-			}
-		}
+            if (firstPlaceholderIndex !== lastIndex) {
+                context.report({
+                    node: placeholder,
+                    message: `${node.name}: function placeholder must be the last statement in the modifier.`
+                });
+            }
+        }
 
-		return {
-			ModifierDeclaration: inspectModifierDeclaration
-		};
-	}
+        return {
+            ModifierDeclaration: inspectModifierDeclaration
+        };
+    }
 };

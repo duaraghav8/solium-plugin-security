@@ -8,14 +8,14 @@
 let Solium = require("solium");
 
 let userConfig = {
-	"rules": {
-		"security/no-continue": "error"
-	}
+    "rules": {
+        "security/no-continue": "error"
+    }
 };
 
-describe("[RULE] no-continue: Acceptances", function () {
-	it("should accept loops without continue statements", function(done) {
-		let code = `
+describe("[RULE] no-continue: Acceptances", function() {
+    it("should accept loops without continue statements", function(done) {
+        let code = `
 			contract A {
 				function() {
 					while (true) { break; }
@@ -34,19 +34,19 @@ describe("[RULE] no-continue: Acceptances", function () {
 				}
 			}
 		`;
-		let errors = Solium.lint(code, userConfig);
+        let errors = Solium.lint(code, userConfig);
 
-		errors.constructor.name.should.equal ("Array");
-		errors.should.be.size(0);
+        errors.constructor.name.should.equal("Array");
+        errors.should.be.size(0);
 
-		Solium.reset();
-		done();
-	});
+        Solium.reset();
+        done();
+    });
 });
 
-describe("[RULE] no-continue: Rejections", function () {
-	it("should raise an error for a continue statement", function(done) {
-		let code = `
+describe("[RULE] no-continue: Rejections", function() {
+    it("should raise an error for a continue statement", function(done) {
+        let code = `
 			contract A {
 				function() {
 					while (true) { continue; }
@@ -67,12 +67,12 @@ describe("[RULE] no-continue: Rejections", function () {
 				}
 			}
 		`;
-		let errors = Solium.lint(code, userConfig);
+        let errors = Solium.lint(code, userConfig);
 
-		errors.constructor.name.should.equal ("Array");
-		errors.should.be.size(4);
+        errors.constructor.name.should.equal("Array");
+        errors.should.be.size(4);
 
-		Solium.reset();
-		done();
-	});
+        Solium.reset();
+        done();
+    });
 });

@@ -6,44 +6,44 @@
 "use strict";
 
 module.exports = {
-	meta: {
-		docs: {
-			recommended: true,
-			type: "error",
-			description: "Disallow unreachable code"
-		},
+    meta: {
+        docs: {
+            recommended: true,
+            type: "error",
+            description: "Disallow unreachable code"
+        },
 
-		schema: []
-	},
+        schema: []
+    },
 
-	create: function(context) {
-		function inspectFunctionDeclaration(emitted) {
-			if (emitted.exit) {
-				return;
-			}
+    create: function(context) {
+        function inspectFunctionDeclaration(emitted) {
+            if (emitted.exit) {
+                return;
+            }
 
-			let node = emitted.node;
-			let topLevelStatements = node.body.body;
-			let lastIndex = topLevelStatements.length - 1;
+            let node = emitted.node;
+            let topLevelStatements = node.body.body;
+            let lastIndex = topLevelStatements.length - 1;
 
-			let firstTopLevelReturnIndex = topLevelStatements.findIndex(
-				statement => statement.type === "ReturnStatement"
-			);
+            let firstTopLevelReturnIndex = topLevelStatements.findIndex(
+                statement => statement.type === "ReturnStatement"
+            );
 
-			if (firstTopLevelReturnIndex === -1) {
-				return;
-			}
+            if (firstTopLevelReturnIndex === -1) {
+                return;
+            }
 
-			if (firstTopLevelReturnIndex !== lastIndex) {
-				context.report({
-					node: topLevelStatements[firstTopLevelReturnIndex + 1],
-					message: "Code is unreachable."
-				});
-			}
-		}
+            if (firstTopLevelReturnIndex !== lastIndex) {
+                context.report({
+                    node: topLevelStatements[firstTopLevelReturnIndex + 1],
+                    message: "Code is unreachable."
+                });
+            }
+        }
 
-		return {
-			FunctionDeclaration: inspectFunctionDeclaration
-		};
-	}
+        return {
+            FunctionDeclaration: inspectFunctionDeclaration
+        };
+    }
 };
