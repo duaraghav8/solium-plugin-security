@@ -24,34 +24,44 @@ describe("[RULE] 256-bit-ints-only: Rejections", function() {
         errors.length.should.equal(3);
 
         code = toContract(`
-			enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
-			uint16[] num = [1,2,3];
-			int8 constant a = 100;
+            enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
+            uint16[] num = [1,2,3];
+            int8 constant a = 100;
 
-			function foo() {
-				string bb;
-				string cc = "blah";
+            uint a = -190;
+            int b = 0;
 
-				bytes bb;
-				bytes32 axa = "hello world";
+            function foo() {
+                string bb;
+                string cc = "blah";
 
-				bool x = true;
-				bool y = false;
+                bytes bb;
+                bytes32 axa = "hello world";
 
-				address mine = 0x00;
+                bool x = true;
+                bool y = false;
 
-				int128[] numbers;
-				int64[] numbers;
+                address mine = 0x00;
+                uint a = -190;
+                int b = 0;
 
-				ActionChoices f = ActionChoices.GoRight;
+                int128[] numbers;
+                int64[] numbers;
 
-				var focus = 90189;
-			}
-		`);
+                ActionChoices f = ActionChoices.GoRight;
+
+                var focus = 90189;
+
+                int32 myInt = getMyIntPlease();
+                uint16[] wow = [190278];
+
+                int16 axa;
+            }
+        `);
 
         errors = Solium.lint(code, userConfig);
         errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(4);
+        errors.length.should.equal(7);
 
         Solium.reset();
 
@@ -69,30 +79,30 @@ describe("[RULE] 256-bit-ints-only: Acceptances", function() {
         errors.length.should.equal(0);
 
         code = toContract(`
-			enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
-			uint256[] num = [1,2,3];
-			int constant a = 100;
+            enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
+            uint256[] num = [1,2,3];
+            int constant a = 100;
 
-			function foo() {
-				string bb;
-				string cc = "blah";
+            function foo() {
+                string bb;
+                string cc = "blah";
 
-				bytes bb;
-				bytes32 axa = "hello world";
+                bytes bb;
+                bytes32 axa = "hello world";
 
-				bool x = true;
-				bool y = false;
+                bool x = true;
+                bool y = false;
 
-				address mine = 0x00;
+                address mine = 0x00;
 
-				int[] numbers;
-				int256[] numbers;
+                int[] numbers;
+                int256[] numbers;
 
-				ActionChoices f = ActionChoices.GoRight;
+                ActionChoices f = ActionChoices.GoRight;
 
-				var focus = 90189;
-			}
-		`);
+                var focus = 90189;
+            }
+        `);
 
         errors = Solium.lint(code, userConfig);
         errors.constructor.name.should.equal("Array");

@@ -24,29 +24,30 @@ module.exports = {
     },
 
     create: function(context) {
-        function inspectDeclarationExpression(emitted) {
-            if (emitted.exit) {
+        function isInt(type) {
+            return type.startsWith("int") || type.startsWith("uint");
+        }
+
+        function is256Bit(type) {
+            return ALLOWED_INTS.includes(type);
+        }
+
+        function inspectType(emitted) {
+            const { node } = emitted;
+
+            if (emitted.exit || !isInt(node.literal) || is256Bit(node.literal)) {
                 return;
             }
 
-            let node = emitted.node;
-            let variableType = node.literal.literal;
+            context.report({
+                node,
+                message: `${node.literal}: Only use 256-bit integers.`
+            });
 
-            if (typeof variableType !== "string") {
-                return;
-            }
-
-            if ((variableType.indexOf("int") === 0 || variableType.indexOf("uint") === 0) &&
-                ALLOWED_INTS.indexOf(variableType) === -1) {
-                context.report({
-                    node: node,
-                    message: `${variableType}: Only use 256-bit integers.`
-                });
-            }
         }
 
         return {
-            DeclarativeExpression: inspectDeclarationExpression
+            Type: inspectType
         };
     }
 };

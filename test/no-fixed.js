@@ -65,6 +65,7 @@ describe("[RULE] no-fixed: Rejections", function() {
         errors.should.have.size(4);
 
 
+        // eslint-disable-next-line no-unused-vars
         const codeExhaustive = toContract(`
             ${fixedDeclarations}
             ${ufixedDeclarations}
@@ -77,6 +78,7 @@ describe("[RULE] no-fixed: Rejections", function() {
 
         // TODO: Uncomment below test once we move to a fast (antlr) parser.
         // Since we're generating too many statements, below test will take a lot of time.
+        // Also remove the eslint disable directive above
         /*
         errors = Solium.lint(codeExhaustive, userConfig);
         errors.should.be.Array();
