@@ -43,25 +43,26 @@ module.exports = {
              *   Else insert it right before body (BlockStatement node)
              */
             function fix(fixer) {
+                const DEFAULT_VIS = "public";
+
                 if (node.returnParams !== null) {
-                    // Since we don't have exact position of 'returns' token, writing vis
-                    // before it becomes bit complex. So leave it for now. TODO.
-                    return null;
+                    return fixer.insertTextAt(node.returnParams.end, ` ${DEFAULT_VIS}`);
                 }
 
                 if (node.is_abstract) {
                     // No BlockStatement node ahead
-                    return fixer.insertTextAt(node.end-1, " public");
+                    return fixer.insertTextAt(node.end-1, ` ${DEFAULT_VIS}`);
                 }
 
                 // TODO: check whether we actually require the spaces on both of public's sides below.
                 // Give space only if needed, otherwise it just creates extra (ugly) whitespace.
-                return fixer.insertTextBefore(node.body, " public ");
+                return fixer.insertTextBefore(node.body, ` ${DEFAULT_VIS} `);
             }
 
             (node.modifiers === null || !hasAVisibilityModifier(node.modifiers)) && context.report({
-                node, fix,
-                message: `No visibility specified explicitly for ${node.name || "the fallback"} function.`
+                node,
+                fix,
+                message: `No visibility specified explicitly for ${node.name || "fallback"} function.`
             });
         }
 

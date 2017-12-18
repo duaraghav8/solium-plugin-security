@@ -25,7 +25,7 @@ module.exports = {
             let node = emitted.node;
             if (emitted.exit || !node.returnParams) { return; }
 
-            for (let param of node.returnParams) {
+            for (let param of node.returnParams.params) {
                 if (!param.id) { continue; }
 
                 const message = node.name ?
