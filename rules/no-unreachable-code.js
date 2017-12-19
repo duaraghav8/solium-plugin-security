@@ -18,11 +18,13 @@ module.exports = {
 
     create: function(context) {
         function inspectFunctionDeclaration(emitted) {
-            if (emitted.exit) {
+            const { node } = emitted;
+
+            // Exit now if function is abstract (has no body)
+            if (emitted.exit || node.is_abstract) {
                 return;
             }
 
-            let node = emitted.node;
             let topLevelStatements = node.body.body;
             let lastIndex = topLevelStatements.length - 1;
 

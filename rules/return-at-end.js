@@ -25,7 +25,7 @@ module.exports = {
         function inspectFunctionDeclaration(emitted) {
             let node = emitted.node;
 
-            if (emitted.exit) {
+            if (emitted.exit || node.is_abstract) {
                 return;
             }
 

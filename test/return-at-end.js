@@ -16,6 +16,18 @@ let userConfig = {
 
 describe("[RULE] return-at-end: Acceptances", function() {
 
+    it("should not lint abstract functions", done => {
+        let code = "contract Foo { function bar(); }",
+            errors = Solium.lint(code, userConfig);
+        errors.should.be.size(0);
+
+        code = "contract Foo { function bar(uint x, string yy, bytes32 abra) payable returns(string); }";
+        errors = Solium.lint(code, userConfig);
+        errors.should.be.size(0);
+
+        done();
+    });
+
     it("should accept functions that have a single return statement at the end", function(done) {
         let errors, code = "contract Foo { function foo () {uint256 x = 3; return;} }";
 

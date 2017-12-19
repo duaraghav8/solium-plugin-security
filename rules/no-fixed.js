@@ -18,11 +18,12 @@ module.exports = {
 
     create: function(context) {
         function inspectType(emitted) {
-            if (emitted.exit) {
+            const type = emitted.node.literal;
+
+            // If the literal is not a string (ie, has a sub-type, like in MappingExpression), exit
+            if (emitted.exit || typeof(type) !== "string") {
                 return;
             }
-
-            let type = emitted.node.literal;
 
             // Prefix match instead of exact match to ensure that all MxN declarations are caught (eg- ufixed128x19)
             if (type.indexOf("fixed") === 0 || type.indexOf("ufixed") === 0) {

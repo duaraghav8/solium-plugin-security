@@ -35,7 +35,7 @@ module.exports = {
         function inspectType(emitted) {
             const { node } = emitted;
 
-            if (emitted.exit || !isInt(node.literal) || is256Bit(node.literal)) {
+            if (emitted.exit || typeof(node.literal) !== "string" || !isInt(node.literal) || is256Bit(node.literal)) {
                 return;
             }
 

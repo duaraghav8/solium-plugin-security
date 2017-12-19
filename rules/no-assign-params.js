@@ -79,11 +79,14 @@ module.exports = {
         }
 
         function inspectFunctionDeclaration(emitted) {
-            if (emitted.exit || emitted.node.is_abstract) { return; }
+            const { node } = emitted;
 
-            const node = emitted.node;
+            // If function has no body (abstract) or no params, exit
+            if (emitted.exit || node.is_abstract || node.params === null) {
+                return;
+            }
 
-            let params = node.params.map(x => x["id"]);
+            const params = node.params.map(x => x["id"]);
             inspectBody(node.body.body, node, params);
         }
 

@@ -31,6 +31,22 @@ describe("[RULE] 256-bit-ints-only: Rejections", function() {
             uint a = -190;
             int b = 0;
 
+            mapping(uint16 => address) a;
+            mapping(int8 => address) a;
+            mapping(uint256 => address) a;
+            mapping(uint8 => address) a;
+            mapping(string => uint32) a;
+            mapping(bytes32 => int32) a;
+            mapping(bool => uint16) a;
+            mapping(address => uint256) a;
+
+            struct Bubble {
+                uint8 a;
+                int16 b;
+                uint64 c;
+                int32 d;
+            }
+
             function foo() {
                 string bb;
                 string cc = "blah";
@@ -61,7 +77,7 @@ describe("[RULE] 256-bit-ints-only: Rejections", function() {
 
         errors = Solium.lint(code, userConfig);
         errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(7);
+        errors.length.should.equal(17);
 
         Solium.reset();
 
@@ -82,6 +98,22 @@ describe("[RULE] 256-bit-ints-only: Acceptances", function() {
             enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
             uint256[] num = [1,2,3];
             int constant a = 100;
+
+            mapping(uint => address) a;
+            mapping(int => address) a;
+            mapping(uint256 => address) a;
+            mapping(uint256 => address) a;
+            mapping(string => uint) a;
+            mapping(bytes32 => int) a;
+            mapping(bool => uint256) a;
+            mapping(address => uint256) a;
+
+            struct Bubble {
+                uint a;
+                int b;
+                uint256 c;
+                int256 d;
+            }
 
             function foo() {
                 string bb;

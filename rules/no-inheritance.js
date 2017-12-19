@@ -45,13 +45,14 @@ module.exports = {
             if (noInterface && (node.is.length > 0)) {
                 context.report({
                     node: node,
-                    message: `Avoid using inheritance for contract ${node.name}.`
+                    message: `Avoid using inheritance for contract '${node.name}'.`
                 });
 
                 return;
             }
 
-            contracts[node.name] = {"parents": [], "node": node};
+            contracts[node.name] = {parents: [], node: node};
+
             for (let parent of node.is) {
                 contracts[node.name].parents.push(parent.name);
             }
@@ -70,7 +71,7 @@ module.exports = {
                     if (!interfaces.includes(parent)) {
                         context.report({
                             node: contract.node,
-                            message: `Avoid using inheritance for contract ${name}.`
+                            message: `Avoid using inheritance for contract '${name}'.`
                         });
 
                         break;

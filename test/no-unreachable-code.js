@@ -69,6 +69,30 @@ describe("[RULE] no-unreachable-code: Rejections", function() {
 });
 
 describe("[RULE] no-unreachable-code: Acceptances", function() {
+    it("should not lint abstract functions", done => {
+        let code = toContract("function foobar(uint x, address baby) payable;"),
+            errors = Solium.lint(code, userConfig);
+
+        errors.should.be.Array();
+        errors.should.have.size(0);
+
+
+        code = toContract("function foobar(uint x, address baby) returns (uint x, string);");
+        errors = Solium.lint(code, userConfig);
+
+        errors.should.be.Array();
+        errors.should.have.size(0);
+
+
+        code = toContract("function();");
+        errors = Solium.lint(code, userConfig);
+
+        errors.should.be.Array();
+        errors.should.have.size(0);
+
+        done();
+    });
+
     it("should accept contracts without a return", function(done) {
         let code = toContract("function foo () { fixed a = 2.0; }");
         let errors = Solium.lint(code, userConfig);

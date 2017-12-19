@@ -46,6 +46,17 @@ describe("[RULE] no-assign-params: Acceptances", function() {
         Solium.reset();
         done();
     });
+
+    it("shouldn't raise an error for a function with no params", function(done) {
+        let code = "contract Blah { function my_func() { blah(); } }",
+            errors = Solium.lint(code, config);
+
+        errors.constructor.name.should.equal("Array");
+        errors.should.be.size(0);
+
+        Solium.reset();
+        done();
+    });
 });
 
 describe("[RULE] no-assign-params: Rejections", function() {
