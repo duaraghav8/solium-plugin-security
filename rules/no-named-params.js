@@ -14,7 +14,7 @@ module.exports = {
         docs: {
             description: "Discourage named function parameters",
             recommended: false,
-            type: "error"
+            type: "off"
         },
 
         schema: []

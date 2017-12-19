@@ -16,7 +16,7 @@ module.exports = {
     meta: {
         docs: {
             recommended: false,
-            type: "error",
+            type: "off",
             description: "Discourage use of non-256 bit integers"
         },
 

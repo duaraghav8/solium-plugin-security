@@ -18,7 +18,7 @@ module.exports = {
     meta: {
         docs: {
             recommended: false,
-            type: "error",
+            type: "off",
             description: "Encourage use of function placeholder as the last statement in the modifier"
         },
 

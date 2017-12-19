@@ -9,7 +9,7 @@ module.exports = {
     meta: {
         docs: {
             recommended: false,
-            type: "error",
+            type: "off",
             description: "Disallow user-defined modifiers"
         },
 

@@ -11,7 +11,7 @@ module.exports = {
         docs: {
             description: "Encourage else blocks after else-if blocks",
             recommended: false,
-            type: "error"
+            type: "off"
         },
 
         schema: []

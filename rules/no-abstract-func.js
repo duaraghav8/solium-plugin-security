@@ -11,7 +11,7 @@ module.exports = {
 
         docs: {
             recommended: false,
-            type: "error",
+            type: "off",
             description: "Discourage use of abstract functions"
         },
 

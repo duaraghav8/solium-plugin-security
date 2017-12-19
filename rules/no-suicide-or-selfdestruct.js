@@ -14,7 +14,7 @@ module.exports = {
     meta: {
         docs: {
             recommended: false,
-            type: "warning",
+            type: "off",
             description: "Disallow 'suicide' and 'selfdestruct'"
         },
 

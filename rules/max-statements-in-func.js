@@ -9,7 +9,7 @@ module.exports = {
     meta: {
         docs: {
             recommended: false,
-            type: "error",
+            type: "off",
             description: "Enforce upper limit on number of statements present in a function"
         },
 

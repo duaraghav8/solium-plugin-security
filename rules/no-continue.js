@@ -11,7 +11,7 @@ module.exports = {
 
         docs: {
             recommended: false,
-            type: "warning",
+            type: "off",
             description: "Avoid use of 'continue' statement."
         },
 

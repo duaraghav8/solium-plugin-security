@@ -12,7 +12,7 @@ module.exports = {
     meta: {
         docs: {
             recommended: false,
-            type: "error",
+            type: "off",
             description: "Disallow bitwise operators"
         },
 

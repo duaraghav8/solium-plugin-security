@@ -12,7 +12,7 @@ module.exports = {
 
         docs: {
             recommended: false,
-            type: "error",
+            type: "off",
             description: "Encourage functions to only have a single return statement at the end of the function."
         },
 
