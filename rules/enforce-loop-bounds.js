@@ -1,9 +1,22 @@
 /**
- * @fileoverview Flag all loops which don't have fixed bounds
+ * @fileoverview Flag loops which don't have fixed bounds. This DOES NOT catch all kinds of potentially infinite loops.
  * @author Nicolas Feignon <nfeignon@gmail.com>
  */
 
 "use strict";
+
+
+// TODO: Examine test.argument.value (when test condition gets a negative number)
+function hasATruthyValue(test) {
+    // If the test isn't a value, it means its a complicated expression which will be evaluated dynamically
+    if (!test.hasOwnProperty("value")) {
+        return false;
+    }
+
+    // We deliberately use double equals instead of triple because we need to test for all true-equivalent values!
+    return (test.value == true || (Number.isInteger(test.value) && test.value !== 0));
+}
+
 
 module.exports = {
 
@@ -23,40 +36,62 @@ module.exports = {
 
         // eslint-disable-next-line no-unused-vars
         function hasBreakStatement(expr, index, array) {
-            return expr.type === "BreakStatement";
+            return (expr.type === "BreakStatement" || (expr.type === "IfStatement" && inspectIfStatement(expr)));
         }
 
         function inspectIfStatement(node) {
-            // This returns true if it finds a 'break' statement in the 'if' block
-            if (node.alternate && node.alternate.type === "IfStatement") {
-                return inspectIfStatement(node.alternate);
-            } else if (node.alternate && node.alternate.type === "BlockStatement") {
-                if (node.alternate.body.some(hasBreakStatement)) { return true; }
+            if (
+                node.consequent.type === "BreakStatement" ||
+                (node.consequent.type === "BlockStatement" && node.consequent.body.some(hasBreakStatement)) ||
+                (node.consequent.type === "IfStatement" && inspectIfStatement(node.consequent))
+            ) {
+                return true;
             }
 
-            return node.consequent.body.some(hasBreakStatement);
-        }
-
-        function inspectLoopStatement(emitted) {
-            if (emitted.exit) { return; }
-            let node = emitted.node;
-            let hasBreak = false;
-
-            for (let expr of node.body.body) {
-                if (expr.type === "BreakStatement") {
-                    hasBreak = true;
-                    break;
-                } else if (expr.type === "IfStatement") {
-                    hasBreak = inspectIfStatement(expr);
+            if (node.alternate) {
+                if (
+                    node.alternate.type === "BreakStatement" ||
+                    (node.alternate.type === "BlockStatement" && node.alternate.body.some(hasBreakStatement)) ||
+                    (node.alternate.type === "IfStatement" && inspectIfStatement(node.alternate))
+                ) {
+                    return true;
                 }
             }
 
-            if ((!node.test || node.test.value == true) && !hasBreak) {
+            return false;
+        }
+
+        function inspectLoopStatement(emitted) {
+            const { node } = emitted;
+
+            if (emitted.exit) {
+                return;
+            }
+
+            let loopBody;
+
+            if (node.body.type === "BlockStatement") {
+                loopBody = node.body.body;
+            } else {
+                loopBody = [node.body];
+            }
+
+            let hasBreak = false;
+
+            for (let expr of loopBody) {
+                if (expr.type === "BreakStatement" || (expr.type === "IfStatement" && inspectIfStatement(expr))) {
+                    hasBreak = true;
+                    break;
+                }
+            }
+
+            if ((node.test === null || hasATruthyValue(node.test)) && !hasBreak) {
                 context.report({
                     node: node,
                     message: "Loop should have fixed bounds."
                 });
             }
+
         }
 
         return {
