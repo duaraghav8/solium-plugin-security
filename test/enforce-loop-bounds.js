@@ -46,11 +46,6 @@ describe("[RULE] enforce-loop-bounds: Acceptances", function() {
 
         for (let expr of code) {
             errors = Solium.lint(toContract(expr), userConfig);
-            if (errors.length > 0) {
-                console.log (expr)
-                console.log (errors[0])
-                process.exit(1);
-            }
             errors.length.should.equal(0);
         }
 

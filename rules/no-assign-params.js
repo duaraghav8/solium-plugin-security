@@ -22,12 +22,12 @@ module.exports = {
 
         function isBadAssignment(statement, params) {
             return statement["expression"]["type"] === "AssignmentExpression" &&
-                   params.indexOf(statement["expression"]["left"]["name"]) >= 0;
+                params.indexOf(statement["expression"]["left"]["name"]) >= 0;
         }
 
         function isBadUpdate(statement, params) {
             return statement["expression"]["type"] === "UpdateExpression" &&
-                   params.indexOf(statement["expression"]["argument"]["name"]) >= 0;
+                params.indexOf(statement["expression"]["argument"]["name"]) >= 0;
 
         }
 
@@ -44,13 +44,13 @@ module.exports = {
         }
 
         function inspectStatement(statement, node, params, following) {
-            if ("ExpressionStatement" === following["type"]) {
+            if (following["type"] === "ExpressionStatement") {
                 checkExpressionStatement(following, node, params);
-            } else if ("IfStatement" === following["type"]) {
+            } else if (following["type"] === "IfStatement") {
                 inspectIf(following, node, params);
             } else if (["ForStatement", "WhileStatement", "DoWhileStatement"].indexOf(following["type"]) >= 0) {
                 inspectLoop(following, node, params);
-            } else {
+            } else if (following["type"] === "BlockStatement") {
                 inspectBody(following["body"], node, params);
             }
         }
@@ -58,8 +58,9 @@ module.exports = {
         function inspectIf(statement, node, params) {
             inspectStatement(statement, node, params, statement["consequent"]);
 
-            if (statement["alternate"] == null) { return; }
-            inspectStatement(statement, node, params, statement["alternate"]);
+            if (statement["alternate"] !== null) {
+                inspectStatement(statement, node, params, statement["alternate"]);
+            }
         }
 
         function inspectLoop(statement, node, params) {
@@ -68,11 +69,11 @@ module.exports = {
 
         function inspectBody(body, node, params) {
             for (let statement of body) {
-                if ("ExpressionStatement" === statement["type"]) {
+                if (statement["type"] === "ExpressionStatement") {
                     checkExpressionStatement(statement, node, params);
                 } else if (["ForStatement", "WhileStatement", "DoWhileStatement"].indexOf(statement["type"]) >= 0) {
                     inspectLoop(statement, node, params);
-                } else if ("IfStatement" === statement["type"]) {
+                } else if (statement["type"] === "IfStatement") {
                     inspectIf(statement, node, params);
                 }
             }
