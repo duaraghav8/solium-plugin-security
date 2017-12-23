@@ -21,7 +21,8 @@ describe("[RULE] no-modify-for-iter-var: Acceptances", function() {
         let code = [
             "function foo() { for(i = 0; i < 10; i++) { i + 1; } }",
             "function foo() { for(;;) {} }",
-            "function foo() { for(a;;) { a++; } }"
+            "function foo() { for(a;;) { a++; } }",
+            "function foo() { \n    for (uint i = 0; i < self.length; i++)\n    s += self[i]; }"
         ];
         let errors;
 

@@ -28,9 +28,14 @@ module.exports = {
                 return;
             }
 
-            let iterationVariable = node.init.left.name;
+            let iterationVariable = node.init.left.name, loopBody = node.body.body;
 
-            for (let expr of node.body.body) {
+            // if the loop doesn't have braces, ie, it doesn't have BlockStatement enclosing lop statements
+            if (node.body.type !== "BlockStatement") {
+                loopBody = [node.body];
+            }
+
+            for (let expr of loopBody) {
                 if (expr.type !== "ExpressionStatement") {
                     continue;
                 }
