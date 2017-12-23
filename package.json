@@ -4,7 +4,7 @@
   "description": "Official Solium Plugin for Security-related lint rules",
   "main": "index.js",
   "scripts": {
-    "test": "rm -rf ./node_modules/solium-plugin-security && mocha --require should --reporter spec --recursive",
+    "test": "mocha --require should --reporter spec --recursive",
     "lint": "eslint rules/ test/ index.js"
   },
   "keywords": [

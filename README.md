@@ -88,6 +88,7 @@ Lint normally using `solium -d contracts/` or `solium -d contracts/ --fix` to ap
 - `cd solium-plugin-security`
 - `npm install --dev`
 - `npm link`
+- `npm link solium-plugin-security`
 - `npm test`
 
 
