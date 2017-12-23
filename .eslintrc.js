@@ -40,6 +40,7 @@ module.exports = {
         "no-caller": "error",
         "no-inner-declarations": "warn",
         "no-console": "error",
+        "yoda": "error",
         "no-undef": "off",
         "no-useless-escape": "off",
         "no-sparse-arrays": "off",   // we give undefined as test cases using pattern [, a, b]
