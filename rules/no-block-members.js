@@ -13,7 +13,7 @@ module.exports = {
         docs: {
             description: "Discourage use of members 'blockhash' & 'timestamp' (and alias 'now') of block global variable",
             recommended: true,
-            type: "error"
+            type: "warning"
         },
 
         schema: [{
