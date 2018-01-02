@@ -91,6 +91,8 @@ Lint normally using `solium -d contracts/` or `solium -d contracts/ --fix` to ap
 - `npm link solium-plugin-security`
 - `npm test`
 
+If you'd also like to use your develop build of this plugin with dev build of Solium, go to Solium's directory and run `npm link solium-plugin-security`. This will let Solium access your modified plugin instead of its pre-installed security module.
+
 
 ## Roadmap
 - [ ] Add automated tests
