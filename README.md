@@ -93,6 +93,7 @@ Lint normally using `solium -d contracts/` or `solium -d contracts/ --fix` to ap
 
 If you'd also like to use your develop build of this plugin with dev build of Solium, go to Solium's directory and run `npm link solium-plugin-security`. This will let Solium access your modified plugin instead of its pre-installed security module.
 
+Access Solium's [Developer Docs](http://solium.readthedocs.io/en/latest/developer-guide.html)
 
 ## Roadmap
 - [ ] Add automated tests
@@ -103,4 +104,5 @@ If you'd also like to use your develop build of this plugin with dev build of So
 - [ ] `no-multiple-send-calls`
 - [ ] `check-send-result`
 
-...And many more from the sources listed above
+
+**[Access the complete Solium documentation](http://solium.readthedocs.io/en/latest/index.html)**
