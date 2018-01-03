@@ -23,8 +23,8 @@ module.exports = {
     meta: {
 
         docs: {
-            recommended: true,
-            type: "error",
+            recommended: false,
+            type: "off",
             description: "Flag all loops which don't have fixed bounds"
         },
 

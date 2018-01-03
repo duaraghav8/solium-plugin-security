@@ -8,8 +8,8 @@
 module.exports = {
     meta: {
         docs: {
-            recommended: true,
-            type: "error",
+            recommended: false,
+            type: "off",
             description: "Disallow type deduction via 'var'"
         },
 
