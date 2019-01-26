@@ -33,19 +33,20 @@ Some of them aren't always desirable and are therefore disabled by default (mark
 
 | Name                                 | Description                                                                                      | Options                           | Defaults                             | Fixes | Default Setting |
 |--------------------------------------|--------------------------------------------------------------------------------------------------|-----------------------------------|--------------------------------------|-------|-----------------|
-| no-throw                             | Discourage use of 'throw' statement for error flagging                                           |                                   |                                      | YES   | `ENABLED`       |
-| no-tx-origin                         | Discourage use of 'tx.origin' global variable                                                    |                                   |                                      |       | `ENABLED`       |
+| no-throw                             | Discourage use of `throw` statement for error flagging                                           |                                   |                                      | YES   | `ENABLED`       |
+| no-tx-origin                         | Discourage use of `tx.origin` global variable                                                    |                                   |                                      |       | `ENABLED`       |
 | enforce-explicit-visibility          | Encourage user to explicitly specify visibility of function                                      |                                   |                                      | YES   | `ENABLED`       |
-| no-block-members                     | Discourage use of members 'blockhash' & 'timestamp' (and alias 'now') of 'block' global variable | List of members to warn against   | ["blockhash", "timestamp"]           |       | `ENABLED`       |
-| no-call-value                        | Discourage use of .call.value()()                                                                |                                   |                                      |       | `ENABLED`       |
+| no-block-members                     | Discourage use of members `blockhash` & `timestamp` (and alias `now`) of `block` global variable | List of members to warn against   | ["blockhash", "timestamp"]           |       | `ENABLED`       |
+| no-call-value                        | Discourage use of `.call.value()()`                                                              |                                   |                                      |       | `ENABLED`       |
 | no-assign-params                     | Disallow assigning to function parameters                                                        |                                   |                                      |       | `ENABLED`       |
 | no-fixed                             | Disallow fixed point types                                                                       |                                   |                                      |       | `ENABLED`       |
 | no-inline-assembly                   | Discourage use of inline assembly                                                                |                                   |                                      |       | `ENABLED`       |
 | no-low-level-calls                   | Discourage the use of low-level functions - call(), callcode() & delegatecall()                  | List of functions to warn against | ["call", "callcode", "delegatecall"] |       | `ENABLED`       |
 | no-modify-for-iter-var               | Discourage user to modify a for loop iteration counting variable in the loop body                |                                   |                                      |       | `ENABLED`       |
-| no-send                              | Discourage the use of unsafe method 'send'                                                       |                                   |                                      |       | `ENABLED`       |
-| no-sha3                              | Encourage use of 'keccak256()' over 'sha3()' function                                            |                                   |                                      | YES   | `ENABLED`       |
+| no-send                              | Discourage the use of unsafe method `send()`                                                     |                                   |                                      |       | `ENABLED`       |
+| no-sha3                              | Encourage use of `keccak256()` over `sha3()` function                                            |                                   |                                      | YES   | `ENABLED`       |
 | no-unreachable-code                  | Disallow unreachable code                                                                        |                                   |                                      |       | `ENABLED`       |
+| check-send-result                    | Enforce checking the result of `send()` call                                                     |                                   |                                      |       | `ENABLED`       |
 | else-after-elseif                    | Encourage user to use else statement after else-if statement                                     |                                   |                                      |       | `DISABLED`      |
 | enforce-loop-bounds                  | Encourage use of loops with fixed bounds                                                         |                                   |                                      |       | `DISABLED`      |
 | enforce-placeholder-last             | Enforce that the function placeholder is the last statement in the modifier                      |                                   |                                      |       | `DISABLED`      |
@@ -54,7 +55,7 @@ Some of them aren't always desirable and are therefore disabled by default (mark
 | max-statements-in-func               | Enforce upper limit on number of statements inside a function                                    | Maximum number of statements      | 25                                   |       | `DISABLED`      |
 | no-abstract-func                     | Discourage use of abstract functions                                                             |                                   |                                      |       | `DISABLED`      |
 | no-bit-operations                    | Disallow bitwise operations                                                                      |                                   |                                      |       | `DISABLED`      |
-| no-continue                          | Discourage use of 'continue' statement                                                           |                                   |                                      |       | `DISABLED`      |
+| no-continue                          | Discourage use of `continue` statement                                                           |                                   |                                      |       | `DISABLED`      |
 | no-inheritance                       | Discourage use of inheritance                                                                    | Disallow interface inheritance    | { "no-interface": false }            |       | `DISABLED`      |
 | no-multiple-inheritance              | Discourage use of multiple inheritance                                                           | Disallow interface inheritance    | { "no-interface": false }            |       | `DISABLED`      |
 | no-named-params                      | Disallow named function parameters                                                               |                                   |                                      |       | `DISABLED`      |
@@ -93,14 +94,4 @@ Lint normally using `solium -d contracts/` or `solium -d contracts/ --fix` to ap
 
 If you'd also like to use your develop build of this plugin with dev build of Solium, go to Solium's directory and run `npm link solium-plugin-security`. This will let Solium access your modified plugin instead of its pre-installed security module.
 
-See documentation on [developing a plugin](https://ethlint.readthedocs.io/en/latest/developer-guide.html#developing-a-plugin).
-
-## Roadmap
-- [ ] Add automated tests
-- [ ] Refine rule `enforce-explicit-visibility`
-
-### Security rules to be implemented
-- [ ] `no-multiple-send-calls`
-
-
-See complete **[Documentation](https://ethlint.readthedocs.io/en/latest/)**.
+See [developing a plugin](https://ethlint.readthedocs.io/en/latest/developer-guide.html#developing-a-plugin).
