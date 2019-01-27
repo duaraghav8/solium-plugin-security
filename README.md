@@ -7,12 +7,12 @@ This Plugin provides security-focused lint rules for [Ethlint](https://github.co
 The rules have been taken from Consensys' [Recommended Smart Contract Practices](https://consensys.github.io/smart-contract-best-practices/recommendations/) and Solium's [Rule Wishlist](https://github.com/duaraghav8/Solium/issues/44).
 
 ## Installation
-**NOTE: If you're using Solium `v1.0.1` or above, this plugin comes pre-installed as a local dependency and you can skip this section.**
+**NOTE:** If you're using Solium `v1.0.1` or above, this plugin comes pre-installed as a local dependency and you can skip this section.
 
 `npm install -g solium-plugin-security`
 
 ## Usage
-**NOTE: If you've installed Solium `v1.0.1` or above and created `soliumrc.json` using `solium --init`, you can skip this step since solium automatically applies the security plugin for you.**
+**NOTE:** If you've installed Solium `v1.0.1` or above and created `soliumrc.json` using `solium --init`, you can skip this step since solium automatically applies the security plugin for you.
 
 Add `security` to your `soliumrc.json`'s `plugins` array. Your configuration file should look like:
 
@@ -95,3 +95,15 @@ Lint normally using `solium -d contracts/` or `solium -d contracts/ --fix` to ap
 If you'd also like to use your develop build of this plugin with dev build of Solium, go to Solium's directory and run `npm link solium-plugin-security`. This will let Solium access your modified plugin instead of its pre-installed security module.
 
 See [developing a plugin](https://ethlint.readthedocs.io/en/latest/developer-guide.html#developing-a-plugin).
+
+## Known Issues
+1. When installing the Linter from the `ethlint` NPM package, you might see the following warning:
+```
+npm WARN solium-plugin-security@0.1.1 requires a peer of solium@^1.0.0 but none is installed. You must install peer dependencies yourself.
+```
+
+You can safely ignore this warning.
+
+Solium was recently [renamed](https://medium.com/solium/renaming-solium-to-ethlint-18b3cf043d15) to Ethlint and the linter is available for download from both `solium` and `ethlint` NPM packages. Ethlint comes shipped with this Security plugin. This plugin checks to ensure whether `solium` NPM package is installed or not.
+
+There is currently no way in NPM to *allow any one of the specified packages to satisfy as peer dependency*, so we can't specify `solium OR ethlint`. We also cannot change `solium` to `ethlint` in `peerDependencies` because its a potential breaking change. See the [original issue](https://github.com/duaraghav8/solium-plugin-security/issues/33).
